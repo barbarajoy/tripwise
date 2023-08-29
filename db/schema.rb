@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_29_114531) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_29_210711) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -71,6 +71,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_29_114531) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "trip_id"
+    t.integer "budget", default: 10
     t.index ["planner_id"], name: "index_trips_on_planner_id"
     t.index ["trip_id"], name: "index_trips_on_trip_id"
     t.index ["tripper_id"], name: "index_trips_on_tripper_id"
