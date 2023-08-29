@@ -10,9 +10,43 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_27_205329) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_29_095254) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "destinations", force: :cascade do |t|
+    t.integer "longitude"
+    t.integer "latitude"
+    t.string "address"
+    t.string "description"
+    t.integer "position"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.string "content"
+    t.bigint "trip_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["trip_id"], name: "index_messages_on_trip_id"
+    t.index ["user_id"], name: "index_messages_on_user_id"
+  end
+
+  create_table "trips", force: :cascade do |t|
+    t.bigint "planner_id"
+    t.bigint "tripper_id"
+    t.string "title"
+    t.string "image_url"
+    t.text "comment"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "trip_id"
+    t.index ["planner_id"], name: "index_trips_on_planner_id"
+    t.index ["trip_id"], name: "index_trips_on_trip_id"
+    t.index ["tripper_id"], name: "index_trips_on_tripper_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -22,8 +56,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_27_205329) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "first_name"
+    t.string "last_name"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "messages", "trips"
+  add_foreign_key "messages", "users"
+  add_foreign_key "trips", "trips"
+  add_foreign_key "trips", "users", column: "planner_id"
+  add_foreign_key "trips", "users", column: "tripper_id"
 end
