@@ -1,4 +1,17 @@
 <%= render "/layouts/navbar" %>
+<h2>Our recommandations</h2>
 
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<div class="card-container">
+  <div class="travel-card">
+    <%= image_tag('santorin.jpg', width: 150, height: 150) %>
+    <p class="city-name">Santorin</p>
+  </div>
+  <div class="travel-card">
+    <%= image_tag('tokyo.webp', width: 150, height: 150) %>
+    <p class="city-name">Tokyo</p>
+  </div>
+  <div class="travel-card">
+    <%= image_tag('bali.png', width: 150, height: 150) %>
+    <p class="city-name">Bali</p>
+  </div>
+</div>
