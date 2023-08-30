@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_30_092519) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_30_131555) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -50,8 +50,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_30_092519) do
     t.integer "position"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "trip_id", null: false
-    t.index ["trip_id"], name: "index_destinations_on_trip_id"
   end
 
   create_table "messages", force: :cascade do |t|
@@ -79,6 +77,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_30_092519) do
     t.index ["tripper_id"], name: "index_trips_on_tripper_id"
   end
 
+  create_table "trips_destinations", force: :cascade do |t|
+    t.bigint "trip_id", null: false
+    t.bigint "destination_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["destination_id"], name: "index_trips_destinations_on_destination_id"
+    t.index ["trip_id"], name: "index_trips_destinations_on_trip_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -95,10 +102,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_30_092519) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "destinations", "trips"
   add_foreign_key "messages", "trips"
   add_foreign_key "messages", "users"
   add_foreign_key "trips", "trips"
   add_foreign_key "trips", "users", column: "planner_id"
   add_foreign_key "trips", "users", column: "tripper_id"
+  add_foreign_key "trips_destinations", "destinations"
+  add_foreign_key "trips_destinations", "trips"
 end
