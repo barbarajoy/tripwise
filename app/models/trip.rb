@@ -3,8 +3,15 @@ class Trip < ApplicationRecord
   belongs_to :tripper, class_name: 'User'
   has_many :destinations
   has_many :messages
-  validates :title, presence: true, format: { with: /\A[a-zA-Z'-]+\z/ }
+  validates :title, presence: true
   validates :image_url, presence: true
   validates :comment, presence: true
   validates :planner_id, presence: true
+
+  include PgSearch::Model
+  pg_search_scope :search_by_title,
+    against: [ :title ],
+    using: {
+      tsearch: { prefix: true }
+    }
 end
