@@ -82,5 +82,4 @@ rand(20..30).times do |j|
 
 end
 
-
 puts "Done"
