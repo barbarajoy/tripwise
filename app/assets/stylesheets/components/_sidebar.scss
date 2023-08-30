@@ -1,0 +1,58 @@
+.sidebar {
+  padding-bottom: 25px;
+}
+
+.sidebar h4{
+  text-align: center;
+  margin-top: 15px;
+  color: $green;
+  font-weight: bold;
+}
+
+.sidebar p {
+  text-align: center;
+}
+
+.form-check {
+  padding: 3px;
+}
+
+.form-check-input {
+  display: none;
+}
+
+.form-check-input + .form-check-label::before {
+  content: '';
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 1px solid grey;
+  background-color: #ddd;
+  border-radius: 3px;
+  margin-right: 10px;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+.form-check-input:checked + .form-check-label::before {
+  background-color: $green;
+  border-color: grey;
+}
+
+.form-check-input:checked + .form-check-label::after {
+  content: '\2713';
+  display: inline-block;
+  position: absolute;
+  left: 4px;
+  top: 0;
+  color: white;
+  font-size: 14px;
+  line-height: 14px;
+  width: 16px;
+  height: 16px;
+  text-align: center;
+  vertical-align: middle;
+  background-color: $dark-green;
+  border-radius: 3px;
+  margin-right: 10px;
+}

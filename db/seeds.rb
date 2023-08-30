@@ -14,13 +14,12 @@ CITYS = ["Tokyo", "Sao Paulo", "Jakarta", "Delhi", "Séoul", "Shanghai", "Le Cai
   "Surate", "Toronto", "Madrid", "Qingdao", "Saint-Pétersbourg", "Pune", "Amman", "Colombo", "Surakarta",
   "Belo Horizonte", "Ibadan", "Zhengzhou", "Détroit", "Ankara", "Guatemala", "Dubaï"]
 
-
-
 puts "Starting seed"
 
 Trip.destroy_all
 User.destroy_all
 pex = Pexels::Client.new('sEpDeAZP9RRh5YnpiLUPLtyvufibCueYBpqUjOeVzxGbzPH9ZAsidXVh')
+
 
 
 rand(20..30).times do |i|
@@ -44,6 +43,7 @@ rand(20..30).times do |j|
     image_url: maphoto,
     comment: Faker::Lorem.paragraph,
     tripper: tripper,
+    budget: rand(10..10000),
     planner: User.where.not(id: tripper.id).sample })
 
 
