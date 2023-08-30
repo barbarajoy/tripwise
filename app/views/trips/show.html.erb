@@ -7,8 +7,8 @@
   <div class="destinations">
     <% @trip.destinations.order(:position).each do |destination| %>
     <div class="destination">
-      <%= destination.address %>
-      <%= destination.description %>
+      <p><%= destination.address %></p>
+      <p><%= destination.description %></p>
       <% end %>
     </div>
   </div>
