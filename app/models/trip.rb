@@ -7,4 +7,11 @@ class Trip < ApplicationRecord
   validates :image_url, presence: true
   validates :comment, presence: true
   validates :planner_id, presence: true
+
+  include PgSearch::Model
+  pg_search_scope :search_by_title,
+    against: [ :title ],
+    using: {
+      tsearch: { prefix: true }
+    }
 end
