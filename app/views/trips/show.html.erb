@@ -1,0 +1,19 @@
+<div class="container">
+  <h1><%= @trip.planner.first_name %> <%= @trip.planner.last_name %></h1>
+  <h2><%= @trip.title %></h2>
+  <p><%= @trip.comment %></p>
+  <%= image_tag @trip.image_url %>
+
+  <div class="destinations">
+    <% @trip.destinations.order(:position).each do |destination| %>
+    <div class="destination">
+      <%= destination.address %>
+      <%= destination.description %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="button-container">
+    <button type ="button" class="button-dark-green-show"><%= link_to 'Contact the planner', '#' %></button>
+  </div>
+</div>
