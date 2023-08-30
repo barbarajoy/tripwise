@@ -1,13 +1,22 @@
-<%= render "/layouts/navbar" %>
-
   <div class="container-fluid">
     <div class="row">
-      <nav class="custom-navbar col-md-3 col-lg-2 d-md-block bg-light sidebar">
-        <div class="position-sticky">
-          <h4 class="my-3">Budget</h4>
-          <div class="slider" id="price-slider"></div>
-            <input type="hidden" id="min-price">
-            <input type="hidden" id="max-price">
+      <nav class="col-md-3 col-lg-2 d-md-block bg-light sidebar">
+        <div class="budgetSlider">
+          <h4>Budget</h4>
+          <div class="min-max">
+            <div class="min">
+              <label>Min</label><span id="min-value"></span>
+            </div>
+            <div class="max">
+              <label>Max</label><span id="max-value"></span>
+            </div>
+          </div>
+        </div>
+            <div class="min-max-range">
+              <input type="range" min="0" max="5000" value="2000" class="range" id="min">
+              <input type="range" min="5001" max="10000" value="8000" class="range" id="max">
+            </div>
+          <hr>
           <h4 class="my-3">Trip Styles</h4>
             <div class="form-check">
               <input class="form-check-input" type="checkbox" value="cultural" id="cultural">
@@ -45,7 +54,22 @@
               <input class="form-check-input" type="checkbox" value="humanitarian" id="humanitarian">
               <label class="form-check-label" for="humanitarian">Humanitarian</label>
             </div>
-        </div>
       </nav>
+
+    <div class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+      <% @trips.each do |trip| %>
+      <div class="card-trip">
+        <%= image_tag trip.image_url %>
+        <div class="card-trip-infos">
+          <div>
+            <h2><%= trip.title %></h2>
+            <p><%= trip.comment %></p>
+          </div>
+          <h2 class="card-trip-username">username</h2>
+          <img src="https://kitt.lewagon.com/placeholder/users/krokrob" class="card-trip-user avatar-bordered" />
+        </div>
+      </div>
+      <% end %>
+
     <div>
 </div>
