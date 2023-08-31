@@ -22,7 +22,7 @@ CITYS = ["Tokyo", "Sao Paulo", "Jakarta", "Delhi", "Seoul", "Shanghai", "Le Cair
 puts "Starting seed"
 
 
-
+TripDestination.destroy_all
 Destination.destroy_all
 Message.destroy_all
 Trip.destroy_all
@@ -42,43 +42,66 @@ end
 
 rand(20..30).times do |j|
   city = CITYS.sample
-  picture = pex.photos.search(city, per_page: 1).photos
+  picture = []
+  # picture = pex.photos.search(city, per_page: 1).photos
   if picture.length == 1
     maphoto = picture.first.src["large"]
   else
     maphoto = "https://www.deutschland.de/sites/default/files/styles/image_container/public/media/image/living-in-germany-city-frankfurt-skyline.jpg?itok=ZSTPGApy"
   end
-  tripper = User.all.sample
+  puts maphoto
+  planner = User.all.sample
   trip = Trip.create({ title: Faker::Adjective.positive.capitalize + " trip at " + city,
     image_url: maphoto,
     comment: Faker::Lorem.paragraph,
-    tripper: tripper,
-    planner: User.where.not(id: tripper.id).sample })
+    budget: rand(100..1000),
+    city: city,
+    planner: planner,
+    tripper: planner
+    })
+  puts trip.save!
+
+  rand(0..2).times do |k|
+    copied_trip = trip.dup
+    copied_trip.trip_id = Trip.last
+    # puts copied_trip.trip_id
+    # puts "end*"*20
+    copied_trip.tripper = User.where.not(id: planner.id).sample
+    copied_trip.save
+  end
+end
+
+puts ""
+puts " *ici1*"*20
+puts Trip.last
+puts Trip.last.id
+puts " *là1*"*20
 
 
-  rand(2..10).times do |k|
+Trip.all.each do |trip|
+
+
+  rand(2..10).times do
     Message.create({ content:Faker::Lorem.sentence, trip: trip, user: [trip.planner, trip.tripper].sample })
   end
 
-  url = "http://overpass-api.de/api/interpreter?data=[out:json];area[name=\"#{city}\"]->.searchArea;node[amenity=restaurant](area.searchArea);out;"
-
-  JSON.parse(URI.open(url).read)["elements"].each_with_index do |a, i|
-    break if i >= 10
-    add = "pas trouvé"
+  url = "http://overpass-api.de/api/interpreter?data=[out:json];area[name=\"#{trip.city}\"]->.searchArea;node[amenity=restaurant](area.searchArea);out;"
+  JSON.parse(URI.open(url).read)["elements"].each_with_index do |a, n|
+    break if n >= 10
+    add = "Not found"
     add = "#{a["tags"]["addr:housenumber"]} #{a["tags"]["addr:street"]}" if a["tags"].key?("addr:housenumber") && a["tags"].key?("addr:street")
     lat = a["lat"] if a.key?("lat")
     lon = a["lon"] if a.key?("lon")
 
-    Destination.create({
+    destination = Destination.create({
       longitude: lon,
       latitude: lat,
       address: add,
-      description: "a",
-      position: i,
-      trip: trip
-      }).save
+      description: Faker::Lorem.sentence,
+      position: n
+      })
+      trip.destinations << destination
   end
-
 
 end
 
