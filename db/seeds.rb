@@ -17,6 +17,8 @@ CITYS = ["Tokyo", "Sao Paulo", "Jakarta", "Delhi", "Seoul", "Shanghai", "Le Cair
   "Surate", "Toronto", "Madrid", "Qingdao", "Saint Petersbourg", "Pune", "Amman", "Colombo", "Surakarta",
   "Belo Horizonte", "Ibadan", "Zhengzhou", "Detroit", "Ankara", "Guatemala", "Dubai"]
 
+STYLES = ["cultural", "adventure", "romantic", "gastronomic", "eco-tourism", "luxury", "accessible", "party", "humanitarian"]
+
 puts "Starting seed"
 
 Trip.destroy_all
@@ -25,9 +27,7 @@ Message.destroy_all
 Destination.destroy_all
 TripDestination.destroy_all
 
-
 pex = Pexels::Client.new('sEpDeAZP9RRh5YnpiLUPLtyvufibCueYBpqUjOeVzxGbzPH9ZAsidXVh')
-
 
 rand(20..30).times do |i|
   if i.zero?
@@ -39,6 +39,7 @@ end
 
 rand(20..30).times do |j|
   city = CITYS.sample
+  style = STYLES.sample
   picture = []
   # picture = pex.photos.search(city, per_page: 1).photos
   if picture.length == 1
@@ -48,13 +49,15 @@ rand(20..30).times do |j|
   end
   puts maphoto
   planner = User.all.sample
-  trip = Trip.create({ title: Faker::Adjective.positive.capitalize + " trip at " + city,
+  trip = Trip.create({
+    title: Faker::Adjective.positive.capitalize + " trip at " + city,
     image_url: maphoto,
     comment: Faker::Lorem.paragraph,
     budget: rand(100..1000),
     city: city,
     planner: planner,
-    tripper: planner
+    tripper: planner,
+    style: style
     })
   puts trip.save!
 
@@ -68,9 +71,7 @@ rand(20..30).times do |j|
   end
 end
 
-
 Trip.all.each do |trip|
-
 
   rand(2..10).times do
     Message.create({ content:Faker::Lorem.sentence, trip: trip, user: [trip.planner, trip.tripper].sample })

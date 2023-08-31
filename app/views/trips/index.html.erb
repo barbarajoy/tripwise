@@ -19,43 +19,12 @@
               <input type="range" min="5001" max="10000" value="8000" class="range" id="max">
             </div>
           <hr>
-          <h4 class="my-3">Trip Styles</h4>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="cultural" id="cultural">
-              <label class="form-check-label" for="cultural">Cultural</label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="adventure" id="adventure">
-              <label class="form-check-label" for="adventure">Adventure</label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="romantic" id="romantic">
-              <label class="form-check-label" for="romantic">Romantic</label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="gastronomic" id="gastronomic">
-              <label class="form-check-label" for="gastronomic">Gastronomic</label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="ecotourism" id="ecotourism">
-              <label class="form-check-label" for="ecotouridm">Eco-tourism</label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="luxury" id="luxury">
-              <label class="form-check-label" for="luxury">Luxury</label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="accessible" id="accessible">
-              <label class="form-check-label" for="accessible">Accessible</label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="party" id="party">
-              <label class="form-check-label" for="party">Party</label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="humanitarian" id="humanitarian">
-              <label class="form-check-label" for="humanitarian">Humanitarian</label>
-            </div>
+
+        <%= simple_form_for :filter, url: trips_path, method: :get do |f| %>
+            <h4 class="my-3">Trip Styles</h4>
+            <%= f.input :style, legend_tag: false, as: :check_boxes, collection: Trip.pluck(:style).uniq.map { |style| [style, style] } %>
+            <%= f.submit %>
+        <% end %>
       </nav>
 
       <div class="col-8 ms-sm-auto col-lg-10 px-md-4">
