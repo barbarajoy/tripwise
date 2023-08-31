@@ -1,4 +1,16 @@
+.container-fluid {
+//   display: flex;
+}
+
+.card-trip-grid {
+  margin: 25px auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 16px;
+}
+
 .card-trip {
+  flex-grow: 1;
   overflow: hidden;
   background: white;
   box-shadow: 0 0 15px rgba(0,0,0,0.2);
@@ -36,4 +48,21 @@
   right: 16px;
   top: -20px;
   width: 40px;
+}
+
+.card-planner {
+  text-align: right;
+  font-size: 10px;
+  color: $green;
+}
+
+a {
+  text-decoration: none;
+  color: $very-dark-green;
+  transition: 0.3s;
+
+}
+
+a:hover {
+  color: $green;
 }
