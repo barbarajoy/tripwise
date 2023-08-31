@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_30_131555) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_30_154935) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -62,6 +62,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_30_131555) do
     t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
+  create_table "trip_destinations", force: :cascade do |t|
+    t.bigint "trip_id", null: false
+    t.bigint "destination_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["destination_id"], name: "index_trip_destinations_on_destination_id"
+    t.index ["trip_id"], name: "index_trip_destinations_on_trip_id"
+  end
+
   create_table "trips", force: :cascade do |t|
     t.bigint "planner_id"
     t.bigint "tripper_id"
@@ -72,6 +81,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_30_131555) do
     t.datetime "updated_at", null: false
     t.bigint "trip_id"
     t.integer "budget", default: 10
+    t.string "city"
     t.index ["planner_id"], name: "index_trips_on_planner_id"
     t.index ["trip_id"], name: "index_trips_on_trip_id"
     t.index ["tripper_id"], name: "index_trips_on_tripper_id"
@@ -104,6 +114,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_30_131555) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "messages", "trips"
   add_foreign_key "messages", "users"
+  add_foreign_key "trip_destinations", "destinations"
+  add_foreign_key "trip_destinations", "trips"
   add_foreign_key "trips", "trips"
   add_foreign_key "trips", "users", column: "planner_id"
   add_foreign_key "trips", "users", column: "tripper_id"

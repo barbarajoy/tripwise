@@ -1,5 +1,6 @@
 class Destination < ApplicationRecord
-  belongs_to :trip
+  has_many :trip_destinations
+  has_many :trips, through: :trip_destinations
   validates :longitude, presence: true
   validates :longitude, presence: true
   validates :address, presence: true
