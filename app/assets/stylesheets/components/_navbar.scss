@@ -26,9 +26,18 @@
 }
 
 nav {
-  background-color: #3FA7A0;
+  background-color: $dark-green;
 }
 
 .navbar-top {
   margin-top: 25px;
+}
+
+.searchbar {
+  border: 2px solid $yellow;
+  // box-shadow: 0 0 0 2px $yellow;
+}
+
+.button-dark-green {
+  margin-right: 30px;
 }
