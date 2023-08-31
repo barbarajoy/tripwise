@@ -1,4 +1,4 @@
-.container {
+.container{
   text-align: center;
   padding: 20px;
   background-color: $very-light-green;
@@ -44,9 +44,15 @@
   margin-bottom: 10px;
 }
 
+.link-btn-container {
+  text-align: left;
+  margin-top: 20px;
+  color: white;
+  text-decoration: none;
+}
+
 .button-dark-green-show {
   background-color: $very-dark-green;
-  color: white;
   font-weight: bold;
   border: none;
   padding: 10px 20px;
@@ -59,11 +65,4 @@
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
     color: $very-dark-green;
   }
-}
-
-.button-container {
-  display: flex;
-  justify-content: flex-end;
-  margin-top: 20px;
-  margin-bottom: 20px;
 }

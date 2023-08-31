@@ -5,17 +5,15 @@
   <h2><%= @trip.title %></h2>
   <p><%= @trip.comment %></p>
   <%= image_tag @trip.image_url %>
-
   <div class="destinations">
     <% @trip.destinations.order(:position).each do |destination| %>
-    <div class="destination">
-      <p><%= destination.address %></p>
-      <p><%= destination.description %></p>
-      <% end %>
+      <div class="destination">
+        <p><%= destination.address %></p>
+        <p><%= destination.description %></p>
+      </div>
+    <% end %>
+    <div>
+      <button type ="button" class="button-dark-green-show"><%= link_to 'Contact the planner', '#', class: "link-btn-container" %></button>
     </div>
-  </div>
-
-  <div class="button-container">
-    <button type ="button" class="button-dark-green-show"><%= link_to 'Contact the planner', '#' %></button>
   </div>
 </div>

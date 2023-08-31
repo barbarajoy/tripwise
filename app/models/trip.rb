@@ -1,9 +1,9 @@
 class Trip < ApplicationRecord
   belongs_to :planner, class_name: 'User'
   belongs_to :tripper, class_name: 'User'
-  has_many :trip_destinations
+  has_many :trip_destinations, dependent: :destroy
   has_many :destinations, through: :trip_destinations
-  has_many :messages
+  has_many :messages, dependent: :destroy
   validates :title, presence: true
   validates :city, presence: true
   validates :image_url, presence: true
