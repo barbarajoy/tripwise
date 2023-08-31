@@ -9,6 +9,9 @@ class Trip < ApplicationRecord
   validates :image_url, presence: true
   validates :comment, presence: true
   validates :planner_id, presence: true
+  belongs_to :trip, optional: true
+  has_many :trips, dependent: :destroy
+
 
   include PgSearch::Model
   pg_search_scope :search_by_title,

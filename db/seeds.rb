@@ -19,16 +19,14 @@ CITYS = ["Tokyo", "Sao Paulo", "Jakarta", "Delhi", "Seoul", "Shanghai", "Le Cair
 
 puts "Starting seed"
 
-
-TripDestination.destroy_all
-Destination.destroy_all
-Message.destroy_all
 Trip.destroy_all
 User.destroy_all
+Message.destroy_all
+Destination.destroy_all
+TripDestination.destroy_all
 
 
 pex = Pexels::Client.new('sEpDeAZP9RRh5YnpiLUPLtyvufibCueYBpqUjOeVzxGbzPH9ZAsidXVh')
-
 
 
 rand(20..30).times do |i|
@@ -62,9 +60,9 @@ rand(20..30).times do |j|
 
   rand(0..2).times do |k|
     copied_trip = trip.dup
-    copied_trip.trip_id = Trip.last
-    # puts copied_trip.trip_id
-    # puts "end*"*20
+    copied_trip.trip_id = trip.id
+    # puts copied_trip.trip
+    puts "*end* "*10
     copied_trip.tripper = User.where.not(id: planner.id).sample
     copied_trip.save
   end
