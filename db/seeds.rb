@@ -92,6 +92,7 @@ Trip.all.each do |trip|
       position: n
       })
       trip.destinations << destination
+      trip.save
   end
 
 end
