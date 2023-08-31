@@ -5,7 +5,17 @@
     </a>
     <h2 class="navbar-heading">Find your next adventure</h2>
     <ul class="nav navbar-nav navbar-right ml-auto">
-      <li id="navbar-link"><button type="button" class="button m-4"><%= link_to 'Sign in', '#' %></button></li>
+      <li id="navbar-link">
+        <% if user_signed_in? %>
+          <button type="button" class="button m-4">
+            <%= link_to 'Sign out', destroy_user_session_path, data: {turbo_method: :delete} %>
+          </button>
+        <% else %>
+          <button type="button" class="button m-4">
+            <%= link_to 'Sign in/up', new_user_session_path %>
+          </button>
+        <% end %>
+      </li>
     </ul>
   </div>
 </nav>
