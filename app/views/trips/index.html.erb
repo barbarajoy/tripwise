@@ -22,7 +22,7 @@
 
         <%= simple_form_for :filter, url: trips_path, method: :get do |f| %>
             <h4 class="my-3">Trip Styles</h4>
-            <%= f.input :style, legend_tag: false, as: :check_boxes, collection: Trip.pluck(:style).uniq.map { |style| [style.capitalize, style] } %>
+            <%= f.input :style, legend_tag: false, as: :check_boxes, collection: Trip.pluck(:style).uniq.map { |style| [style, style] } %>
             <%= f.submit %>
         <% end %>
       </nav>
