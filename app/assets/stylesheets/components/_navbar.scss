@@ -22,22 +22,10 @@
   align-items: center;
   justify-content: space-between;
   height: 100px; /* Nouvelle hauteur souhaitée */
-  margin: auto;
+  margin-top: 30px;
+  margin-bottom: 20px;
 }
 
 nav {
   background-color: $dark-green;
-}
-
-.navbar-top {
-  margin-top: 25px;
-}
-
-.searchbar {
-  border: 2px solid $yellow;
-  // box-shadow: 0 0 0 2px $yellow;
-}
-
-.button-dark-green {
-  margin-right: 30px;
 }
