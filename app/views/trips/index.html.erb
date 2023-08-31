@@ -56,20 +56,21 @@
             </div>
       </nav>
 
-    <div class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-      <% @trips.each do |trip| %>
-      <div class="card-trip">
-        <%= image_tag trip.image_url %>
-        <div class="card-trip-infos">
-          <div>
-            <h2><%= trip.title %></h2>
-            <p><%= trip.comment %></p>
+    <%# <div class="row"> %>
+        <% @trips.each do |trip| %>
+      <div class="col-9 ms-sm-auto col-lg-10 px-md-4">
+        <div class="card-trip">
+          <%= image_tag trip.image_url %>
+          <div class="card-trip-infos">
+            <div>
+              <h2><%= trip.title %></h2>
+              <p><%= trip.comment %></p>
+            </div>
+            <h2 class="card-trip-username">username</h2>
+            <img src="https://kitt.lewagon.com/placeholder/users/krokrob" class="card-trip-user avatar-bordered" />
           </div>
-          <h2 class="card-trip-username">username</h2>
-          <img src="https://kitt.lewagon.com/placeholder/users/krokrob" class="card-trip-user avatar-bordered" />
         </div>
-      </div>
-      <% end %>
-
-    <div>
+        <% end %>
+      <div>
+    <%# </div> %>
 </div>
