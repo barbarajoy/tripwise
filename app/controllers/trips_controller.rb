@@ -7,5 +7,10 @@ class TripsController < ApplicationController
 
   def show
     @trip = Trip.find(params[:id])
+    @new_trip = Trip.new
+  end
+
+  def new
+    raise
   end
 end

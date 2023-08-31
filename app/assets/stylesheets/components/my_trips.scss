@@ -1,0 +1,14 @@
+.my_trip_container {
+  display: flex;
+  justify-content: space-between;
+  // align-items: flex-end;
+
+}
+
+.my_conversations, .my_messages {
+  border-right: 3px solid black;
+}
+.column {
+  width: 33%;
+  margin: 10px;
+}

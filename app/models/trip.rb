@@ -11,6 +11,7 @@ class Trip < ApplicationRecord
   validates :planner_id, presence: true
   belongs_to :trip, optional: true
   has_many :trips, dependent: :destroy
+  has_many :messages, dependent: :destroy
 
 
   include PgSearch::Model

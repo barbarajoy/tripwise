@@ -61,8 +61,6 @@ rand(20..30).times do |j|
   rand(0..2).times do |k|
     copied_trip = trip.dup
     copied_trip.trip_id = trip.id
-    # puts copied_trip.trip
-    puts "*end* "*10
     copied_trip.tripper = User.where.not(id: planner.id).sample
     copied_trip.save
   end
@@ -91,7 +89,8 @@ Trip.all.each do |trip|
       description: Faker::Lorem.sentence,
       position: n
       })
-      trip.destinations << destination
+    trip.destinations << destination
+    trip.save
   end
 
 end

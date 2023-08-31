@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   root to: "pages#home"
   resources :trips, only: %i[index show]
   namespace :my do
-    resources :trips, only: %i[create show] do
+    resources :trips, only: %i[new create show] do
       resources :messages, only: %i[create]
     end
   end
