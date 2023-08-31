@@ -4,26 +4,12 @@
   <div class="container-fluid">
     <div class="row">
       <nav class="col-md-4 col-lg-2 d-md-block sidebar">
-        <div class="budgetSlider">
-          <h4>Budget</h4>
-          <div class="min-max">
-            <div class="min">
-              <label>Min</label><span id="min-value"></span>
-            </div>
-            <div class="max">
-              <label>Max</label><span id="max-value"></span>
-            </div>
-          </div>
-        </div>
-            <div class="min-max-range">
-              <input type="range" min="0" max="5000" value="2000" class="range" id="min">
-              <input type="range" min="5001" max="10000" value="8000" class="range" id="max">
-            </div>
-          <hr>
+        <%= render "/layouts/budgetslider" %>
+        <hr>
 
         <%= simple_form_for :filter, url: trips_path, method: :get do |f| %>
             <h4 class="my-3">Trip Styles</h4>
-            <%= f.input :style, legend_tag: false, as: :check_boxes, collection: Trip.pluck(:style).uniq.map { |style| [style, style] } %>
+            <%= f.input :style, legend_tag: false, as: :check_boxes, collection: Trip.where.not(style: nil).pluck(:style).uniq.map { |style| [style.capitalize, style] } %>
             <%= f.submit %>
         <% end %>
       </nav>
@@ -45,4 +31,5 @@
           <% end %>
         </div>
       </div>
+    </div>
   </div>
