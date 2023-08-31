@@ -1,0 +1,61 @@
+// .budgetSlider h4 {
+//   text-align: center;
+//   margin-top: 15px;
+// }
+
+.min {
+  float: left;
+}
+
+.max {
+  float: right;
+}
+
+.min-max {
+  width: 90%;
+  max-width: 200px;
+  margin: 0 auto;
+  padding: 25px 0 15px 0;
+}
+
+.min-max label {
+  font-size: 12px;
+  float: left;
+  margin-right: 5px;
+  line-height: 1.6;
+}
+
+.min-max span {
+  // font-size: 10px;
+  // text-align: center;
+  display: inline-block;
+  width: 30px;
+  border: 1px solid $green;
+}
+
+.min-max-range {
+  padding: 30px 0 20px 0;
+}
+
+.range {
+  -webkit-appearance:none;
+  appearance: none;
+  width: 50%;
+  height: 10px;
+  max-width: 400px;
+  background-color: $very-light-green;
+  float: left;
+  margin: 0;
+  padding: 0;
+  outline: none;
+}
+
+.range::-webkit-slider-thumb {
+  -webkit-appearance:none;
+  appearance: none;
+  background-color: $dark-green;
+  border-radius: 50%;
+  height: 15px;
+  width: 15px;
+  cursor: pointer;
+}
