@@ -1,26 +1,11 @@
 <nav>
   <div class="navbar-top">
-    <%= link_to '#' do %>
+    <a href="<%= root_path %>">
       <%= image_tag('logo.png', width: 150, height: 150) %>
-    <% end %>
+    </a>
     <h2 class="navbar-heading">Find your next adventure</h2>
     <ul class="nav navbar-nav navbar-right ml-auto">
       <li id="navbar-link"><button type="button" class="button m-4"><%= link_to 'Sign in', '#' %></button></li>
     </ul>
-  </div>
-
-  <div class="navbar-bottom">
-    <div class="row justify-content-center">
-      <div class="col-sm-8 my-3">
-        <%= form_with url: trips_path, method: :get, class: "d-flex" do %>
-          <%= text_field_tag :query,
-              params[:query],
-              class: " searchbar form-control rounded-pill mr-2 p-2",
-              placeholder: "Where do you want to travel"
-            %>
-          <%= submit_tag "Search", name: "", class: "button-dark-green" %>
-        <% end %>
-      </div>
-    </div>
   </div>
 </nav>
