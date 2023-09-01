@@ -12,8 +12,10 @@
         <p><%= trip_destination.destination.description %></p>
       </div>
     <% end %>
-    <div>
-      <button type ="button" class="button-dark-green-show"><%= link_to 'Contact the planner', '#', class: "link-btn-container" %></button>
-    </div>
   </div>
+
+  <div class="button-container">
+    <%= link_to 'Contact the planner', my_trips_path(trip_id:@trip.id), class: "link-btn-container button-dark-green-show", data: { turbo_method: :post } %>
+  </div>
+
 </div>
