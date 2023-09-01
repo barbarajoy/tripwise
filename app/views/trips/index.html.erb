@@ -1,16 +1,28 @@
 <%= render "/layouts/navbar" %>
-<%= render "layouts/searchbar" %>
 
+<%= simple_form_for :filter, url: trips_path, method: :get do |f| %>
+  <div class="searchbar-container">
+    <div class="d-flex justify-content-center searchbar-container">
+      <div class="w-70 d-flex">
+        <div class="w-70">
+          <%= f.input :title, label: false,
+            placeholder: 'Where do you want to go?',
+            input_html: { class: "searchbar form-control rounded-pill mr-2 py-2 w-100", style: "width: 80%;" } %>
+        </div>
+        <div class="w-15">
+          <%= f.submit class: "button-dark-green rounded-pill w-100 mx-3" %>
+        </div>
+      </div>
+    </div>
+  </div>
   <div class="container-fluid">
     <div class="row">
       <nav class="col-md-4 col-lg-2 d-md-block sidebar">
         <%= render "/layouts/budgetslider" %>
         <hr>
 
-        <%= simple_form_for :filter, url: trips_path, method: :get do |f| %>
             <h4 class="my-3">Trip Styles</h4>
             <%= f.input :style, legend_tag: false, as: :check_boxes, collection: Trip.where.not(style: nil).pluck(:style).uniq.map { |style| [style.capitalize, style] } %>
-            <%= f.submit %>
         <% end %>
       </nav>
 
