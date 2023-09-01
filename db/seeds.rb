@@ -46,7 +46,6 @@ rand(20..30).times do |j|
   else
     maphoto = "https://www.deutschland.de/sites/default/files/styles/image_container/public/media/image/living-in-germany-city-frankfurt-skyline.jpg?itok=ZSTPGApy"
   end
-  puts maphoto
   planner = User.all.sample
   trip = Trip.create({ title: Faker::Adjective.positive.capitalize + " trip at " + city,
     image_url: maphoto,
@@ -61,8 +60,6 @@ rand(20..30).times do |j|
   rand(0..2).times do |k|
     copied_trip = trip.dup
     copied_trip.trip_id = trip.id
-    # puts copied_trip.trip
-    puts "*end* "*10
     copied_trip.tripper = User.where.not(id: planner.id).sample
     copied_trip.save
   end
