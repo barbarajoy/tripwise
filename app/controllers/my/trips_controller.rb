@@ -8,7 +8,7 @@ class My::TripsController < ApplicationController
     if @trip.trip.nil?
       copied_trip = @trip.dup
       copied_trip.trip_id = @trip.id
-      copied_trip.tripper = User.where.not(id: @trip.id).sample #current_user
+      copied_trip.tripper = current_user
       if copied_trip.save
         redirect_to my_trip_path(copied_trip)
       else
@@ -27,7 +27,7 @@ class My::TripsController < ApplicationController
     # @trips = Trip.all.where(sql_subquery, query: "%#{params[:query]}%")
     @trips = Trip.all
 
-    @interlocutor = @trip.planner
+    # @interlocutor = @trip.planner
     # @interlocutor = @trip.tripper if current_user == @trip.planner
 
     @message = Message.new

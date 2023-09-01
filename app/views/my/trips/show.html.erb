@@ -1,23 +1,73 @@
-<h1>hello</h1>
+<h1>My trips</h1>
 
-<%= @message %>
 <div class="my_trip_container">
   <div class="my_conversations column">
     <% @trips.each do |trip| %>
-    <%= trip.title %>
+
+
+
+      <ul>
+        <% if current_user.id == trip.planner.id && trip.planner.id != trip.tripper.id %>
+          <%= link_to my_trip_path(trip) do %>
+            <li>
+              <%= trip.tripper.first_name %> <%= trip.tripper.last_name %><br><%= trip.title %>
+            </li>
+          <% end %>
+        <% elsif current_user.id == trip.tripper.id && trip.planner.id != trip.tripper.id %>
+          <%= link_to my_trip_path(trip) do %>
+            <li>
+              <%= trip.planner.first_name %> <%= trip.planner.last_name %><br><%= trip.title %>
+            </li>
+          <% end %>
+        <% end %>
+      </ul>
     <% end %>
   </div>
   <div class="my_messages column">
 
-    bbb
+
+
+    <%= "Tripper : #{@trip.tripper.first_name} (#{@trip.tripper.id})" %><br>
+    <%= "Planner : #{@trip.planner.first_name} (#{@trip.planner.id})" %><br>
+    <%= "current_user : #{current_user.first_name} (#{current_user.id})" %>
+    <div class="messages">
+      <% @trip.messages.each do |message| %>
+        <div class="message <%= current_user.id == message.user_id ? " right" : "left" %>" id="message-<%= message.id %>">
+          <small>
+            <strong><%= message.user.first_name  %></strong>
+            <i><%= message.created_at.strftime("%a %b %e at %l:%M %p") %></i>
+          </small>
+          <p><%= message.content %></p>
+        </div>
+      <% end %>
+    </div>
+    <div id="new_messages">
+
+    </div>
+
 
   </div>
   <div class="my_trips column">
-    cccc
+
+
+  <h1><strong><%= @trip.planner.first_name %> <%= @trip.planner.last_name %></strong></h1>
+  <h2><strong><%= @trip.title %></strong></h2>
+  <p><%= @trip.comment %></p>
+  <%= image_tag @trip.image_url, style:"width: 100%;" %>
+  <div class="destinations">
+    <% @trip.trip_destinations.each do |trip_destination| %>
+      <div class="destination">
+        <h4><strong><%= trip_destination.destination.address %></strong></h4>
+        <p><%= trip_destination.destination.description %></p>
+      </div>
+    <% end %>
+  </div>
+
+
   </div>
 </div>
 
-    t.bigint "planner_id"
+    <%# t.bigint "planner_id"
     t.bigint "tripper_id"
     t.string "title"
     t.string "image_url"
@@ -29,4 +79,4 @@
     t.string "city"
     t.index ["planner_id"], name: "index_trips_on_planner_id"
     t.index ["trip_id"], name: "index_trips_on_trip_id"
-    t.index ["tripper_id"], name: "index_trips_on_tripper_id"
+    t.index ["tripper_id"], name: "index_trips_on_tripper_id" %>

@@ -33,7 +33,7 @@ rand(20..30).times do |i|
   if i.zero?
     User.create({ email: "test@test.test", password: "testtest", first_name: "Audran", last_name: "Pillard" })
   else
-    User.create({ email: Faker::Internet.email, password: Faker::Internet.password(min_length: 8), first_name: Faker::Name.first_name, last_name: Faker::Name.last_name })
+    User.create({ email: Faker::Internet.email, password: "password", first_name: Faker::Name.first_name, last_name: Faker::Name.last_name })
   end
 end
 
@@ -47,7 +47,11 @@ rand(20..30).times do |j|
   else
     maphoto = "https://www.deutschland.de/sites/default/files/styles/image_container/public/media/image/living-in-germany-city-frankfurt-skyline.jpg?itok=ZSTPGApy"
   end
-  planner = User.all.sample
+  if j.zero?
+    planner = User.first
+  else
+    planner = User.all.sample
+  end
   trip = Trip.create({
     title: Faker::Adjective.positive.capitalize + " trip at " + city,
     image_url: maphoto,
@@ -58,9 +62,9 @@ rand(20..30).times do |j|
     tripper: planner,
     style: style
     })
-  puts trip.save!
+  trip.save!
 
-  rand(0..2).times do |k|
+  rand(0..3).times do |k|
     copied_trip = trip.dup
     copied_trip.trip_id = trip.id
     copied_trip.tripper = User.where.not(id: planner.id).sample
@@ -69,9 +73,10 @@ rand(20..30).times do |j|
 end
 
 Trip.all.each do |trip|
-
-  rand(2..10).times do
-    Message.create({ content:Faker::Lorem.sentence, trip: trip, user: [trip.planner, trip.tripper].sample })
+  if trip.planner != trip.tripper
+    rand(2..10).times do
+      Message.create({ content:Faker::Lorem.sentence, trip: trip, user: [trip.planner, trip.tripper].sample })
+    end
   end
 
   url = "http://overpass-api.de/api/interpreter?data=[out:json];area[name=\"#{trip.city}\"]->.searchArea;node[amenity=restaurant](area.searchArea);out;"
@@ -83,6 +88,7 @@ Trip.all.each do |trip|
     lon = a["lon"] if a.key?("lon")
 
     destination = Destination.create({
+      title: a["tags"]["name"],
       longitude: lon,
       latitude: lat,
       address: add,
