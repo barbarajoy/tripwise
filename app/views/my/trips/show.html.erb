@@ -1,0 +1,32 @@
+<h1>hello</h1>
+
+<%= @message %>
+<div class="my_trip_container">
+  <div class="my_conversations column">
+    <% @trips.each do |trip| %>
+    <%= trip.title %>
+    <% end %>
+  </div>
+  <div class="my_messages column">
+
+    bbb
+
+  </div>
+  <div class="my_trips column">
+    cccc
+  </div>
+</div>
+
+    t.bigint "planner_id"
+    t.bigint "tripper_id"
+    t.string "title"
+    t.string "image_url"
+    t.text "comment"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "trip_id"
+    t.integer "budget", default: 10
+    t.string "city"
+    t.index ["planner_id"], name: "index_trips_on_planner_id"
+    t.index ["trip_id"], name: "index_trips_on_trip_id"
+    t.index ["tripper_id"], name: "index_trips_on_tripper_id"

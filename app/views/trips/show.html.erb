@@ -16,4 +16,9 @@
       <%= link_to 'Contact the planner', my_trips_path , class: "link-btn-container button-dark-green-show" %>
     </div>
   </div>
+
+  <div class="button-container">
+    <%= link_to 'Contact the planner', my_trips_path(trip_id:@trip.id), class: "button-dark-green-show", data: { turbo_method: :post } %>
+  </div>
+
 </div>
