@@ -175,59 +175,61 @@ end
 
 puts "Creating one real example"
 
-# user1 = User.create(
-#   first_name: "Jane",
-#   last_name: "Smith",
-#   email: "jane@example.com",
-#   password: "password"
-# )
 
-# trip1 = Trip.create(
-#   title: "Super cute romantic trip in Italy",
-#   city: "Rome, Florence, Venice",
-#   image_url: "https://media.tacdn.com/media/attractions-splice-spp-674x446/06/70/0e/c8.jpg",
-#   comment: "Embarking on an Italian escapade for a romantic journey. Our path unveils hidden treasures at every stop. In Rome, the Eternal City, each monument narrates a timeless love story. Florence, with its sublime art, leaves an artistic imprint on our hearts. And finally, the winding canals of Venice mirror our love in their tranquil waters. This unforgettable voyage through the charm of Italy will forever be etched in our story.",
-#   planner_id: user1.id,
-#   tripper_id: user1.id
-# )
+user1 = User.create(
+  first_name: "Jane",
+  last_name: "Smith",
+  email: "jane@example.com",
+  password: "password"
+)
 
-# destination_italy1 = Destination.create(
-#   address: "Rome, Italy",
-#   latitude: 41.9028,
-#   longitude: 12.4964,
-#   position: 1,
-#   description: "Explore the captivating history of Rome as you stand before the ancient Colosseum and wander through the ruins of the Roman Forum. Savor traditional pasta dishes in quaint trattorias and make a wish at the iconic Trevi Fountain, surrounded by the city's timeless beauty."
-# )
+trip1 = Trip.create(
+  title: "Super cute romantic trip in Italy",
+  city: "Rome, Florence, Venice",
+  image_url: "https://media.tacdn.com/media/attractions-splice-spp-674x446/06/70/0e/c8.jpg",
+  comment: "Embarking on an Italian escapade for a romantic journey. Our path unveils hidden treasures at every stop. In Rome, the Eternal City, each monument narrates a timeless love story. Florence, with its sublime art, leaves an artistic imprint on our hearts. And finally, the winding canals of Venice mirror our love in their tranquil waters. This unforgettable voyage through the charm of Italy will forever be etched in our story.",
+  planner_id: user1.id,
+  tripper_id: user1.id,
+  style: "romantic"
+)
 
-# destination_italy2 = Destination.create(
-#   address: "Florence, Italy",
-#   latitude: 43.7696,
-#   longitude: 11.2558,
-#   position: 2,
-#   description: "Indulge in the artistic treasures of Florence, where Michelangelo's David and Botticelli's Birth of Venus reside. Stroll along the Arno River, cross the iconic Ponte Vecchio, and savor gelato in bustling piazzas. Florence's charm and creativity will leave you enchanted."
-# )
+destination_italy1 = Destination.create(
+  address: "Rome, Italy",
+  latitude: 41.9028,
+  longitude: 12.4964,
+  position: 1,
+  description: "Explore the captivating history of Rome as you stand before the ancient Colosseum and wander through the ruins of the Roman Forum. Savor traditional pasta dishes in quaint trattorias and make a wish at the iconic Trevi Fountain, surrounded by the city's timeless beauty."
+)
 
-# destination_italy3 = Destination.create(
-#   address: "Venice, Italy",
-#   latitude: 45.4408,
-#   longitude: 12.3155,
-#   position: 3,
-#   description: "Embark on a romantic journey through the enchanting canals of Venice, serenaded by the gentle lapping of water against historic palaces. Discover hidden squares, indulge in delectable seafood, and visit the glassmaking island of Murano, where artistry and beauty intertwine."
-# )
+destination_italy2 = Destination.create(
+  address: "Florence, Italy",
+  latitude: 43.7696,
+  longitude: 11.2558,
+  position: 2,
+  description: "Indulge in the artistic treasures of Florence, where Michelangelo's David and Botticelli's Birth of Venus reside. Stroll along the Arno River, cross the iconic Ponte Vecchio, and savor gelato in bustling piazzas. Florence's charm and creativity will leave you enchanted."
+)
 
-# trip_destinations = TripDestination.create(
-#   trip: trip1,
-#   destination: destination_italy1
-# )
+destination_italy3 = Destination.create(
+  address: "Venice, Italy",
+  latitude: 45.4408,
+  longitude: 12.3155,
+  position: 3,
+  description: "Embark on a romantic journey through the enchanting canals of Venice, serenaded by the gentle lapping of water against historic palaces. Discover hidden squares, indulge in delectable seafood, and visit the glassmaking island of Murano, where artistry and beauty intertwine."
+)
 
-# trip_destinations = TripDestination.create(
-#   trip: trip1,
-#   destination: destination_italy2
-# )
+trip_destinations = TripDestination.create(
+  trip: trip1,
+  destination: destination_italy1
+)
 
-# trip_destinations = TripDestination.create(
-#   trip: trip1,
-#   destination: destination_italy3
-# )
+trip_destinations = TripDestination.create(
+  trip: trip1,
+  destination: destination_italy2
+)
+
+trip_destinations = TripDestination.create(
+  trip: trip1,
+  destination: destination_italy3
+)
 
 puts "Done"
