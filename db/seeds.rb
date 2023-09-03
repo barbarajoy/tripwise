@@ -4,20 +4,103 @@ require "open-uri"
 
 pex = Pexels::Client.new('sEpDeAZP9RRh5YnpiLUPLtyvufibCueYBpqUjOeVzxGbzPH9ZAsidXVh')
 
-CITYS = ["Tokyo", "Sao Paulo", "Jakarta", "Delhi", "Seoul", "Shanghai", "Le Caire", "Bombay",
-  "Canton", "Lagos", "New York", "Chongqing", "Pekin", "Mexico", "Moscou", "Osaka",
-  "Bangkok", "Los Angeles", "Dacca", "Calcutta", "Karachi", "Teheran", "Buenos Aires", "Istanbul", "Hyderabad",
-  "Gauteng", "Chengdu", "Londres", "Shantou", "Tianjin", "Quanzhou Xiamen",
-  "Ho-Chi-Minh-Ville", "Surabaya", "Bangalore", "Paris", "Bagdad", "Chennai", "Xian",
-  "Rio de Janeiro", "Kinshasa", "Shenzhen", "Lahore", "Lima", "Nagoya", "Bogota", "Wuhan", "Suzhou", "Rhin-Ruhr",
-  "Hangzhou", "Chicago", "Washington", "San Francisco", "San Jose", "Taipei", "Luanda", "Bandung", "Rangoon", "Khartoum",
-  "Nankin", "Dongguan", "Amsterdam", "Shenyang", "Boston", "Milan",
-  "Kuala Lumpur", "Singapour", "Ahmedabad", "Dallas", "Busan", "Islamabad Rawalpindi", "Faisalabad", "Alger",
-  "Nairobi", "Hanoi", "Santiago", "Hong Kong", "Houston", "Semarang", "Philadelphie", "Riyad", "Miami", "Atlanta",
-  "Surate", "Toronto", "Madrid", "Qingdao", "Saint Petersbourg", "Pune", "Amman", "Colombo", "Surakarta",
-  "Belo Horizonte", "Ibadan", "Zhengzhou", "Detroit", "Ankara", "Guatemala", "Dubai"]
+CITYS = ["Bangkok", "Paris", "London", "Dubai", "Singapore", "Kuala Lumpur", "New York City", "Istanbul", "Tokyo",
+  "Seoul", "Antalya", "Phuket", "Mecca", "Pattaya", "Milan", "Barcelona", "Rome", "Osaka", "Taipei", "Shanghai",
+  "Vienna", "Amsterdam", "Los Angeles", "Madrid", "Guangzhou", "Prague", "Miami", "Munich", "Las Vegas", "Dublin",
+  "Riyadh", "Berlin", "Toronto", "Venice", "Sydney", "Vienna", "Hong Kong", "Johannesburg", "Edinburgh", "Marrakech",
+  "Dubrovnik", "Helsinki", "Copenhagen", "Stockholm", "Budapest", "Warsaw", "Krakow", "Zurich", "Athens", "Nairobi",
+  "Abu Dhabi", "Delhi", "Mumbai", "Jaipur", "Bangalore", "Kolkata", "Bali", "Ho Chi Minh City", "Hanoi", "Manila",
+  "Lima", "Buenos Aires", "Sao Paulo", "Rio de Janeiro", "Cairo", "Alexandria", "Cape Town", "Nairobi", "Amman",
+  "Jerusalem", "Toronto", "Vancouver", "Montreal", "Calgary", "Quebec City", "Edmonton", "Ottawa", "Havana",
+  "Santiago de Cuba", "Bogota", "Medellin", "Cancun", "Playa del Carmen", "Mexico City", "Guadalajara", "Monterrey",
+  "Moscow", "St. Petersburg", "Kyiv", "Odessa", "Kazan", "Sochi", "Yekaterinburg", "Novosibirsk", "Irkutsk",
+  "Vladivostok", "Krasnoyarsk", "Yerevan", "Tbilisi", "Baku", "Kiev", "Minsk", "Warsaw", "Prague"]
 
-STYLES = ["cultural", "adventure", "romantic", "gastronomic", "eco-tourism", "luxury", "accessible", "party", "humanitarian"]
+
+  STYLES = ["cultural", "adventure", "romantic", "gastronomic", "ecotourism", "luxury", "accessible", "party", "humanitarian"]
+  DESTINATIONS_CRITERES = {
+    cultural: [
+      "tourism=attraction",
+      "tourism=artwork",
+      "tourism=gallery"
+    ],
+    adventure: [
+      "tourism=attraction",
+      "tourism=artwork",
+      "tourism=gallery"
+    ],
+    romantic: [
+      "tourism=attraction",
+      "tourism=artwork",
+      "tourism=gallery"
+    ],
+    gastronomic: [
+      "tourism=attraction",
+      "tourism=artwork",
+      "tourism=gallery"
+    ],
+    ecotourism: [
+      "tourism=attraction",
+      "tourism=artwork",
+      "tourism=gallery"
+    ],
+    luxury: [
+      "tourism=attraction",
+      "tourism=artwork",
+      "tourism=gallery"
+    ],
+    accessible: [
+      "tourism=attraction",
+      "tourism=artwork",
+      "tourism=gallery"
+    ],
+    party: [
+      "tourism=attraction",
+      "tourism=artwork",
+      "tourism=gallery"
+    ],
+    humanitarian: [
+      "tourism=attraction",
+      "tourism=artwork",
+      "tourism=gallery"
+    ]
+  }
+
+
+def create_destination(trip, style)
+  found = false
+  # DESTINATIONS_CRITERES.keys.each do |style|
+  DESTINATIONS_CRITERES[style.to_sym].each do |categories|
+
+
+
+
+
+    url = "http://overpass-api.de/api/interpreter?data=[out:json];area[name=\"#{trip.city}\"]->.searchArea;node[#{categories}](area.searchArea);out;"
+    cpt = 0
+    JSON.parse(URI.open(url).read)["elements"].each_with_index do |a, n|
+      cpt = n
+      break if n >= 10 || !a["tags"].key?("name")#|| !a["tags"].key?("addr:housenumber") || !a["tags"].key?("addr:street")
+      found = true
+      # puts "#{n} #{a["tags"]["name"]} '#{a["tags"]["addr:housenumber"]} #{a["tags"]["addr:street"]}'"
+      lat = a["lat"] if a.key?("lat")
+      lon = a["lon"] if a.key?("lon")
+
+      trip.destinations.new({
+        title: a["tags"]["name"],
+        longitude: lon,
+        latitude: lat,
+        address: "is_coming.....", #{a["tags"]["addr:housenumber"]} #{a["tags"]["addr:street"]}"
+        description: Faker::Lorem.sentence,
+        position: n
+      })
+    end
+    puts "- #{cpt} lieu(x) #{categories}" if cpt != 0
+  end
+
+  found
+end
+
 
 puts "Starting seed"
 
@@ -37,11 +120,14 @@ rand(20..30).times do |i|
   end
 end
 
-rand(20..30).times do |j|
+rand(10..20).times do |j|
   city = CITYS.sample
-  style = STYLES.sample
+
+# CITYS.each_with_index do |city, j|
+
+  style = DESTINATIONS_CRITERES.keys.sample.to_s
   picture = []
-  # picture = pex.photos.search(city, per_page: 1).photos
+  picture = pex.photos.search(city, per_page: 1).photos
   if picture.length == 1
     maphoto = picture.first.src["large"]
   else
@@ -52,7 +138,7 @@ rand(20..30).times do |j|
   else
     planner = User.all.sample
   end
-  trip = Trip.create({
+  trip = Trip.new({
     title: Faker::Adjective.positive.capitalize + " trip at " + city,
     image_url: maphoto,
     comment: Faker::Lorem.paragraph,
@@ -61,101 +147,87 @@ rand(20..30).times do |j|
     planner: planner,
     tripper: planner,
     style: style
-    })
-  trip.save!
+  })
 
-  rand(0..3).times do |k|
-    copied_trip = trip.dup
-    copied_trip.trip_id = trip.id
-    copied_trip.tripper = User.where.not(id: planner.id).sample
-    copied_trip.save
+
+  puts ""
+  puts trip.city.upcase
+  if create_destination(trip, style)
+    trip.save
+    rand(0..3).times do |k|
+      copied_trip = trip.dup
+      copied_trip.trip_id = trip.id
+      copied_trip.destinations = trip.destinations
+      copied_trip.tripper = User.where.not(id: planner.id).sample
+      copied_trip.save
+    end
   end
 end
+
 
 Trip.all.each do |trip|
   if trip.planner != trip.tripper
     rand(2..10).times do
-      Message.create({ content:Faker::Lorem.sentence, trip: trip, user: [trip.planner, trip.tripper].sample })
+      trip.messages.create({ content:Faker::Lorem.sentence, user: [trip.planner, trip.tripper].sample })
     end
   end
-
-  url = "http://overpass-api.de/api/interpreter?data=[out:json];area[name=\"#{trip.city}\"]->.searchArea;node[amenity=restaurant](area.searchArea);out;"
-  JSON.parse(URI.open(url).read)["elements"].each_with_index do |a, n|
-    break if n >= 10
-    add = "Not found"
-    add = "#{a["tags"]["addr:housenumber"]} #{a["tags"]["addr:street"]}" if a["tags"].key?("addr:housenumber") && a["tags"].key?("addr:street")
-    lat = a["lat"] if a.key?("lat")
-    lon = a["lon"] if a.key?("lon")
-
-    destination = Destination.create({
-      title: a["tags"]["name"],
-      longitude: lon,
-      latitude: lat,
-      address: add,
-      description: Faker::Lorem.sentence,
-      position: n
-      })
-      trip.destinations << destination
-      trip.save
-  end
-
 end
 
 puts "Creating one real example"
 
-user1 = User.create(
-  first_name: "Jane",
-  last_name: "Smith",
-  email: "jane@example.com",
-  password: "password"
-)
+# user1 = User.create(
+#   first_name: "Jane",
+#   last_name: "Smith",
+#   email: "jane@example.com",
+#   password: "password"
+# )
 
-trip1 = Trip.create(
-  title: "Super cute romantic trip in Italy",
-  city: "Rome, Florence, Venice",
-  image_url: "https://media.tacdn.com/media/attractions-splice-spp-674x446/06/70/0e/c8.jpg",
-  comment: "Embarking on an Italian escapade for a romantic journey. Our path unveils hidden treasures at every stop. In Rome, the Eternal City, each monument narrates a timeless love story. Florence, with its sublime art, leaves an artistic imprint on our hearts. And finally, the winding canals of Venice mirror our love in their tranquil waters. This unforgettable voyage through the charm of Italy will forever be etched in our story.",
-  planner_id: user1.id,
-  tripper_id: user1.id
-)
+# trip1 = Trip.create(
+#   title: "Super cute romantic trip in Italy",
+#   city: "Rome, Florence, Venice",
+#   image_url: "https://media.tacdn.com/media/attractions-splice-spp-674x446/06/70/0e/c8.jpg",
+#   comment: "Embarking on an Italian escapade for a romantic journey. Our path unveils hidden treasures at every stop. In Rome, the Eternal City, each monument narrates a timeless love story. Florence, with its sublime art, leaves an artistic imprint on our hearts. And finally, the winding canals of Venice mirror our love in their tranquil waters. This unforgettable voyage through the charm of Italy will forever be etched in our story.",
+#   planner_id: user1.id,
+#   tripper_id: user1.id
+# )
 
-destination_italy1 = Destination.create(
-  address: "Rome, Italy",
-  latitude: 41.9028,
-  longitude: 12.4964,
-  position: 1,
-  description: "Explore the captivating history of Rome as you stand before the ancient Colosseum and wander through the ruins of the Roman Forum. Savor traditional pasta dishes in quaint trattorias and make a wish at the iconic Trevi Fountain, surrounded by the city's timeless beauty."
-)
+# destination_italy1 = Destination.create(
+#   address: "Rome, Italy",
+#   latitude: 41.9028,
+#   longitude: 12.4964,
+#   position: 1,
+#   description: "Explore the captivating history of Rome as you stand before the ancient Colosseum and wander through the ruins of the Roman Forum. Savor traditional pasta dishes in quaint trattorias and make a wish at the iconic Trevi Fountain, surrounded by the city's timeless beauty."
+# )
 
-destination_italy2 = Destination.create(
-  address: "Florence, Italy",
-  latitude: 43.7696,
-  longitude: 11.2558,
-  position: 2,
-  description: "Indulge in the artistic treasures of Florence, where Michelangelo's David and Botticelli's Birth of Venus reside. Stroll along the Arno River, cross the iconic Ponte Vecchio, and savor gelato in bustling piazzas. Florence's charm and creativity will leave you enchanted."
-)
+# destination_italy2 = Destination.create(
+#   address: "Florence, Italy",
+#   latitude: 43.7696,
+#   longitude: 11.2558,
+#   position: 2,
+#   description: "Indulge in the artistic treasures of Florence, where Michelangelo's David and Botticelli's Birth of Venus reside. Stroll along the Arno River, cross the iconic Ponte Vecchio, and savor gelato in bustling piazzas. Florence's charm and creativity will leave you enchanted."
+# )
 
-destination_italy3 = Destination.create(
-  address: "Venice, Italy",
-  latitude: 45.4408,
-  longitude: 12.3155,
-  position: 3,
-  description: "Embark on a romantic journey through the enchanting canals of Venice, serenaded by the gentle lapping of water against historic palaces. Discover hidden squares, indulge in delectable seafood, and visit the glassmaking island of Murano, where artistry and beauty intertwine."
-)
+# destination_italy3 = Destination.create(
+#   address: "Venice, Italy",
+#   latitude: 45.4408,
+#   longitude: 12.3155,
+#   position: 3,
+#   description: "Embark on a romantic journey through the enchanting canals of Venice, serenaded by the gentle lapping of water against historic palaces. Discover hidden squares, indulge in delectable seafood, and visit the glassmaking island of Murano, where artistry and beauty intertwine."
+# )
 
-trip_destinations = TripDestination.create(
-  trip: trip1,
-  destination: destination_italy1
-)
+# trip_destinations = TripDestination.create(
+#   trip: trip1,
+#   destination: destination_italy1
+# )
 
-trip_destinations = TripDestination.create(
-  trip: trip1,
-  destination: destination_italy2
-)
+# trip_destinations = TripDestination.create(
+#   trip: trip1,
+#   destination: destination_italy2
+# )
 
-trip_destinations = TripDestination.create(
-  trip: trip1,
-  destination: destination_italy3
-)
+# trip_destinations = TripDestination.create(
+#   trip: trip1,
+#   destination: destination_italy3
+# )
 
 puts "Done"

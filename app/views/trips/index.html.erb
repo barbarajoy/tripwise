@@ -1,4 +1,4 @@
-<%= render "/layouts/navbar" %>
+<%= render "/layouts/navbar", hauteur: "20"  %>
 <%= render "layouts/searchbar" %>
 
   <div class="container-fluid">
@@ -17,19 +17,22 @@
       <div class="col-8 ms-sm-auto col-lg-10 px-md-4">
         <div class="card-trip-grid">
           <% @trips.each do |trip| %>
-          <div class="card-trip">
-            <%= image_tag trip.image_url %>
-            <div class="card-trip-infos">
-              <div>
-                <h2><%= link_to trip.title, trip_path(trip) %></h2>
-                <p><%= trip.comment %></p>
+            <%= link_to trip_path(trip) do %>
+              <div class="card-trip">
+                <%= image_tag trip.image_url %>
+                <div class="card-trip-infos">
+                  <div>
+                    <h2><%= trip.title %></h2>
+                    <p><%= trip.comment %></p>
+                  </div>
+                  <h2 class="card-planner"><%= trip.planner.first_name %> <%= trip.planner.last_name %></h2>
+                  <img src="https://kitt.lewagon.com/placeholder/users/krokrob" class="card-trip-user avatar-bordered" />
+                </div>
               </div>
-              <h2 class="card-planner"><%= trip.planner.first_name %> <%= trip.planner.last_name %></h2>
-              <img src="https://kitt.lewagon.com/placeholder/users/krokrob" class="card-trip-user avatar-bordered" />
-            </div>
-          </div>
+            <% end %>
           <% end %>
         </div>
       </div>
     </div>
   </div>
+<%= render "layouts/footer", position: "relative" %>

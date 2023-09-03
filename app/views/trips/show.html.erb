@@ -1,4 +1,4 @@
-<%= render "/layouts/navbar" %>
+<%= render "/layouts/navbar", hauteur: "20"  %>
 
 <div class="container">
   <h1><strong><%= @trip.planner.first_name %> <%= @trip.planner.last_name %></strong></h1>
@@ -8,14 +8,16 @@
   <div class="destinations">
     <% @trip.trip_destinations.each do |trip_destination| %>
       <div class="destination">
-        <h4><strong><%= trip_destination.destination.address %></strong></h4>
+        <h4><strong><%= trip_destination.destination.title %></strong></h4>
+        <p><%= trip_destination.destination.address %></p>
         <p><%= trip_destination.destination.description %></p>
       </div>
     <% end %>
   </div>
 
   <div class="button-container">
-    <%= link_to 'Contact the planner', my_trips_path(trip_id:@trip.id), class: "link-btn-container button-dark-green-show", data: { turbo_method: :post } %>
+    <%= link_to 'Contact the planner', planner_trips_path(trip_id:@trip.id), class: "link-btn-container button-dark-green-show", data: { turbo_method: :post } %>
   </div>
 
 </div>
+<%= render "layouts/footer", position: "relative" %>

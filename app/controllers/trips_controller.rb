@@ -8,7 +8,7 @@ class TripsController < ApplicationController
       @trips = @trips.where(style: params[:filter][:style])
     end
   end
-  
+
   def show
     @trip = Trip.find(params[:id])
     @new_trip = Trip.new
