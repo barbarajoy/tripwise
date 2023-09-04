@@ -12,7 +12,11 @@
     <% current_user.trips.each do |trip| %>
       <%= link_to planner_trip_path(trip) do %>
       <div class="card-index-custom">
-        <%= image_tag trip.image_url %>
+        <% if trip.photo.attached? %>
+          <%= cl_image_tag trip.photo.key, height: 300, width: 400, crop: :fill %>
+        <% else %>
+          <%= image_tag trip.image_url %>
+         <% end %>
         <div class="card-index-infos-custom">
             <h2><%= trip.title %></h2>
             <%# A LAISSER OU NON ? <p><%= trip.comment </p> %>

@@ -6,7 +6,6 @@ class Trip < ApplicationRecord
   has_many :messages, dependent: :destroy
   validates :title, presence: true
   validates :city, presence: true
-  validates :image_url, presence: true
   validates :comment, presence: true
   validates :planner_id, presence: true
   belongs_to :trip, optional: true
@@ -14,8 +13,9 @@ class Trip < ApplicationRecord
   has_many :messages, dependent: :destroy
   accepts_nested_attributes_for :destinations
 
-  STYLES = ["cultural", "adventure", "romantic", "gastronomic", "ecotourism", "luxury", "accessible", "party", "humanitarian"]
+  has_one_attached :photo
 
+  STYLES = ["cultural", "adventure", "romantic", "gastronomic", "ecotourism", "luxury", "accessible", "party", "humanitarian"]
 
   include PgSearch::Model
   pg_search_scope :search_by_title,

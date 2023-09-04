@@ -25,14 +25,18 @@ class Planner::TripsController < ApplicationController
 
   def new
     @trip = Trip.new
-    #@destination = Destination.new
   end
 
   def create
     @trip = Trip.new(trip_params)
-    @trip.user_id = current_user.id
-    #@destination = Destination.new(destination_params)
-    #@destination.user_id = current_user.id
+    @trip.planner_id = current_user.id
+    @trip.tripper_id = current_user.id
+    trip_params["destinations_attributes"].each_key do |dest_params|
+      @destination = Destination.new(trip_params["destinations_attributes"][dest_params])
+      @destination.trip = @trip
+      @destination.save
+    end
+
     if @trip.save!
       redirect_to planner_trips_path(@trip)
     else
@@ -43,7 +47,7 @@ class Planner::TripsController < ApplicationController
   private
 
   def trip_params
-    params.require(:trip).permit(trip_attributes: [:id, :title, :comment, :budget, :city, :style, :photo],
-                                 destination_attributes: [:title])
+    params.require(:trip).permit(:id, :title, :comment, :budget, :city, :style, :photo,
+                                 destinations_attributes: %i[:title, :address, :description])
   end
 end
