@@ -1,9 +1,9 @@
-<%= render "/layouts/navbar", hauteur: "20" %>
+<%= render "/layouts/navbar", hauteur: "20", searchbar: false   %>
 <h1>My trips</h1>
 
 <div class="my_trip_container">
-  <div class="my_conversations column">
-    <div class="scrollable-content" id="column1">
+  <div class="col-12 col-lg-2 my_conversations">
+    <div class="scrollable-content">
       <ul>
         <% @trips.each do |trip| %>
           <% if current_user.id == trip.planner.id && trip.planner.id != trip.tripper.id %>
@@ -23,7 +23,7 @@
       </ul>
     </div>
   </div>
-  <div class="my_messages column" id="column2">
+  <div class="col-12 col-lg-5 my_messages">
     <div class="scrollable-content">
       <a href="#last_right">Aller à la section 1</a>
       <%= "Tripper : #{@trip.tripper.first_name} (#{@trip.tripper.id})" %><br>
@@ -40,16 +40,43 @@
             <p <%= message == @trip.messages.last ? "id=mid_scroll_right" : nil %>><%= message.content %></p>
           </div>
         <% end %>
+        <%= simple_form_for [@trip, @new_message], url: my_trip_messages_path(@trip.id) do |f| %>
+          <%= f.input :content, as: :text, input_html: { id: 'new_messages', name: 'message[content]' }, label: false %>
+          <%= f.button :submit, id: 'btn_new_messages', value: ">" %>
+        <% end %>
       </div>
-      <%= simple_form_for [@trip, @new_message], url: my_trip_messages_path(@trip.id) do |f| %>
-        <%= f.input :content, as: :text, input_html: { id: 'new_messages' }, label: false %>
-        <%= f.button :submit, id: 'btn_new_messages', value: ">" %>
-      <% end %>
     </div>
   </div>
-  <div class="my_trips column" id="column3">
+  <div class="col-12 col-lg-5 my_trips" id="column3">
     <div class="scrollable-content">
 
+      <%= link_to("Trip initial", trip_path(@trip.trip_id)) if !@trip.trip_id.nil? %>
+
+
+      <h4><strong><%= @trip.title %></strong></h4>
+      <p><%= @trip.comment %></p>
+      <div class="destinations">
+        <% if current_user == @trip.planner %>
+          <%= puts "a" %>
+        <% else %>
+
+          <table class="sortable-table">
+            <% @trip.trip_destinations.each do |trip_destination| %>
+              <tr>
+                <td class="sortable-handle"><i class="fa-solid fa-arrows-up-down"></i></td>
+                <td><%= trip_destination.destination.position+1 %></td>
+                <td><%= trip_destination.destination.title %></td>
+                <td><i class="fa-solid fa-arrow-up-right-from-square"></i></td>
+              </tr>
+            <% end %>
+          </table>
+
+        <% end %>
+      </div>
+
+
+
+      <!--
       <h1><strong><%= @trip.planner.first_name %> <%= @trip.planner.last_name %></strong></h1>
       <h2><strong><%= @trip.title %></strong></h2>
       <p><%= @trip.comment %></p>
@@ -62,7 +89,45 @@
           </div>
         <% end %>
       </div>
+      -->
     </div>
   </div>
 </div>
 <%= render "layouts/footer", position: "absolute" %>
+
+<script>
+  document.getElementById('new_messages').addEventListener('keydown', function(event) {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      document.getElementById('btn_new_messages').click();
+    }
+  });
+</script>
+
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+    $(document).ready(function() {
+    $(".sortable-table tbody").sortable({
+      handle: ".sortable-handle",
+      update: function(event, ui) {
+        console.log("a");
+        console.log(event.currentTarget.location.href);
+        var order = $(this).sortable('toArray', { attribute: 'data-id' });
+        $.ajax({
+          type: 'PATCH',
+          url: `/my/trips/${aerer}`,
+          data: { order: order },
+          success: function(response) {
+            console.log("Mise à jour réussie !");
+          },
+          error: function() {
+            console.error("Échec de la mise à jour.");
+          }
+        });
+      }
+    });
+  });
+
+  </script>

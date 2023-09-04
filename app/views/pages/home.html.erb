@@ -1,4 +1,4 @@
-<%= render "/layouts/navbar", hauteur: "100"  %>
+<%= render "/layouts/navbar", hauteur: "100", searchbar: true %>
 
 <%= simple_form_for :filter, url: trips_path, method: :get do |f| %>
   <div class="searchbar-container text-center">
