@@ -36,9 +36,7 @@
                     <p><%= trip.comment %></p>
                   </div>
                   <h2 class="card-planner"><%= trip.planner.first_name %> <%= trip.planner.last_name %></h2>
-                  <div class="card-trip-user avatar-bordered">
-                    <%= image_tag trip.planner_id.image_url %>
-                  </div>
+                    <%= image_tag trip.planner.image_url, class: "card-trip-user avatar-bordered" %>
                 </div>
               </div>
             <% end %>
