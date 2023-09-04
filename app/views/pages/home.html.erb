@@ -1,8 +1,20 @@
-<%= render "/layouts/navbar", hauteur: "20"  %>
-<%= render "layouts/searchbar" %>
+<%= render "/layouts/navbar", hauteur: "100"  %>
+
+<%= simple_form_for :filter, url: trips_path, method: :get do |f| %>
+  <div class="searchbar-container text-center">
+    <div class="d-flex searchbar-container">
+          <%= f.input :title, label: false,
+            placeholder: 'Where do you want to go?',
+            wrapper_html: { class: "searchbar-wrapper" },
+            input_html: { class: "searchbar form-control rounded-pill mr-2 py-2 w-70", style: "width: 80%;" } %>
+          <%= f.submit "Search", class: "button-dark-green rounded-pill searchbar-button" %>
+    </div>
+  </div>
+<% end %>
 
 <div class="content my-3">
-  <h2 class="text-center pb-4">Our recommandations of the day:</h2>
+  <div class="block-container">
+  <h2 class="pb-4">Most searched destinations:</h2>
   <div class="card-container">
     <div class="travel-card">
       <%= image_tag('santorini.jpg', width: 150, height: 150) %>
@@ -16,5 +28,25 @@
       <%= image_tag('bali.jpg', width: 150, height: 150) %>
       <p class="city-name">Bali</p>
     </div>
+
+    <div class="block-container">
+      <h2 class="pb-4">Our recommandations of the day:</h2>
+      <div class="card-container">
+      <div class="travel-card">
+        <%= image_tag('rio.jpeg', width: 150, height: 150) %>
+        <p class="city-name">Rio de Janeiro</p>
+      </div>
+      <div class="travel-card">
+        <%= image_tag('el-calafate.jpg', width: 150, height: 150) %>
+        <p class="city-name">El Calafate</p>
+      </div>
+      <div class="travel-card">
+        <%= image_tag('petra.jpeg', width: 150, height: 150) %>
+        <p class="city-name">Petra</p>
+      </div>
+    </div>
+
+
+
   </div>
 </div>

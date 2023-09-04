@@ -1,22 +1,18 @@
 
-<%= render "/layouts/navbar", hauteur: "20"  %>
-<%= render "layouts/searchbar" %>
+<%= render "/layouts/navbar", hauteur: "100"  %>
 
 <%= simple_form_for :filter, url: trips_path, method: :get do |f| %>
-  <div class="searchbar-container">
-    <div class="d-flex justify-content-center searchbar-container">
-      <div class="w-70 d-flex">
-        <div class="w-70">
+  <div class="searchbar-container text-center">
+    <div class="d-flex searchbar-container">
           <%= f.input :title, label: false,
             placeholder: 'Where do you want to go?',
-            input_html: { class: "searchbar form-control rounded-pill mr-2 py-2 w-100", style: "width: 80%;" } %>
-        </div>
-        <div class="w-15">
-          <%= f.submit class: "button-dark-green rounded-pill w-100 mx-3" %>
-        </div>
-      </div>
+            wrapper_html: { class: "searchbar-wrapper" },
+            input_html: { class: "searchbar form-control rounded-pill mr-2 py-2 w-70", style: "width: 80%;" } %>
+          <%= f.submit "Search", class: "button-dark-green rounded-pill searchbar-button" %>
     </div>
   </div>
+
+
   <div class="container-fluid">
     <div class="row">
       <nav class="col-md-4 col-lg-2 d-md-block sidebar">
@@ -40,7 +36,9 @@
                     <p><%= trip.comment %></p>
                   </div>
                   <h2 class="card-planner"><%= trip.planner.first_name %> <%= trip.planner.last_name %></h2>
-                  <img src="https://kitt.lewagon.com/placeholder/users/krokrob" class="card-trip-user avatar-bordered" />
+                  <div class="card-trip-user avatar-bordered">
+                    <%= image_tag trip.planner_id.image_url %>
+                  </div>
                 </div>
               </div>
             <% end %>

@@ -112,11 +112,35 @@ TripDestination.destroy_all
 
 pex = Pexels::Client.new('sEpDeAZP9RRh5YnpiLUPLtyvufibCueYBpqUjOeVzxGbzPH9ZAsidXVh')
 
+IMAGE_URL = [
+  "https://avatars.githubusercontent.com/u/102687903?v=4",
+  "https://avatars.githubusercontent.com/u/60078137?v=4",
+  "https://avatars.githubusercontent.com/u/101594582?v=4",
+  "https://avatars.githubusercontent.com/u/139124612?v=4",
+  "https://avatars.githubusercontent.com/u/138495721?v=4",
+  "https://res.cloudinary.com/wagon/image/upload/c_fill,g_face,h_200,w_200/v1688992728/dwty0kmrxptymirqocjk.jpg",
+  "https://avatars.githubusercontent.com/u/135238187?v=4",
+  "https://avatars.githubusercontent.com/u/136320274?v=4",
+  "https://avatars.githubusercontent.com/u/139125894?v=4",
+  "https://res.cloudinary.com/wagon/image/upload/c_fill,g_face,h_200,w_200/v1688993845/fvpb8lfyosqeivzds7ez.jpg",
+  "https://avatars.githubusercontent.com/u/44208500?v=4",
+  "https://avatars.githubusercontent.com/u/139124191?v=4",
+  "https://avatars.githubusercontent.com/u/118887314?v=4",
+  "https://avatars.githubusercontent.com/u/120410801?v=4",
+  "https://avatars.githubusercontent.com/u/102727596?v=4",
+  "https://avatars.githubusercontent.com/u/107953331?v=4",
+  "https://avatars.githubusercontent.com/u/136184385?v=4",
+  "https://avatars.githubusercontent.com/u/139124726?v=4",
+  "https://avatars.githubusercontent.com/u/135331205?v=4",
+  "https://res.cloudinary.com/wagon/image/upload/c_fill,g_face,h_200,w_200/v1688995034/okfhhgjkc71sqo7mpqpk.jpg",
+  "https://avatars.githubusercontent.com/u/139124434?v=4"
+]
+
 rand(20..30).times do |i|
   if i.zero?
-    User.create({ email: "test@test.test", password: "testtest", first_name: "Audran", last_name: "Pillard" })
+    User.create({ email: "test@test.test", password: "testtest", first_name: "Audran", last_name: "Pillard", image_url: "https://avatars.githubusercontent.com/u/135331205?v=4" })
   else
-    User.create({ email: Faker::Internet.email, password: "password", first_name: Faker::Name.first_name, last_name: Faker::Name.last_name })
+    User.create({ email: Faker::Internet.email, password: "password", first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, image_url: IMAGE_URL.sample })
   end
 end
 
@@ -180,7 +204,8 @@ user1 = User.create(
   first_name: "Jane",
   last_name: "Smith",
   email: "jane@example.com",
-  password: "password"
+  password: "password",
+  image_url: "https://avatars.githubusercontent.com/u/107953331?v=4"
 )
 
 trip1 = Trip.create(
