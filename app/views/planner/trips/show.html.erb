@@ -4,7 +4,11 @@
   <h2>Trip downloaded by <strong><%= rand(2..100) %></strong> users</h2>
   <h3><strong><%= @trip.title %></strong></h3>
   <p><%= @trip.comment %></p>
-  <%= image_tag @trip.image_url %>
+  <% if @trip.photo.attached? %>
+    <%= cl_image_tag @trip.photo.key, height: 300, width: 400, crop: :fill %>
+  <% else %>
+    <%= image_tag @trip.image_url %>
+  <% end %>
   <div class="destinations">
     <% @trip.trip_destinations.each do |trip_destination| %>
       <div class="destination">
