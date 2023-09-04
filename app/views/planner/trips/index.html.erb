@@ -1,0 +1,24 @@
+<%= render "/layouts/navbar" %>
+<div class="container my-trips-container-custom">
+  <div class="title-div-planner-index-custom">
+    <div class="d-flex align-items-center justify-content-between">
+      <h1>All my trips</h1>
+      <% if user_signed_in? %>
+        <%= link_to 'Add a trip', '#', class: "button-dark-green" %>
+        <% end %>
+    </div>
+  </div>
+  <div class="card-main-custom ">
+    <% current_user.trips.each do |trip| %>
+      <%= link_to trip_path(trip) do %>
+      <div class="card-index-custom">
+        <%# mettre l'image du trip %>
+        <div class="card-index-infos-custom">
+            <h2><%= trip.title %></h2>
+            <p><%= trip.comment %></p>
+        </div>
+      </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>

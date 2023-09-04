@@ -1,4 +1,7 @@
 class Planner::TripsController < ApplicationController
+  def index
+  @trips = Trip.all
+  end
 
 
   def create
@@ -16,6 +19,5 @@ class Planner::TripsController < ApplicationController
       redirect_to my_trip_path(@trip)
     end
   end
-
 
 end

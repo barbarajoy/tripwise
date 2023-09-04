@@ -1,6 +1,6 @@
 class Trip < ApplicationRecord
-  belongs_to :planner, class_name: 'User'
-  belongs_to :tripper, class_name: 'User'
+  belongs_to :planner, class_name: 'User', foreign_key: 'planner_id'
+  belongs_to :tripper, class_name: 'User', foreign_key: 'tripper_id'
   has_many :trip_destinations, dependent: :destroy
   has_many :destinations, through: :trip_destinations
   has_many :messages, dependent: :destroy
