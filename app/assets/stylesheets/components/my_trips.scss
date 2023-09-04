@@ -1,0 +1,102 @@
+.my_trip_container {
+  display: flex;
+  justify-content: space-between;
+  bottom: 10%;
+  position: absolute;
+  top: 16%;
+}
+
+.my_conversations, .my_messages {
+  // border-right: 3px solid black;
+}
+
+.my_conversations {
+  width: 25%;
+}
+
+.my_messages {
+  width: 40%;
+}
+
+.my_trips {
+  width: 35%;
+}
+
+.column {
+  height: 100%;
+  // padding: 10px;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.scrollable-content {
+  max-height: 100%;
+  overflow-y: auto;
+  scroll-margin-bottom: 0;
+}
+
+.messages {
+  scroll-margin-bottom: 0;
+}
+
+.right {
+  margin: 5px 5px 5px 40px;
+}
+
+.left {
+  margin: 5px 40px 5px 5px;
+}
+
+.message {
+  background-color: white;
+  border-radius: 5px;
+  padding: 5px;
+  justify-content: flex-end;
+  scroll-margin-bottom: 0;
+
+  &>p {
+    margin: 0px;
+  }
+}
+
+.my_messages .scrollable-content {
+  max-height: 85%;
+}
+
+#my_conversation li {
+  background-color: rgb(203, 203, 203);
+}
+
+.my_conversations ul {
+  list-style-type: none;
+  margin-bottom: 0px;
+  padding-left: 0px;
+  li {
+    background-color: white;
+    border-radius: 5px;
+    padding: 5px;
+    margin: 5px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+}
+
+#new_messages, #btn_new_messages {
+  position: fixed;
+  bottom: 11%;
+  height: 8%;
+  background-color: white;
+  border-radius: 5px;
+  border: 1px solid black;
+}
+
+#new_messages {
+  left: 25%;
+  width: 33%;
+}
+
+#btn_new_messages {
+  width: 4%;
+  left: 59%;
+}

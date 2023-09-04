@@ -5,7 +5,7 @@
 .card-trip-grid {
   margin: 25px auto;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   grid-gap: 16px;
 }
 
@@ -25,6 +25,7 @@
 }
 
 .card-trip h2 {
+  min-width: 70px;
   font-size: 16px;
   font-weight: bold;
   margin: 0;
@@ -34,6 +35,14 @@
   font-size: 12px;
   opacity: .7;
   margin: 0;
+}
+
+.card-trip-infos {
+  height: 100px;
+  p {
+    height: 40px;
+    overflow: hidden;
+  }
 }
 
 .card-trip .card-trip-infos {
@@ -46,13 +55,13 @@
 
 .card-trip-infos .card-trip-user {
   position: absolute;
-  right: 16px;
+  right: 7%;
   top: -20px;
-  width: 40px;
+  width: 60px;
 }
 
 .card-planner {
-  text-align: right;
+  text-align: center;
   font-size: 10px;
   color: $green;
 }
