@@ -10,7 +10,7 @@
     </div>
   </div>
     <% current_user.trips.each do |trip| %>
-      <%= link_to trip_path(trip) do %>
+      <%= link_to planner_trip_path(trip) do %>
       <div class="card-index-custom">
         <%= image_tag trip.image_url %>
         <div class="card-index-infos-custom">
