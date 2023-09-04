@@ -9,6 +9,8 @@
 
 .searchbar-container{
   background-color: $dark-green;
+  display: flex;
+  justify-content: center;
 }
 
 .w-70 {
@@ -17,4 +19,8 @@
 
 .w-15 {
   width: 15%;
+}
+
+.presence_searchbar {
+
 }

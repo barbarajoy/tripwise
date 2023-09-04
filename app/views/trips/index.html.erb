@@ -1,9 +1,8 @@
 
-<%= render "/layouts/navbar", hauteur: "20"  %>
-<%= render "layouts/searchbar" %>
+<%= render "/layouts/navbar", hauteur: "100", searchbar: true  %>
 
 <%= simple_form_for :filter, url: trips_path, method: :get do |f| %>
-  <div class="searchbar-container">
+  <!--<div class="searchbar-container">
     <div class="d-flex justify-content-center searchbar-container">
       <div class="w-70 d-flex">
         <div class="w-70">
@@ -16,7 +15,8 @@
         </div>
       </div>
     </div>
-  </div>
+  </div>-->
+
   <div class="container-fluid">
     <div class="row">
       <nav class="col-md-4 col-lg-2 d-md-block sidebar">

@@ -3,7 +3,10 @@
     <a href="<%= root_path %>">
       <%= image_tag('logo.png', class: "img-navbar-height-#{hauteur}") %>
     </a>
-    <h2 class="navbar-heading">Find your next adventure</h2>
+    <div class="navbar-middle">
+      <h2 class="navbar-heading">Find your next adventure</h2>
+      <%= render "layouts/searchbar" if searchbar %>
+    </div>
     <ul class="nav navbar-nav navbar-right ml-auto">
       <li id="navbar-link">
         <% if user_signed_in? %>
