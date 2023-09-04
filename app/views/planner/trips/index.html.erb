@@ -5,7 +5,7 @@
     <div class="d-flex justify-content-between">
       <h1>All my trips</h1>
       <% if user_signed_in? %>
-        <%= link_to 'Add a trip', '#', class: "button-dark-green" %>
+        <%= link_to 'Add a trip', new_planner_trip_path, class: "button-dark-green" %>
         <% end %>
     </div>
   </div>
@@ -23,4 +23,4 @@
   </div>
 </div>
 
-<%= render "layouts/footer", position: "absolute" %>
+<%= render "layouts/footer", position: "relative" %>

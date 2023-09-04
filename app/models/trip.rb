@@ -12,6 +12,9 @@ class Trip < ApplicationRecord
   belongs_to :trip, optional: true
   has_many :trips, dependent: :destroy
   has_many :messages, dependent: :destroy
+  accepts_nested_attributes_for :destinations
+
+  STYLES = ["cultural", "adventure", "romantic", "gastronomic", "ecotourism", "luxury", "accessible", "party", "humanitarian"]
 
 
   include PgSearch::Model

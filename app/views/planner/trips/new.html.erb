@@ -1,0 +1,32 @@
+<div class="container">
+  <h1>Tell us about your trip</h1>
+  <%= simple_form_for [:planner, @trip],  data: { controller: 'nested-form', nested_form_wrapper_selector_value: '.nested-form-wrapper' } do |f| %>
+    <h2><%= f.input :title, placeholder: 'Title of your Trip' %></h2>
+    <h2><%= f.input :comment, placeholder: 'An amazing trip' %></h2>
+    <h2><%= f.input :budget, input_html: { min: '0', step: 'any' }, placeholder: 'For the trip'%></h2>
+    <h2><%= f.input :city, placeholder: 'Bordeaux' %></h2>
+    <h2><%= f.input :style,
+      collection: Trip::STYLES,
+      as: :check_boxes,
+      label: 'Select trip style',
+      input_html: { class: "tag-selector" },
+      item_wrapper_class: 'tag-item' %></h2>
+    <%#= f.file_field :photo %>
+    <%= f.file_field :photo, input_html: { class: 'd-none' }, label_html: { class: 'upload-photo'}, label: '📷 Upload a photo' %>
+
+    <template data-nested-form-target="template">
+      <%= f.fields_for :destinations, Destination.new, child_index: 'NEW_RECORD' do |destination_fields| %>
+        <%= render "destination_form", f: destination_fields %>
+      <% end %>
+    </template>
+
+    <%= f.fields_for :destinations do |destination_fields| %>
+      <%= render "destination_form", f: destination_fields %>
+    <% end %>
+
+     <div data-nested-form-target="target"></div>
+     <button class="button-green" type="button" data-action="nested-form#add">Add destination</button>
+
+    <%= f.submit "Create Trip", class: 'button-dark-green', style: 'margin-top:10px;' %>
+  <% end %>
+</div>
