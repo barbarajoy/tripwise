@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_01_111911) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_04_095113) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -89,6 +89,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_01_111911) do
     t.index ["tripper_id"], name: "index_trips_on_tripper_id"
   end
 
+  create_table "trips_destinations", force: :cascade do |t|
+    t.bigint "trip_id", null: false
+    t.bigint "destination_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["destination_id"], name: "index_trips_destinations_on_destination_id"
+    t.index ["trip_id"], name: "index_trips_destinations_on_trip_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -99,6 +108,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_01_111911) do
     t.datetime "updated_at", null: false
     t.string "first_name"
     t.string "last_name"
+    t.string "image_url"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
@@ -112,4 +122,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_01_111911) do
   add_foreign_key "trips", "trips"
   add_foreign_key "trips", "users", column: "planner_id"
   add_foreign_key "trips", "users", column: "tripper_id"
+  add_foreign_key "trips_destinations", "destinations"
+  add_foreign_key "trips_destinations", "trips"
 end

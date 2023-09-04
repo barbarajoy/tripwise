@@ -1,52 +1,40 @@
-
 <%= render "/layouts/navbar", hauteur: "100", searchbar: true  %>
 
 <%= simple_form_for :filter, url: trips_path, method: :get do |f| %>
-  <!--<div class="searchbar-container">
-    <div class="d-flex justify-content-center searchbar-container">
-      <div class="w-70 d-flex">
-        <div class="w-70">
-          <%= f.input :title, label: false,
-            placeholder: 'Where do you want to go?',
-            input_html: { class: "searchbar form-control rounded-pill mr-2 py-2 w-100", style: "width: 80%;" } %>
-        </div>
-        <div class="w-15">
-          <%= f.submit class: "button-dark-green rounded-pill w-100 mx-3" %>
-        </div>
-      </div>
-    </div>
-  </div>-->
+<div class="container-fluid">
+  <div class="row">
+    <nav class="col-md-4 col-lg-2 d-md-block sidebar">
+      <%= render "/layouts/budgetslider" %>
+      <hr>
 
-  <div class="container-fluid">
-    <div class="row">
-      <nav class="col-md-4 col-lg-2 d-md-block sidebar">
-        <%= render "/layouts/budgetslider" %>
-        <hr>
+          <h4 class="my-3">Trip Styles</h4>
+          <%= f.input :style, legend_tag: false, as: :check_boxes, collection: Trip.where.not(style: nil).pluck(:style).uniq.map { |style| [style.capitalize, style] } %>
+      <% end %>
+    </nav>
 
-            <h4 class="my-3">Trip Styles</h4>
-            <%= f.input :style, legend_tag: false, as: :check_boxes, collection: Trip.where.not(style: nil).pluck(:style).uniq.map { |style| [style.capitalize, style] } %>
-        <% end %>
-      </nav>
-
-      <div class="col-8 ms-sm-auto col-lg-10 px-md-4">
-        <div class="card-trip-grid">
-          <% @trips.each do |trip| %>
-            <%= link_to trip_path(trip) do %>
-              <div class="card-trip">
-                <%= image_tag trip.image_url %>
-                <div class="card-trip-infos">
-                  <div>
-                    <h2><%= trip.title %></h2>
-                    <p><%= trip.comment %></p>
-                  </div>
-                  <h2 class="card-planner"><%= trip.planner.first_name %> <%= trip.planner.last_name %></h2>
-                  <img src="https://kitt.lewagon.com/placeholder/users/krokrob" class="card-trip-user avatar-bordered" />
-                </div>
-              </div>
+    <div class="col-8 ms-sm-auto col-lg-10 px-md-4">
+      <div class="card-trip-grid">
+        <% @trips.each do |trip| %>
+          <%= link_to trip_path(trip) do %>
+            <div class="card-trip">
+            <% if trip.photo.attached? %>
+              <%= cl_image_tag trip.photo.key, height: 300, width: 400, crop: :fill %>
+            <% else %>
+              <%= image_tag trip.image_url %>
             <% end %>
+              <div class="card-trip-infos">
+                <div>
+                  <h2><%= trip.title %></h2>
+                  <p><%= trip.comment %></p>
+                </div>
+                <h2 class="card-planner"><%= trip.planner.first_name %> <%= trip.planner.last_name %></h2>
+                  <%= image_tag trip.planner.image_url, class: "card-trip-user avatar-bordered" %>
+              </div>
+            </div>
           <% end %>
-        </div>
+        <% end %>
       </div>
     </div>
   </div>
+</div>
 <%= render "layouts/footer", position: "relative" %>

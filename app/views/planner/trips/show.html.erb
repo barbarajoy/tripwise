@@ -1,0 +1,27 @@
+<%= render "/layouts/navbar", hauteur: "100"  %>
+
+<div class="container">
+  <h2>Trip downloaded by <strong><%= rand(2..100) %></strong> users</h2>
+  <h3><strong><%= @trip.title %></strong></h3>
+  <p><%= @trip.comment %></p>
+  <% if @trip.photo.attached? %>
+    <%= cl_image_tag @trip.photo.key, height: 300, width: 400, crop: :fill %>
+  <% else %>
+    <%= image_tag @trip.image_url %>
+  <% end %>
+  <div class="destinations">
+    <% @trip.trip_destinations.each do |trip_destination| %>
+      <div class="destination">
+        <h4><strong><%= trip_destination.destination.title %></strong></h4>
+        <p><strong><%= trip_destination.destination.address %></strong></p>
+        <p><%= trip_destination.destination.description %></p>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="button-container">
+    <%= link_to 'Edit my trip', edit_planner_trip_path(trip_id:@trip.id), class: "link-btn-container button-dark-green-show", data: { turbo_method: :patch } %>
+  </div>
+
+</div>
+<%= render "layouts/footer", position: "relative" %>

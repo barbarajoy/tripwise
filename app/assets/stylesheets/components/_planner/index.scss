@@ -1,0 +1,51 @@
+/* Styles for the title section */
+.title-div-planner-index-custom {
+  text-align: center;
+  margin-bottom: 20px;
+
+  h1 {
+    font-size: 28px;
+    color: #333;
+  }
+}
+
+/* Trying stuff */
+/*.card-main-custom {
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}*/
+
+.card-index-custom {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out;
+  border-radius: 5px;
+
+  &:hover {
+    transform: translateY(-5px);
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .card-index-infos-custom {
+    margin-top: 10px;
+
+    h2 {
+      font-size: 18px;
+      color: #333;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+
+    p {
+      font-size: 14px;
+      color: #666;
+    }
+  }
+}
