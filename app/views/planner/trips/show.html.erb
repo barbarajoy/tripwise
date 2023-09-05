@@ -1,4 +1,4 @@
-<%= render "/layouts/navbar", hauteur: "100"  %>
+<%= render partial: "/layouts/navbar", locals: {hauteur: "100", searchbar: false} %>
 
 <div class="container">
   <h2>Trip downloaded by <strong><%= rand(2..100) %></strong> users</h2>
