@@ -5,5 +5,4 @@ class Destination < ApplicationRecord
   validates :longitude, presence: true
   validates :address, presence: true
   validates :description, presence: true
-  validates :position, presence: true
 end

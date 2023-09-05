@@ -5,12 +5,18 @@
   <h2><strong><%= @trip.title %></strong></h2>
   <p><%= @trip.comment %></p>
   <%= image_tag @trip.image_url %>
-  <div class="destinations">
-    <% @trip.trip_destinations.each do |trip_destination| %>
-      <div class="destination">
-        <h4><strong><%= trip_destination.destination.title %></strong></h4>
-        <p><%= trip_destination.destination.address %></p>
-        <p><%= trip_destination.destination.description %></p>
+  <div class="trip_destinations">
+    <% @trip.destinations.each do |destination| %>
+      <div class="trip_destination">
+        <h4><strong><%= destination.title %></strong></h4>
+        <p><%= destination.address %></p>
+        <p><%= destination.description %></p>
+
+        <div style="width: 100px; height: 100px;"
+          data-controller="map"
+          data-map-markers-value="<%= [{ lat: destination.latitude, lng: destination.longitude }].to_json %>"
+          data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
+        </div>
       </div>
     <% end %>
   </div>
@@ -18,6 +24,7 @@
   <div class="button-container">
     <%= link_to 'Contact the planner', my_trips_path(trip_id:@trip.id), class: "link-btn-container button-dark-green-show", data: { turbo_method: :post } %>
   </div>
+
 
 </div>
 <%= render "layouts/footer", position: "relative" %>
