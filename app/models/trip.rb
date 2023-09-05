@@ -13,7 +13,6 @@ class Trip < ApplicationRecord
   has_many :messages, dependent: :destroy
   accepts_nested_attributes_for :destinations
 
-  has_one_attached :photo
 
   STYLES = ["cultural", "adventure", "romantic", "gastronomic", "ecotourism", "luxury", "accessible", "party", "humanitarian"]
 
@@ -23,4 +22,8 @@ class Trip < ApplicationRecord
     using: {
       tsearch: { prefix: true }
     }
+
+  def ordered_tripdestinations
+    trip_destinations.order(:position)
+  end
 end

@@ -67,38 +67,6 @@ CITYS = ["Bangkok", "Paris", "London", "Dubai", "Singapore", "Kuala Lumpur", "Ne
   }
 
 
-def create_destination(trip, style)
-  found = false
-  # DESTINATIONS_CRITERES.keys.each do |style|
-  cptttl = 0
-  DESTINATIONS_CRITERES[style.to_sym].each do |categories|
-    url = "http://overpass-api.de/api/interpreter?data=[out:json];area[name=\"#{trip.city}\"]->.searchArea;node[#{categories}](area.searchArea);out;"
-    cpt = 0
-    JSON.parse(URI.open(url).read)["elements"].each_with_index do |a, n|
-      cpt = n
-      cptttl += 1
-      break if n >= 10 || !a["tags"].key?("name")#|| !a["tags"].key?("addr:housenumber") || !a["tags"].key?("addr:street")
-      found = true
-      # puts "#{n} #{a["tags"]["name"]} '#{a["tags"]["addr:housenumber"]} #{a["tags"]["addr:street"]}'"
-      lat = a["lat"] if a.key?("lat")
-      lon = a["lon"] if a.key?("lon")
-
-      trip.destinations.new({
-        title: a["tags"]["name"],
-        longitude: lon,
-        latitude: lat,
-        address: "is_coming.....", #{a["tags"]["addr:housenumber"]} #{a["tags"]["addr:street"]}"
-        description: Faker::Lorem.sentence,
-        position: cptttl
-      })
-    end
-    puts "- #{cpt} lieu(x) #{categories}" if cpt != 0
-  end
-
-  found
-end
-
-
 puts "Starting seed"
 
 Trip.destroy_all
@@ -108,6 +76,7 @@ Destination.destroy_all
 TripDestination.destroy_all
 
 pex = Pexels::Client.new('sEpDeAZP9RRh5YnpiLUPLtyvufibCueYBpqUjOeVzxGbzPH9ZAsidXVh')
+cpt_test = 0
 
 IMAGE_URL = [
   "https://avatars.githubusercontent.com/u/102687903?v=4",
@@ -141,7 +110,7 @@ rand(20..30).times do |i|
   end
 end
 
-rand(10..20).times do |j|
+rand(20..30).times do |j|
   city = CITYS.sample
 
 # CITYS.each_with_index do |city, j|
@@ -173,13 +142,53 @@ rand(10..20).times do |j|
 
   puts ""
   puts trip.city.upcase
-  if create_destination(trip, style)
-    trip.save
+
+  found = false
+  cptttl = 0
+  # DESTINATIONS_CRITERES.keys.each do |style|
+  DESTINATIONS_CRITERES[style.to_sym].each do |categories|
+    url = "http://overpass-api.de/api/interpreter?data=[out:json];area[name=\"#{trip.city}\"]->.searchArea;node[#{categories}](area.searchArea);out;"
+    cpt = 0
+    JSON.parse(URI.open(url).read)["elements"].each_with_index do |a, n|
+      cpt = n
+      break if n >= 10 || !a["tags"].key?("name")
+      cptttl += 1
+      found = true
+      # puts "#{n} #{a["tags"]["name"]} '#{a["tags"]["addr:housenumber"]} #{a["tags"]["addr:street"]}'"
+      lat = a["lat"] if a.key?("lat")
+      lon = a["lon"] if a.key?("lon")
+
+      destination = Destination.create!({
+        title: a["tags"]["name"],
+        longitude: lon,
+        latitude: lat,
+        address: "is_coming.....", #{a["tags"]["addr:housenumber"]} #{a["tags"]["addr:street"]}"
+        description: Faker::Lorem.sentence
+        # position: cptttl
+      })
+      TripDestination.create!(
+        trip: trip,
+        destination: destination,
+        position: cptttl
+      )
+
+    end
+    puts "- #{cpt} lieu(x) #{categories}" if cpt != 0
+  end
+  if found
+    # puts " - "*20
+    trip.save!
     rand(0..3).times do |k|
       copied_trip = trip.dup
       copied_trip.trip_id = trip.id
       copied_trip.destinations = trip.destinations
-      copied_trip.tripper = User.where.not(id: planner.id).sample
+      if k == 0 && cpt_test < 10
+        cpt_test += 1
+        trip_last = Trip.last
+        copied_trip.tripper = User.first
+      else
+        copied_trip.tripper = User.where.not(id: planner.id).sample
+      end
       copied_trip.save
     end
   end

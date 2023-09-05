@@ -11,7 +11,8 @@ class TripsController < ApplicationController
     if params[:filter].present?
       @trips = @trips.where(style: params[:filter][:style]) unless params[:filter][:style] == [""]
     end
-    @trips = @trips.select{|trip| trip.planner == trip.tripper}
+    @trips = @trips.select { |trip| trip.planner == trip.tripper }
+
   end
 
   def show
