@@ -23,5 +23,4 @@ class TripsController < ApplicationController
   def new
     raise
   end
-
 end

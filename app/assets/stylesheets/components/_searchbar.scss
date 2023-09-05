@@ -1,16 +1,10 @@
 .searchbar {
-  border: 2px solid $yellow;
-  // box-shadow: 0 0 0 2px $yellow;
-}
-
-.button-dark-green {
-  margin-right: 30px;
+  height: 45px;
+  box-shadow: 0 0 0 2px $yellow;
 }
 
 .searchbar-container{
   background-color: $dark-green;
-  display: flex;
-  justify-content: center;
 }
 
 .w-70 {
@@ -21,6 +15,14 @@
   width: 15%;
 }
 
-.presence_searchbar {
+.searchbar-wrapper {
+  flex: 2;
+  position: relative;
 
+}
+
+.searchbar-button {
+  position: absolute;
+  left: 82.5%;
+  height: 45px;
 }
