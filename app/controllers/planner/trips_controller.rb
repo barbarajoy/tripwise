@@ -51,9 +51,9 @@ class Planner::TripsController < ApplicationController
   def update
     @trip = Trip.find(params[:id])
     @trip.update(trip_params)
-    destinations_params["destinations_attributes"].each do |index, destination_attr|
+    i = 1
+    destinations_params["destinations_attributes"].each do |_, destination_attr|
       destination = Destination.find_by(id: destination_attr["id"]) || Destination.new
-
       if destination_attr["_destroy"] == "1"
         destination.destroy
       else
@@ -61,7 +61,13 @@ class Planner::TripsController < ApplicationController
         destination.address = destination_attr["address"]
         destination.description = destination_attr["description"]
         destination.save
-        TripDestination.create(destination:, trip: @trip)
+        trip_dest = TripDestination.find_by(destination:, trip: @trip)
+        if trip_dest
+          trip_dest.update(position: i)
+        else
+          TripDestination.create(destination:, trip: @trip, position: i)
+        end
+        i += 1
       end
     end
     redirect_to planner_trip_path(@trip.id)
