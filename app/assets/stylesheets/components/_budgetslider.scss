@@ -74,9 +74,9 @@
   position: relative;
 }
 
-.range-input input {
+.wrapper .range-input input {
   position: absolute;
-  top: -30px;
+  top: -100px;
   height: 5px;
   width: 100%;
   -webkit-appearance: none;
