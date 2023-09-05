@@ -12,7 +12,7 @@ class Trip < ApplicationRecord
   has_many :trips, dependent: :destroy
   has_many :messages, dependent: :destroy
   accepts_nested_attributes_for :destinations
-
+  scope :by_budget, -> (budget) { where("budget >= :from AND budget <= :to", from: budget[0], to: budget[1]) }
   has_one_attached :photo
 
   STYLES = ["cultural", "adventure", "romantic", "gastronomic", "ecotourism", "luxury", "accessible", "party", "humanitarian"]
