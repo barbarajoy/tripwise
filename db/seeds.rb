@@ -163,7 +163,7 @@ rand(10..20).times do |j|
     title: Faker::Adjective.positive.capitalize + " trip at " + city,
     image_url: maphoto,
     comment: Faker::Lorem.paragraph,
-    budget: rand(100..1000),
+    budget: rand(100..10000),
     city: city,
     planner: planner,
     tripper: planner,

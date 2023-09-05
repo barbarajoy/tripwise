@@ -11,6 +11,9 @@ class TripsController < ApplicationController
     if params[:filter].present?
       @trips = @trips.where(style: params[:filter][:style]) unless params[:filter][:style] == [""]
     end
+    if params.dig(:filter, :from) && params.dig(:filter, :to)
+      @trips = @trips.by_budget([params[:filter][:from], params[:filter][:to]])
+    end
     @trips = @trips.select{|trip| trip.planner == trip.tripper}
   end
 

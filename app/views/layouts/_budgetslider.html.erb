@@ -1,29 +1,11 @@
-    <h4>Budget</h4>
-<div class="wrapper">
-  <header>
-  </header>
-  <div class="price-input">
-    <div class="field">
-      <span>Min</span>
-      <input type="number" class="input-min" value="100">
-    </div>
-
-    <div class="separator">-</div>
-
-    <div class="field">
-      <span>Max</span>
-      <input type="number" class="input-max" value="10000">
-    </div>
-  </div>
-
-
+<div class="range-slider" data-controller="slider" data-slider-target="slider">
+    <span class="range-label">
+    <%= f.number_field :from, as: :integer, value: params.dig(:filter, :from) ? params.dig(:filter, :from) : 100, min: 0, max: 10000 %> -
+    <%= f.number_field :to, as: :integer, value: params.dig(:filter, :to) ? params.dig(:filter, :to) : 1000, min: 0, max: 10000 %>
+    </span>
+  <input value="<%= params.dig(:filter, :from) ? params.dig(:filter, :from) : 100 %>" min="0" max="10000" step="100" type="range"/>
+  <input value="<%= params.dig(:filter, :to) ? params.dig(:filter, :to) : 1000 %>" min="0" max="10000" step="100" type="range"/>
+  <svg width="100%" height="24">
+    <line x1="4" y1="0" x2="300" y2="0" stroke="#444" stroke-width="12" stroke-dasharray="1 28"></line>
+  </svg>
 </div>
-
-  <div class="slider">
-    <div class="progress">
-    </div>
-    <div cllass="range-input">
-      <input type="range" class="range-min" min="0" max="10000" value="100">
-      <input type="range" class="range-max" min="0" max="10000" value="10000">
-    </div>
-  </div>

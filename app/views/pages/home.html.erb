@@ -2,7 +2,7 @@
 
 <%= simple_form_for :filter, url: trips_path, method: :get do |f| %>
   <div class="searchbar-container text-center">
-    <div class="d-flex searchbar-container">
+    <div class="d-flex searchbar-wrapper">
           <%= f.input :title, label: false,
             placeholder: 'Where do you want to go?',
             wrapper_html: { class: "searchbar-wrapper" },
