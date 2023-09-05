@@ -1,17 +1,36 @@
-.my_trip_container {
-  display: flex;
-  justify-content: space-between;
-  bottom: 10%;
-  position: absolute;
-  top: 115px;
+// .my_trip_container {
+//   display: flex;
+  //   justify-content: space-between;
+  //   bottom: 10%;
+  //   position: absolute;
+  //   top: 115px;
+// }
+
+#col1, #col3 {
+  height: calc(100vh - 175px);
 }
 
-.scrollable-content {
-  max-height: 100%;
+#col2 {
+  height: calc(100vh - 240px);
+}
+
+#col1, #col2, #col3 {
   overflow-y: auto;
   scroll-margin-bottom: 0;
 }
 
+.row {
+  width: 100%;
+  margin: 0px;
+}
+
+.col-md-4 {
+  padding: 0px;
+}
+
+#my_conversation li {
+  background-color: rgb(203, 203, 203);
+}
 
 .messages {
   scroll-margin-bottom: 0;
@@ -37,15 +56,11 @@
   }
 }
 
-.my_messages .scrollable-content {
-  max-height: 85%;
+.scrollable-content {
+  margin: 0 4px;
 }
 
-#my_conversation li {
-  background-color: rgb(203, 203, 203);
-}
-
-.my_conversations ul {
+.scrollable-content ul {
   list-style-type: none;
   margin-bottom: 0px;
   padding-left: 0px;
@@ -53,7 +68,7 @@
     background-color: white;
     border-radius: 5px;
     padding: 5px;
-    margin: 5px;
+    margin: 5px 0;
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
@@ -61,28 +76,29 @@
 }
 
 #new_messages, #btn_new_messages {
-  height: 11%;
+  height: 8%;
   position: absolute;
-  bottom: 1%;
+  bottom: 8%;
   background-color: white;
   border-radius: 5px;
   border: 1px solid black;
 }
 
 #new_messages {
-  width: 37%;
+  left: 34%;
+  width: 28%;
 }
 
 #btn_new_messages {
-  width: 4%;
-  left: 54%;
+  width: 5%;
+  left: 62%;
 }
 
-.destinations table {
+.my_trips_destinations table {
   border-collapse: collapse;
 }
 
-.destinations td,.destinations th {
+.my_trips_destinations td,.my_trips_destinations th {
   border: 1px solid #000;
   padding: 2px 8px;
   background-color: white;

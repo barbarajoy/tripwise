@@ -5,8 +5,6 @@
 
 .searchbar-container{
   background-color: $dark-green;
-  display: flex;
-  justify-content: center;
 }
 
 .w-70 {
@@ -25,6 +23,6 @@
 
 .searchbar-button {
   position: absolute;
-  left: -82.5%;
+  left: 82.5%;
   height: 45px;
 }
