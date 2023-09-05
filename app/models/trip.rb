@@ -23,4 +23,8 @@ class Trip < ApplicationRecord
     using: {
       tsearch: { prefix: true }
     }
+
+  def ordered_tripdestinations
+    trip_destinations.order(:position)
+  end
 end
