@@ -4,6 +4,7 @@
   font-weight: bold;
   border: none;
   padding: 10px 20px;
+  width: 120px;
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
@@ -16,6 +17,23 @@
 
 .button-dark-green {
   background-color: $very-dark-green;
+  color: white;
+  font-weight: bold;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
+
+  &:hover {
+    background-color: $light-green;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    color: $very-dark-green;
+  }
+}
+
+.button-green {
+  background-color: $green;
   color: white;
   font-weight: bold;
   border: none;

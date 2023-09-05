@@ -3,30 +3,7 @@
   justify-content: space-between;
   bottom: 10%;
   position: absolute;
-  top: 16%;
-}
-
-.my_conversations, .my_messages {
-  // border-right: 3px solid black;
-}
-
-.my_conversations {
-  width: 25%;
-}
-
-.my_messages {
-  width: 40%;
-}
-
-.my_trips {
-  width: 35%;
-}
-
-.column {
-  height: 100%;
-  // padding: 10px;
-  display: inline-block;
-  vertical-align: top;
+  top: 115px;
 }
 
 .scrollable-content {
@@ -34,6 +11,7 @@
   overflow-y: auto;
   scroll-margin-bottom: 0;
 }
+
 
 .messages {
   scroll-margin-bottom: 0;
@@ -83,20 +61,29 @@
 }
 
 #new_messages, #btn_new_messages {
-  position: fixed;
-  bottom: 11%;
-  height: 8%;
+  height: 11%;
+  position: absolute;
+  bottom: 1%;
   background-color: white;
   border-radius: 5px;
   border: 1px solid black;
 }
 
 #new_messages {
-  left: 25%;
-  width: 33%;
+  width: 37%;
 }
 
 #btn_new_messages {
   width: 4%;
-  left: 59%;
+  left: 54%;
+}
+
+.destinations table {
+  border-collapse: collapse;
+}
+
+.destinations td,.destinations th {
+  border: 1px solid #000;
+  padding: 2px 8px;
+  background-color: white;
 }

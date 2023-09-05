@@ -2,7 +2,7 @@ require 'pexels'
 require "json"
 require "open-uri"
 
-pex = Pexels::Client.new('sEpDeAZP9RRh5YnpiLUPLtyvufibCueYBpqUjOeVzxGbzPH9ZAsidXVh')
+pex = Pexels::Client.new(ENV["PEXELS_API_KEY"])
 
 CITYS = ["Bangkok", "Paris", "London", "Dubai", "Singapore", "Kuala Lumpur", "New York City", "Istanbul", "Tokyo",
   "Seoul", "Antalya", "Phuket", "Mecca", "Pattaya", "Milan", "Barcelona", "Rome", "Osaka", "Taipei", "Shanghai",
@@ -70,16 +70,13 @@ CITYS = ["Bangkok", "Paris", "London", "Dubai", "Singapore", "Kuala Lumpur", "Ne
 def create_destination(trip, style)
   found = false
   # DESTINATIONS_CRITERES.keys.each do |style|
+  cptttl = 0
   DESTINATIONS_CRITERES[style.to_sym].each do |categories|
-
-
-
-
-
     url = "http://overpass-api.de/api/interpreter?data=[out:json];area[name=\"#{trip.city}\"]->.searchArea;node[#{categories}](area.searchArea);out;"
     cpt = 0
     JSON.parse(URI.open(url).read)["elements"].each_with_index do |a, n|
       cpt = n
+      cptttl += 1
       break if n >= 10 || !a["tags"].key?("name")#|| !a["tags"].key?("addr:housenumber") || !a["tags"].key?("addr:street")
       found = true
       # puts "#{n} #{a["tags"]["name"]} '#{a["tags"]["addr:housenumber"]} #{a["tags"]["addr:street"]}'"
@@ -92,7 +89,7 @@ def create_destination(trip, style)
         latitude: lat,
         address: "is_coming.....", #{a["tags"]["addr:housenumber"]} #{a["tags"]["addr:street"]}"
         description: Faker::Lorem.sentence,
-        position: n
+        position: cptttl
       })
     end
     puts "- #{cpt} lieu(x) #{categories}" if cpt != 0
