@@ -18,7 +18,7 @@
             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
 
             <% if current_user.trips.empty? %>
-              <p>You have no trip</p>
+              <%= link_to "Suggest a trip", new_planner_trip_path, class: "dropdown-item" %>
             <% else %>
               <%= link_to "My messages", my_trip_path(current_user.trips.first.id), class: "dropdown-item" %>
             <% end %>
