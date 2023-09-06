@@ -21,7 +21,6 @@
           <% end %>
           <div class="card-index-infos-custom">
             <h2><%= trip.title %></h2>
-            <%= link_to "Delete this trip", planner_trip_path(trip), data: {turbo_method: :delete, turbo_confirm: "Are you sure you want to delete this trip?"}, class: "button-green"%>
           </div>
         </div>
         <% end %>
@@ -30,4 +29,4 @@
   </div>
 </div>
 
-<%= render "layouts/footer", position: "relative" %>
+<%= render "layouts/footer", position: "absolute" %>
