@@ -6,37 +6,41 @@
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
   width: 1000px;
   margin: 0 auto;
-
-  h1 {
-    font-size: 28px;
-    text-align: left;
-  }
-
-  h2 {
-    font-size: 24px;
-    color: $dark-green;
-    text-align: left;
-  }
-
-  h3{
-    font-size: 22px;
-    color: black;
-    text-align: left;
+  .trip_show_header {
+    display: flex;
+    align-items: baseline;
+    h1 {
+      font-size: 28px;
+      text-align: left;
+    }
+    h2 {
+      font-size: 24px;
+      color: $dark-green;
+      text-align: left;
+    }
+    h3{
+      margin-left: 5px;
+      font-size: 18px;
+      color: black;
+      text-align: left;
+    }
   }
 
   p {
     font-size: 16px;
-    margin-top: 10px;
+    // margin-top: 10px;
+    margin-bottom: 0px;
     text-align: left;
   }
 
   img {
     width: 100%;
     object-fit: cover;
-    max-height: 150px;
+    max-height: 400px;
     margin-top: 15px;
     border-radius: 5px;
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+    margin-bottom: 20px;
   }
 }
 
@@ -47,26 +51,59 @@
 .trip_destination {
   display: flex;
   justify-content: space-between;
-  align-items: flex-end;
+  // align-items: flex-end;
 
   margin-top: 10px;
   margin-bottom: 10px;
-  background-color: white;
+  background-color: #ffffff;
   padding: 10px;
   border-radius: 5px;
   box-shadow: 0px 0px 5px rgba(0, 0, 6px, 0.4);
 }
 
-.trip_map {
-  height: 150px;
-  width: 200px;
+.trip_destination_infos {
+  padding: 10px;
+  width: 60%;
 }
 
-.link-btn-container {
-  text-align: left;
+.trip_destination_address {
+  font-style: italic;
+  margin-bottom: 10px;
+  color: rgb(94, 94, 94);
+}
+
+.trip_destination_header {
+  display: flex;
+  align-items: center;
+  h1 {
+    // background-color: #e2e2e2;
+    border-radius: 50%;
+    padding: 5px;
+    box-shadow: 0px 0px 5px $yellow;
+    width: 60px;
+    height: 60px;
+    text-align: center;
+  }
+  h4 {
+    margin-left: 20px;
+  }
+}
+
+.trip_map {
+  height: 200px;
+  width: 350px;
+  border-radius: 5px;
+  box-shadow: 0px 0px 5px rgba(0, 0, 6px, 0.4);
+}
+
+.button-container {
+  text-align: center;
   margin-top: 20px;
-  color: white;
-  text-decoration: none;
+  .link-btn-container {
+    margin-top: 20px;
+    color: white;
+    text-decoration: none;
+  }
 }
 
 .button-dark-green-show {
@@ -83,4 +120,10 @@
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
     color: $very-dark-green;
   }
+}
+
+
+.delete{
+  display: flex;
+  justify-content: space-between;
 }
