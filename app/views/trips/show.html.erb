@@ -1,18 +1,23 @@
 <%= render "/layouts/navbar", hauteur: "100", searchbar: false %>
 
 <div class="container">
-  <h1><strong><%= @trip.planner.first_name %> <%= @trip.planner.last_name %></strong></h1>
-  <h2><strong><%= @trip.title %></strong></h2>
+  <div class="trip_show_header">
+    <h2><strong><%= @trip.title %></strong></h2>
+    <h3><strong>by <%= @trip.planner.first_name %> <%= @trip.planner.last_name %></strong></h3>
+  </div>
   <p><%= @trip.comment %></p>
   <%= image_tag @trip.image_url %>
   <div class="trip_destinations">
-    <% @trip.destinations.each do |destination| %>
+    <% @trip.destinations.each_with_index do |destination, i| %>
       <div class="trip_destination">
         <div class="trip_destination_infos">
-          <h4><strong><%= destination.title %></strong></h4>
-          <p><%= destination.address %></p>
+          <div class="trip_destination_header">
+            <h1><strong>#<%= i %></strong></h1>
+            <h4><strong><%= destination.title %></strong></h4>
+          </div>
+          <div class="trip_destination_address"><%= destination.address %></div>
           <p><%= destination.description %></p>
-      </div>
+        </div>
         <div class="trip_map"
           data-controller="map"
           data-map-markers-value="<%= [{ lat: destination.latitude, lng: destination.longitude }].to_json %>"
