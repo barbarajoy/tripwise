@@ -19,7 +19,7 @@
         <hr>
 
             <h4 class="my-3">Trip Styles</h4>
-            <%= f.input :style, legend_tag: false, as: :check_boxes, collection: Trip.where.not(style: nil).pluck(:style).uniq.map { |style| [style.capitalize, style] } %>
+            <%= f.input :style, legend_tag: false, as: :check_boxes, collection: Trip.where.not(style: nil).pluck(:style).uniq.map { |style| [style.capitalize, style] }, checked: @selected_styles %>
         <% end %>
       </nav>
 
