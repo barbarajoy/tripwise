@@ -1,10 +1,11 @@
 require 'pexels'
 require "json"
 require "open-uri"
+require 'cgi'
 
 pex = Pexels::Client.new(ENV["PEXELS_API_KEY"])
 
-CITYS = ["Bangkok", "Paris", "London", "Dubai", "Singapore", "Kuala Lumpur", "New York City", "Istanbul", "Tokyo",
+CITYS = ["Rome", "Venise", "Florence", "Bangkok", "Paris", "London", "Dubai", "Singapore", "Kuala Lumpur",
   "Seoul", "Antalya", "Phuket", "Mecca", "Pattaya", "Milan", "Barcelona", "Rome", "Osaka", "Taipei", "Shanghai",
   "Vienna", "Amsterdam", "Los Angeles", "Madrid", "Guangzhou", "Prague", "Miami", "Munich", "Las Vegas", "Dublin",
   "Riyadh", "Berlin", "Toronto", "Venice", "Sydney", "Vienna", "Hong Kong", "Johannesburg", "Edinburgh", "Marrakech",
@@ -14,7 +15,8 @@ CITYS = ["Bangkok", "Paris", "London", "Dubai", "Singapore", "Kuala Lumpur", "Ne
   "Jerusalem", "Toronto", "Vancouver", "Montreal", "Calgary", "Quebec City", "Edmonton", "Ottawa", "Havana",
   "Santiago de Cuba", "Bogota", "Medellin", "Cancun", "Playa del Carmen", "Mexico City", "Guadalajara", "Monterrey",
   "Moscow", "St. Petersburg", "Kyiv", "Odessa", "Kazan", "Sochi", "Yekaterinburg", "Novosibirsk", "Irkutsk",
-  "Vladivostok", "Krasnoyarsk", "Yerevan", "Tbilisi", "Baku", "Kiev", "Minsk", "Warsaw", "Prague"]
+  "Vladivostok", "Krasnoyarsk", "Yerevan", "Tbilisi", "Baku", "Kiev", "Minsk", "Warsaw", "Prague", "New York City",
+  "Istanbul", "Tokyo"]
 
 
   STYLES = ["cultural", "adventure", "romantic", "gastronomic", "ecotourism", "luxury", "accessible", "party", "humanitarian"]
@@ -111,17 +113,22 @@ rand(20..30).times do |i|
 end
 
 cpt_trip = 0
-while cpt_trip < 20
+cpt_trip_tentative = 0
+while cpt_trip < 5
   # rand(20..30).times do |j|
   # CITYS.each_with_index do |city, j|
-  city = CITYS.sample
+  city = CITYS[cpt_trip_tentative]
+  cpt_trip_tentative += 1
 
-
-  style = DESTINATIONS_CRITERES.keys.sample.to_s
+  if cpt_trip < 4
+    style = "romantic"
+  else
+    style = DESTINATIONS_CRITERES.keys.sample.to_s
+  end
   picture = []
-  picture = pex.photos.search(city, per_page: 1).photos
-  if picture.length == 1
-    maphoto = picture.first.src["large"]
+  # picture = pex.photos.search(city, per_page: 2).photos
+  if picture.length > 0
+    maphoto = picture.sample.src["large"]
   else
     maphoto = "https://www.deutschland.de/sites/default/files/styles/image_container/public/media/image/living-in-germany-city-frankfurt-skyline.jpg?itok=ZSTPGApy"
   end
@@ -130,11 +137,22 @@ while cpt_trip < 20
   else
     planner = User.all.sample
   end
+  if cpt_trip == 0
+    comment = "commentaire rome"
+  elsif cpt_trip == 1
+    comment = "commentaire venise"
+  elsif cpt_trip == 2
+    comment = "commentaire florence"
+  else
+    comment = "commentaire sample"
+  end
+
+
   trip = Trip.new({
     title: Faker::Adjective.positive.capitalize + " trip at " + city,
     image_url: maphoto,
-    comment: Faker::Lorem.paragraph,
-    budget: rand(100..10000),
+    comment: comment,
+    budget: rand(100..1000),
     city: city,
     planner: planner,
     tripper: planner,
@@ -142,35 +160,346 @@ while cpt_trip < 20
   })
 
 
-  found = false
-  cptttl = 0
-  # DESTINATIONS_CRITERES.keys.each do |style|
-  DESTINATIONS_CRITERES[style.to_sym].each do |categories|
-    url = "http://overpass-api.de/api/interpreter?data=[out:json];area[name=\"#{trip.city}\"]->.searchArea;node[#{categories}](area.searchArea);out;"
-    cpt_destination = 0
-    JSON.parse(URI.open(url).read)["elements"].each_with_index do |a, n|
-      cpt_destination = n
-      break if cptttl >= 8 || !a["tags"].key?("name")
-      found = true if cptttl >= 2
-      cptttl += 1
-      # puts "#{n} #{a["tags"]["name"]} '#{a["tags"]["addr:housenumber"]} #{a["tags"]["addr:street"]}'"
-      lat = a["lat"] if a.key?("lat")
-      lon = a["lon"] if a.key?("lon")
+  found = true
+  cptttl = 8
+  if cpt_trip == 0
+    # Colisée de Rome
+    destination = Destination.create!({
+      title: "Colisée de Rome",
+      latitude: 41.890210,
+      longitude: 12.492231,
+      address: "Piazza del Colosseo, 1, 00184 Roma RM, Italy",
+      description: "Le Colisée est un amphithéâtre romain antique situé dans le centre de Rome. C'est l'un des monuments les plus emblématiques de la Rome antique et un site touristique incontournable."
+    })
+    TripDestination.create!(
+      trip: trip,
+      destination: destination,
+      position: 1
+    )
 
-      destination = Destination.create!({
-        title: a["tags"]["name"],
-        longitude: lon,
-        latitude: lat,
-        address: "is_coming.....", #{a["tags"]["addr:housenumber"]} #{a["tags"]["addr:street"]}"
-        description: Faker::Lorem.sentence
-        # position: cptttl
-      })
-      TripDestination.create!(
-        trip: trip,
-        destination: destination,
-        position: cptttl
-      )
-      # puts "- #{cpt_destination} lieu(x) #{categories}" if cpt_destination != 0
+    # Basilique Saint-Pierre
+    destination = Destination.create!({
+      title: "Basilique Saint-Pierre",
+      latitude: 41.902240,
+      longitude: 12.453650,
+      address: "Piazza San Pietro, 00120 Città del Vaticano",
+      description: "La basilique Saint-Pierre est l'une des plus grandes églises du monde et un important site religieux situé dans la Cité du Vatican. Elle est renommée pour son architecture majestueuse et abrite de nombreuses œuvres d'art célèbres."
+    })
+    TripDestination.create!(
+      trip: trip,
+      destination: destination,
+      position: 1
+    )
+
+    # Fontaine de Trevi
+    destination = Destination.create!({
+      title: "Fontaine de Trevi",
+      latitude: 41.900933,
+      longitude: 12.483265,
+      address: "Piazza di Trevi, 00187 Roma RM, Italy",
+      description: "La Fontaine de Trevi est l'une des fontaines les plus célèbres du monde. Les visiteurs jettent traditionnellement une pièce de monnaie dans la fontaine pour s'assurer un retour à Rome."
+    })
+    TripDestination.create!(
+      trip: trip,
+      destination: destination,
+      position: 1
+    )
+
+    # Le Panthéon
+    destination = Destination.create!({
+      title: "Le Panthéon",
+      latitude: 41.898615,
+      longitude: 12.476833,
+      address: "Piazza della Rotonda, 00186 Roma RM, Italy",
+      description: "Le Panthéon est un temple antique romain bien préservé qui est aujourd'hui une église. Il est célèbre pour son impressionnante coupole et son architecture remarquable."
+    })
+    TripDestination.create!(
+      trip: trip,
+      destination: destination,
+      position: 1
+    )
+
+    # Galerie Borghèse
+    destination = Destination.create!({
+      title: "Galerie Borghèse",
+      latitude: 41.914250,
+      longitude: 12.492389,
+      address: "Piazzale Scipione Borghese, 5, 00197 Roma RM, Italy",
+      description: "La Galerie Borghèse est un musée abritant une impressionnante collection d'œuvres d'art, notamment des sculptures de Bernin, des peintures de Caravage et de Raphaël, ainsi que des antiquités romaines."
+    })
+    TripDestination.create!(
+      trip: trip,
+      destination: destination,
+      position: 1
+    )
+
+    # Place d'Espagne
+    destination = Destination.create!({
+      title: "Place d'Espagne",
+      latitude: 41.905694,
+      longitude: 12.483732,
+      address: "Piazza di Spagna, 00187 Roma RM, Italy",
+      description: "La Place d'Espagne est une place célèbre de Rome, connue pour son escalier monumental, l'escalier de la Trinité-des-Monts, et la Fontaine de la Barcaccia de Bernin."
+    })
+    TripDestination.create!(
+      trip: trip,
+      destination: destination,
+      position: 1
+    )
+
+    # Le Forum romain
+    destination = Destination.create!({
+      title: "Le Forum romain",
+      latitude: 41.892480,
+      longitude: 12.485396,
+      address: "Via della Salara Vecchia, 5/6, 00186 Roma RM, Italy",
+      description: "Le Forum romain était le centre politique, religieux et commercial de la Rome antique. Aujourd'hui en ruines, il offre un aperçu fascinant de l'histoire romaine."
+    })
+    TripDestination.create!(
+      trip: trip,
+      destination: destination,
+      position: 1
+    )
+
+    # Musées du Vatican
+    destination = Destination.create!({
+      title: "Musées du Vatican",
+      latitude: 41.906188,
+      longitude: 12.453639,
+      address: "Viale Vaticano, 00165 Città del Vaticano",
+      description: "Les Musées du Vatican abritent une vaste collection d'art et d'antiquités, notamment la Chapelle Sixtine, célèbre pour ses fresques de Michel-Ange."
+    })
+    TripDestination.create!(
+      trip: trip,
+      destination: destination,
+      position: 1
+    )
+  elsif cpt_trip == 1
+    # Place Saint-Marc
+    destination = Destination.create!({
+      title: "Place Saint-Marc",
+      latitude: 45.434190,
+      longitude: 12.338780,
+      address: "Piazza San Marco, 30100 Venezia VE, Italy",
+      description: "La Place Saint-Marc est la place principale de Venise et l'un des centres historiques et culturels les plus importants de la ville. Elle est célèbre pour la Basilique Saint-Marc, la Tour de l'Horloge et le Palais des Doges."
+    })
+    TripDestination.create!(
+      trip: trip,
+      destination: destination,
+      position: 1
+    )
+
+    # Pont du Rialto
+    destination = Destination.create!({
+      title: "Pont du Rialto",
+      latitude: 45.438682,
+      longitude: 12.335020,
+      address: "Ponte di Rialto, 30100 Venezia VE, Italy",
+      description: "Le Pont du Rialto est l'un des ponts les plus emblématiques de Venise. Il enjambe le Grand Canal et est entouré de boutiques et de marchés."
+    })
+    TripDestination.create!(
+      trip: trip,
+      destination: destination,
+      position: 1
+    )
+
+    # Palais des Doges
+    destination = Destination.create!({
+      title: "Palais des Doges",
+      latitude: 45.434334,
+      longitude: 12.339266,
+      address: "Piazza San Marco, 1, 30124 Venezia VE, Italy",
+      description: "Le Palais des Doges est un palais vénitien magnifique qui servait de résidence officielle des doges de Venise. Aujourd'hui, il abrite un musée et est célèbre pour son architecture et ses œuvres d'art."
+    })
+    TripDestination.create!(
+      trip: trip,
+      destination: destination,
+      position: 1
+    )
+
+    # Île de Burano
+    destination = Destination.create!({
+      title: "Île de Burano",
+      latitude: 45.485878,
+      longitude: 12.416548,
+      address: "Burano, 30142 Venezia VE, Italy",
+      description: "L'île de Burano est célèbre pour ses maisons colorées et ses dentelles artisanales. C'est un endroit pittoresque pour se promener et découvrir la culture locale."
+    })
+    TripDestination.create!(
+      trip: trip,
+      destination: destination,
+      position: 1
+    )
+
+    # Île de Murano
+    destination = Destination.create!({
+      title: "Île de Murano",
+      latitude: 45.457806,
+      longitude: 12.355586,
+      address: "Murano, 30141 Venezia VE, Italy",
+      description: "L'île de Murano est renommée pour son artisanat du verre, en particulier pour ses souffleurs de verre talentueux. Vous pouvez visiter les ateliers de verre et découvrir l'art du soufflage de verre."
+    })
+    TripDestination.create!(
+      trip: trip,
+      destination: destination,
+      position: 1
+    )
+
+    # Pont des Soupirs
+    destination = Destination.create!({
+      title: "Pont des Soupirs",
+      latitude: 45.434825,
+      longitude: 12.340479,
+      address: "Rio di Palazzo, 30100 Venezia VE, Italy",
+      description: "Le Pont des Soupirs est un pont couvert qui relie le Palais des Doges aux prisons de Venise. Son nom provient de la légende selon laquelle les prisonniers soupiraient en passant par le pont en voyant Venise pour la dernière fois."
+    })
+    TripDestination.create!(
+      trip: trip,
+      destination: destination,
+      position: 1
+    )
+
+    # Île de Giudecca
+    destination = Destination.create!({
+      title: "Île de Giudecca",
+      latitude: 45.4260821,
+      longitude: 12.3182622,
+      address: "Giudecca, 30100 Venezia VE, Italy",
+      description: "L'île de Giudecca offre une vue panoramique sur Venise et est un lieu paisible pour échapper à l'agitation de la ville. Vous y trouverez des églises historiques et une atmosphère authentique."
+    })
+    TripDestination.create!(
+      trip: trip,
+      destination: destination,
+      position: 1
+    )
+
+    # Musée Guggenheim de Venise
+    destination = Destination.create!({
+      title: "Musée Guggenheim de Venise",
+      latitude: 45.430876,
+      longitude: 12.332588,
+      address: "Dorsoduro, 701-704, 30123 Venezia VE, Italy",
+      description: "Le Musée Guggenheim de Venise abrite une collection d'art moderne et contemporain dans un palais vénitien historique. Il présente des œuvres d'artistes renommés du 20e siècle."
+    })
+    TripDestination.create!(
+      trip: trip,
+      destination: destination,
+      position: 1
+    )
+  elsif cpt_trip == 2
+    # Galerie des Offices (Galleria degli Uffizi)
+    destination = Destination.create!({
+      title: "Galerie des Offices",
+      latitude: 43.769562,
+      longitude: 11.255814,
+      address: "Piazzale degli Uffizi, 6, 50122 Firenze FI, Italy",
+      description: "La Galerie des Offices est l'un des musées d'art les plus célèbres au monde, abritant une vaste collection de chefs-d'œuvre de la Renaissance italienne, notamment des œuvres de Botticelli, Michel-Ange et Léonard de Vinci."
+    })
+
+    # Cathédrale Santa Maria del Fiore (Duomo)
+    destination = Destination.create!({
+      title: "Cathédrale Santa Maria del Fiore",
+      latitude: 43.773756,
+      longitude: 11.256600,
+      address: "Piazza del Duomo, 50122 Firenze FI, Italy",
+      description: "La cathédrale de Florence, également connue sous le nom de Duomo, est une merveille architecturale de la Renaissance. Vous pouvez monter au sommet de la coupole pour une vue panoramique de la ville."
+    })
+
+    # Ponte Vecchio
+    destination = Destination.create!({
+      title: "Ponte Vecchio",
+      latitude: 43.767704,
+      longitude: 11.253191,
+      address: "Ponte Vecchio, 50125 Firenze FI, Italy",
+      description: "Le Ponte Vecchio est l'un des ponts les plus célèbres de Florence. Il est connu pour ses boutiques de bijoutiers et son charme historique."
+    })
+
+    # Palais Pitti (Palazzo Pitti)
+    destination = Destination.create!({
+      title: "Palais Pitti",
+      latitude: 43.764234,
+      longitude: 11.248482,
+      address: "Piazza de' Pitti, 1, 50125 Firenze FI, Italy",
+      description: "Le Palais Pitti est un palais historique de la Renaissance qui abrite plusieurs musées, dont la Galerie Palatine et le Musée de la Mode."
+    })
+
+    # Jardins de Boboli (Giardino di Boboli)
+    destination = Destination.create!({
+      title: "Jardins de Boboli",
+      latitude: 43.764680,
+      longitude: 11.248484,
+      address: "Piazza de' Pitti, 1, 50125 Firenze FI, Italy",
+      description: "Les Jardins de Boboli sont des jardins historiques situés derrière le Palais Pitti. Ils offrent une belle promenade parmi les sculptures, les fontaines et les terrasses panoramiques."
+    })
+
+    # Basilique Santa Croce
+    destination = Destination.create!({
+      title: "Basilique Santa Croce",
+      latitude: 43.768970,
+      longitude: 11.262982,
+      address: "Piazza Santa Croce, 16, 50122 Firenze FI, Italy",
+      description: "La Basilique Santa Croce est l'une des églises les plus importantes de Florence, abritant les tombeaux de personnalités célèbres telles que Michel-Ange, Galilée et Machiavel."
+    })
+
+    # Galerie de l'Académie (Galleria dell'Accademia)
+    destination = Destination.create!({
+      title: "Galerie de l'Académie",
+      latitude: 43.776065,
+      longitude: 11.259395,
+      address: "Via Ricasoli, 58/60, 50122 Firenze FI, Italy",
+      description: "La Galerie de l'Académie est célèbre pour abriter la statue de David de Michel-Ange. Elle présente également d'autres œuvres d'art importantes de la Renaissance florentine."
+    })
+
+    # Piazzale Michelangelo
+    destination = Destination.create!({
+      title: "Piazzale Michelangelo",
+      latitude: 43.762175,
+      longitude: 11.265396,
+      address: "Piazzale Michelangelo, 50125 Firenze FI, Italy",
+      description: "Le Piazzale Michelangelo offre l'une des meilleures vues panoramiques de Florence. C'est un endroit populaire pour admirer le coucher de soleil sur la ville."
+    })
+  else
+    found = false
+    cptttl = 0
+    # DESTINATIONS_CRITERES.keys.each do |style|
+    DESTINATIONS_CRITERES[style.to_sym].each do |categories|
+      url_overpass = "http://overpass-api.de/api/interpreter?data=[out:json];area[name=\"#{trip.city}\"]->.searchArea;node[#{categories}](area.searchArea);out;"
+      cpt_destination = 0
+      JSON.parse(URI.open(url_overpass).read)["elements"].each_with_index do |a, n|
+        cpt_destination = n
+        break if cptttl >= 8 || !a["tags"].key?("name")
+        found = true if cptttl >= 2
+        cptttl += 1
+        lat = a["lat"] if a.key?("lat")
+        lon = a["lon"] if a.key?("lon")
+
+        addr = "(#{a["lat"]}, #{a["lon"]})"
+        url_mapbox = "https://api.mapbox.com/geocoding/v5/mapbox.places/#{CGI.escape(a["tags"]["name"])}.json?access_token=pk.eyJ1IjoibGFpZ29oIiwiYSI6ImNsbDBudGU1ejBrdDczbnAzYjlybXljMGUifQ.alDjwDZTSREW8A-_G8B9vQ"
+        if JSON.parse(URI.open(url_mapbox).read).key?("features")
+          if !JSON.parse(URI.open(url_mapbox).read)["features"][0].nil?
+            if JSON.parse(URI.open(url_mapbox).read)["features"][0].key?("properties")
+              if JSON.parse(URI.open(url_mapbox).read)["features"][0]["properties"].key?("address")
+                # puts JSON.parse(URI.open(url_mapbox).read)["features"][0]["properties"]
+                addr = JSON.parse(URI.open(url_mapbox).read)["features"][0]["properties"]["address"]
+              end
+            end
+          end
+        end
+
+        destination = Destination.create!({
+          title: a["tags"]["name"],
+          longitude: lon,
+          latitude: lat,
+          address: addr,
+          description: Faker::Lorem.sentence
+        })
+        TripDestination.create!(
+          trip: trip,
+          destination: destination,
+          position: cptttl
+        )
+        # puts "- #{cpt_destination} lieu(x) #{categories}" if cpt_destination != 0
+      end
     end
   end
   if found

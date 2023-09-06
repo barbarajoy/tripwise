@@ -3,7 +3,7 @@
 
 <div class="my_trip_container">
   <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-3">
       <div class="scrollable-content" id="col1">
         <ul>
           <% @trips.each do |trip| %>
@@ -48,7 +48,7 @@
         </div>
       </div>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-5">
       <div class="scrollable-content" id="col3">
         <%= link_to("Trip initial", trip_path(@trip.trip_id)) if !@trip.trip_id.nil? %>
 
