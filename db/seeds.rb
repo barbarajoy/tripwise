@@ -76,7 +76,7 @@ Destination.destroy_all
 TripDestination.destroy_all
 
 pex = Pexels::Client.new('sEpDeAZP9RRh5YnpiLUPLtyvufibCueYBpqUjOeVzxGbzPH9ZAsidXVh')
-cpt_test = 0
+cpt_first_user = 0
 
 IMAGE_URL = [
   "https://avatars.githubusercontent.com/u/102687903?v=4",
@@ -104,16 +104,18 @@ IMAGE_URL = [
 
 rand(20..30).times do |i|
   if i.zero?
-    User.create({ email: "test@test.test", password: "testtest", first_name: "Audran", last_name: "Pillard", image_url: "https://avatars.githubusercontent.com/u/135331205?v=4" })
+    User.create({ email: "test@test.test", password: "testtest", first_name: "Adel", last_name: "Martin", image_url: "https://avatars.githubusercontent.com/u/135331205?v=4" })
   else
     User.create({ email: Faker::Internet.email, password: "password", first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, image_url: IMAGE_URL.sample })
   end
 end
 
-rand(20..30).times do |j|
+cpt_trip = 0
+while cpt_trip < 20
+  # rand(20..30).times do |j|
+  # CITYS.each_with_index do |city, j|
   city = CITYS.sample
 
-# CITYS.each_with_index do |city, j|
 
   style = DESTINATIONS_CRITERES.keys.sample.to_s
   picture = []
@@ -123,7 +125,7 @@ rand(20..30).times do |j|
   else
     maphoto = "https://www.deutschland.de/sites/default/files/styles/image_container/public/media/image/living-in-germany-city-frankfurt-skyline.jpg?itok=ZSTPGApy"
   end
-  if j.zero?
+  if cpt_trip.zero?
     planner = User.first
   else
     planner = User.all.sample
@@ -140,20 +142,17 @@ rand(20..30).times do |j|
   })
 
 
-  puts ""
-  puts trip.city.upcase
-
   found = false
   cptttl = 0
   # DESTINATIONS_CRITERES.keys.each do |style|
   DESTINATIONS_CRITERES[style.to_sym].each do |categories|
     url = "http://overpass-api.de/api/interpreter?data=[out:json];area[name=\"#{trip.city}\"]->.searchArea;node[#{categories}](area.searchArea);out;"
-    cpt = 0
+    cpt_destination = 0
     JSON.parse(URI.open(url).read)["elements"].each_with_index do |a, n|
-      cpt = n
-      break if n >= 10 || !a["tags"].key?("name")
+      cpt_destination = n
+      break if cptttl >= 8 || !a["tags"].key?("name")
+      found = true if cptttl >= 2
       cptttl += 1
-      found = true
       # puts "#{n} #{a["tags"]["name"]} '#{a["tags"]["addr:housenumber"]} #{a["tags"]["addr:street"]}'"
       lat = a["lat"] if a.key?("lat")
       lon = a["lon"] if a.key?("lon")
@@ -171,25 +170,34 @@ rand(20..30).times do |j|
         destination: destination,
         position: cptttl
       )
-
+      # puts "- #{cpt_destination} lieu(x) #{categories}" if cpt_destination != 0
     end
-    puts "- #{cpt} lieu(x) #{categories}" if cpt != 0
   end
   if found
-    # puts " - "*20
+    cpt_trip += 1
+    puts ""
+    puts "#{trip.city.upcase} => #{cptttl} lieux"
     trip.save!
-    rand(0..3).times do |k|
+    n = rand(0..3)
+    # puts "#{n} copies"
+    n.times do |k|
       copied_trip = trip.dup
       copied_trip.trip_id = trip.id
-      copied_trip.destinations = trip.destinations
-      if k == 0 && cpt_test < 10
-        cpt_test += 1
-        trip_last = Trip.last
+      trip.destinations.each_with_index do |destination, n|
+        TripDestination.create!(
+          trip: copied_trip,
+          destination: destination,
+          position: n
+        )
+      end
+
+      if k == 0 && cpt_first_user < 10
+        cpt_first_user += 1
         copied_trip.tripper = User.first
       else
         copied_trip.tripper = User.where.not(id: planner.id).sample
       end
-      copied_trip.save
+      copied_trip.save! ? "" : copied_trip.error
     end
   end
 end

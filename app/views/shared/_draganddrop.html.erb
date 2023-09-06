@@ -4,9 +4,9 @@
   <tbody data-controller="sortable" data-sortable-tripid-value=<%= trip.id %>>
     <% trip.ordered_tripdestinations.each do |trip_destination| %>
       <tr>
-        <td><i class="fa-solid fa-arrows-up-down"></i></td>
+        <td style="width: 0;"><i class="fa-solid fa-grip-vertical"></i></td>
         <td><%= trip_destination.destination.title %></td>
-        <td><i class="fa-solid fa-arrow-up-right-from-square"></i></td>
+        <td style="width: 0;"><i class="fa-solid fa-arrow-up-right-from-square"></i></td>
       </tr>
     <% end %>
   </tbody>

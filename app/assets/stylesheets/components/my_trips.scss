@@ -78,7 +78,7 @@
 #new_messages, #btn_new_messages {
   height: 8%;
   position: absolute;
-  bottom: 8%;
+  bottom: 50px;
   background-color: white;
   border-radius: 5px;
   border: 1px solid black;
@@ -86,16 +86,20 @@
 
 #new_messages {
   left: 34%;
-  width: 28%;
+  width: 29%;
 }
 
 #btn_new_messages {
-  width: 5%;
-  left: 62%;
+  width: 3%;
+  left: 63%;
 }
 
 .my_trips_destinations table {
   border-collapse: collapse;
+  width: 100%;
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 .my_trips_destinations td,.my_trips_destinations th {
