@@ -567,9 +567,9 @@ user3 = User.create(
 )
 
 user4 = User.create(
-  first_name: "Patti",
-  last_name: "Smith",
-  email: "patti@example.com",
+  first_name: "Laura",
+  last_name: "Beauvais",
+  email: "laura@example.com",
   password: "password",
   image_url: "https://avatars.githubusercontent.com/u/101594582?v=4"
 )
@@ -583,9 +583,9 @@ user5 = User.create(
 )
 
 user6 = User.create(
-  first_name: "Astrud",
-  last_name: "Gilberto",
-  email: "astrud@example.com",
+  first_name: "Barbara",
+  last_name: "Joy",
+  email: "barbara@example.com",
   password: "password",
   image_url: "https://avatars.githubusercontent.com/u/107953331?v=4"
 )
@@ -703,9 +703,9 @@ user20 = User.create(
 )
 
 user21 = User.create(
-  first_name: "Mick",
-  last_name: "Jagger",
-  email: "mick@example.com",
+  first_name: "George",
+  last_name: "Harrison",
+  email: "george@example.com",
   password: "password",
   image_url: "https://avatars.githubusercontent.com/u/120410801?v=4"
 )
