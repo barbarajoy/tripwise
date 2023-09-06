@@ -421,15 +421,15 @@ user26 = User.create(
   image_url: "https://avatars.githubusercontent.com/u/139124434?v=4"
 )
 
-trip1 = Trip.create(
-  title: "Super cute romantic trip in Italy",
-  city: "Rome, Florence, Venice",
-  image_url: "https://media.tacdn.com/media/attractions-splice-spp-674x446/06/70/0e/c8.jpg",
-  comment: "Embarking on an Italian escapade for a romantic journey. Our path unveils hidden treasures at every stop. In Rome, the Eternal City, each monument narrates a timeless love story. Florence, with its sublime art, leaves an artistic imprint on our hearts. And finally, the winding canals of Venice mirror our love in their tranquil waters. This unforgettable voyage through the charm of Italy will forever be etched in our story.",
-  planner_id: user1.id,
-  tripper_id: user1.id,
-  style: "romantic"
-)
+# trip1 = Trip.create(
+#   title: "Super cute romantic trip in Italy",
+#   city: "Rome, Florence, Venice",
+#   image_url: "https://media.tacdn.com/media/attractions-splice-spp-674x446/06/70/0e/c8.jpg",
+#   comment: "Embarking on an Italian escapade for a romantic journey. Our path unveils hidden treasures at every stop. In Rome, the Eternal City, each monument narrates a timeless love story. Florence, with its sublime art, leaves an artistic imprint on our hearts. And finally, the winding canals of Venice mirror our love in their tranquil waters. This unforgettable voyage through the charm of Italy will forever be etched in our story.",
+#   planner_id: user1.id,
+#   tripper_id: user1.id,
+#   style: "romantic"
+# )
 
 # destination_italy1 = Destination.create(
 #   address: "Rome, Italy",

@@ -5,6 +5,7 @@ class TripsController < ApplicationController
 
     #   @trips = @trips.where("title ILIKE ?", "%#{params[:query]}%")
     # end
+    @query = params.dig(:filter, :title)
     if params[:filter].present?
       @trips = @trips.where("title ILIKE ?", "%#{params[:filter][:title]}%") if params[:filter][:title].present?
     end
