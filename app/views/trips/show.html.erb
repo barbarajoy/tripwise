@@ -8,11 +8,12 @@
   <div class="trip_destinations">
     <% @trip.destinations.each do |destination| %>
       <div class="trip_destination">
-        <h4><strong><%= destination.title %></strong></h4>
-        <p><%= destination.address %></p>
-        <p><%= destination.description %></p>
-
-        <div style="width: 100px; height: 100px;"
+        <div class="trip_destination_infos">
+          <h4><strong><%= destination.title %></strong></h4>
+          <p><%= destination.address %></p>
+          <p><%= destination.description %></p>
+      </div>
+        <div class="trip_map"
           data-controller="map"
           data-map-markers-value="<%= [{ lat: destination.latitude, lng: destination.longitude }].to_json %>"
           data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
