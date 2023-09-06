@@ -9,12 +9,12 @@ class TripsController < ApplicationController
       @trips = @trips.where("title ILIKE ?", "%#{params[:filter][:title]}%") if params[:filter][:title].present?
     end
     if params[:filter].present?
-      @trips = @trips.where(style: params[:filter][:style]) unless params[:filter][:style] == [""]
+      @trips = @trips.where(style: params[:filter][:style]) unless params[:filter][:style] == [""] || params[:filter][:style].nil?
     end
     if params.dig(:filter, :from) && params.dig(:filter, :to)
       @trips = @trips.by_budget([params[:filter][:from], params[:filter][:to]])
     end
-    @trips = @trips.select{|trip| trip.planner == trip.tripper}
+    @trips = @trips.select{ |trip| trip.planner == trip.tripper }
   end
 
   def show
