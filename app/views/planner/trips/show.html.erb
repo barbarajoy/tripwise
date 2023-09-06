@@ -2,7 +2,7 @@
 
 <div class="container">
   <div class="delete and title">
-    <h2>Trip downloaded by <strong><%= rand(2..100) %></strong> users</h2>
+    <h2>Trip downloaded by <strong>50</strong> users</h2>
     <%= link_to "Delete this trip", planner_trip_path(@trip), data: {turbo_method: :delete, turbo_confirm: "Are you sure you want to delete this trip?"}, class: "button-dark-green"%>
   </div>
     <h3><strong><%= @trip.title %></strong></h3>
@@ -25,4 +25,4 @@
       <%= link_to 'Edit my trip', edit_planner_trip_path(trip_id:@trip.id), class: "link-btn-container button-dark-green-show" %>
     </div>
 </div>
-<%= render "layouts/footer", position: "absolute" %>
+<%= render "layouts/footer", position: "relative" %>
