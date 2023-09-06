@@ -35,10 +35,11 @@
 
   .card-index-infos-custom {
     margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
 
     h2 {
       font-size: 18px;
-      color: #333;
       margin-bottom: 10px;
       text-align: center;
     }

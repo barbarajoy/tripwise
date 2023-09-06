@@ -1,29 +1,31 @@
 <%= render "/layouts/navbar", hauteur: "100", searchbar: false %>
 <div class=" my-trips-container-custom">
   <div class="container card-main-custom ">
-  <div class="title-div-planner-index-custom">
-    <div class="d-flex justify-content-between">
-      <h1>All my trips</h1>
-      <% if user_signed_in? %>
-        <%= link_to 'Add a trip', new_planner_trip_path, class: "button-dark-green" %>
-        <% end %>
-    </div>
-  </div>
-    <% current_user.trips.each do |trip| %>
-      <%= link_to planner_trip_path(trip) do %>
-      <div class="card-index-custom">
-        <% if trip.photo.attached? %>
-          <%= cl_image_tag trip.photo.key, height: 300, width: 400, crop: :fill %>
-        <% else %>
-          <%= image_tag trip.image_url %>
-         <% end %>
-        <div class="card-index-infos-custom">
-            <h2><%= trip.title %></h2>
-            <%# A LAISSER OU NON ? <p><%= trip.comment </p> %>
-        </div>
+    <div class="title-div-planner-index-custom">
+      <div class="d-flex justify-content-between">
+        <h1>All my trips</h1>
+        <% if user_signed_in? %>
+          <%= link_to 'Add a trip', new_planner_trip_path, class: "button-dark-green" %>
+          <% end %>
       </div>
+    </div>
+
+    <div class="card-main">
+      <% current_user.trips.each do |trip| %>
+        <%= link_to planner_trip_path(trip) do %>
+        <div class="card-index-custom">
+          <% if trip.photo.attached? %>
+            <%= cl_image_tag trip.photo.key, height: 300, width: 400, crop: :fill %>
+          <% else %>
+            <%= image_tag trip.image_url %>
+          <% end %>
+          <div class="card-index-infos-custom">
+            <h2><%= trip.title %></h2>
+          </div>
+        </div>
+        <% end %>
       <% end %>
-    <% end %>
+    </div>
   </div>
 </div>
 
