@@ -26,10 +26,9 @@
     </div>
     <div class="col-md-4">
       <div class="scrollable-content" id="col2">
-        <a href="#last_right">Aller à la section 1</a>
-        <%= "Tripper : #{@trip.tripper.first_name} (#{@trip.tripper.id})" %><br>
+       <!-- <%= "Tripper : #{@trip.tripper.first_name} (#{@trip.tripper.id})" %><br>
         <%= "Planner : #{@trip.planner.first_name} (#{@trip.planner.id})" %><br>
-        <%= "current_user : #{current_user.first_name} (#{current_user.id})" %>
+        <%= "current_user : #{current_user.first_name} (#{current_user.id})" %> -->
         <div class="messages">
           <% rr = @trip.messages.sort_by(&:created_at) %>
           <% rr.each do |message| %>
@@ -50,19 +49,20 @@
     </div>
     <div class="col-md-5">
       <div class="scrollable-content" id="col3">
-        <%= link_to("Trip initial", trip_path(@trip.trip_id)) if !@trip.trip_id.nil? %>
+        <!--<%= link_to("Trip initial", trip_path(@trip.trip_id)) if !@trip.trip_id.nil? %>-->
 
 
         <h4><strong><%= @trip.title %></strong></h4>
         <p><%= @trip.comment %></p>
         <div class="my_trips_destinations">
-          <% if current_user != @trip.planner %>
-
             <%= render partial: "shared/draganddrop", locals: {trip: @trip} %>
+          <!--<% if current_user != @trip.planner %>
+
 
           <% else %>
 
-          <% end %>
+
+          <% end %>-->
         </div>
       </div>
     </div>
