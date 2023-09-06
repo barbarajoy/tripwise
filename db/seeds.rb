@@ -213,24 +213,223 @@ end
 
 puts "Creating one real example"
 
+user1 = User.create(
+  first_name: "Janis",
+  last_name: "Joplin",
+  email: "janis@example.com",
+  password: "password",
+  image_url: "https://avatars.githubusercontent.com/u/102687903?v=4"
+)
 
-# user1 = User.create(
-#   first_name: "Jane",
-#   last_name: "Smith",
-#   email: "jane@example.com",
-#   password: "password",
-#   image_url: "https://avatars.githubusercontent.com/u/107953331?v=4"
-# )
+user2 = User.create(
+  first_name: "Etta",
+  last_name: "James",
+  email: "etta@example.com",
+  password: "password",
+  image_url: "https://avatars.githubusercontent.com/u/102727596?v=4"
+)
 
-# trip1 = Trip.create(
-#   title: "Super cute romantic trip in Italy",
-#   city: "Rome, Florence, Venice",
-#   image_url: "https://media.tacdn.com/media/attractions-splice-spp-674x446/06/70/0e/c8.jpg",
-#   comment: "Embarking on an Italian escapade for a romantic journey. Our path unveils hidden treasures at every stop. In Rome, the Eternal City, each monument narrates a timeless love story. Florence, with its sublime art, leaves an artistic imprint on our hearts. And finally, the winding canals of Venice mirror our love in their tranquil waters. This unforgettable voyage through the charm of Italy will forever be etched in our story.",
-#   planner_id: user1.id,
-#   tripper_id: user1.id,
-#   style: "romantic"
-# )
+user3 = User.create(
+  first_name: "Joan",
+  last_name: "Jett",
+  email: "joan@example.com",
+  password: "password",
+  image_url: "https://avatars.githubusercontent.com/u/135238187?v=4"
+)
+
+user4 = User.create(
+  first_name: "Patti",
+  last_name: "Smith",
+  email: "patti@example.com",
+  password: "password",
+  image_url: "https://avatars.githubusercontent.com/u/101594582?v=4"
+)
+
+user5 = User.create(
+  first_name: "Debbie",
+  last_name: "Harry",
+  email: "deby@example.com",
+  password: "password",
+  image_url: "https://avatars.githubusercontent.com/u/101594582?v=4"
+)
+
+user6 = User.create(
+  first_name: "Astrud",
+  last_name: "Gilberto",
+  email: "astrud@example.com",
+  password: "password",
+  image_url: "https://avatars.githubusercontent.com/u/107953331?v=4"
+)
+
+user7 = User.create(
+  first_name: "Amy",
+  last_name: "Whinehouse",
+  email: "amy@example.com",
+  password: "password",
+  image_url: "https://avatars.githubusercontent.com/u/139123707?v=4"
+)
+
+user8 = User.create(
+  first_name: "Nina",
+  last_name: "Simone",
+  email: "nina@example.com",
+  password: "password",
+  image_url: "https://avatars.githubusercontent.com/u/130074671?v=4"
+)
+
+user9 = User.create(
+  first_name: "Billie",
+  last_name: "Holiday",
+  email: "billie@example.com",
+  password: "password",
+  image_url: "https://avatars.githubusercontent.com/u/139124726?v=4"
+)
+
+user10 = User.create(
+  first_name: "Ella",
+  last_name: "Fitzgerald",
+  email: "ella@example.com",
+  password: "password",
+  image_url: "https://avatars.githubusercontent.com/u/130074693?v=4"
+)
+
+user11 = User.create(
+  first_name: "Robert",
+  last_name: "Plant",
+  email: "robert@example.com",
+  password: "password",
+  image_url: "https://avatars.githubusercontent.com/u/60078137?v=4"
+)
+
+user12 = User.create(
+  first_name: "John",
+  last_name: "Lennon",
+  email: "john@example.com",
+  password: "password",
+  image_url: "https://avatars.githubusercontent.com/u/138495721?v=4"
+)
+
+user13 = User.create(
+  first_name: "Kurt",
+  last_name: "Cobain",
+  email: "kurt@example.com",
+  password: "password",
+  image_url: "https://res.cloudinary.com/wagon/image/upload/c_fill,g_face,h_200,w_200/v1688992728/dwty0kmrxptymirqocjk.jpg"
+)
+
+user14 = User.create(
+  first_name: "Tom",
+  last_name: "Jobim",
+  email: "tom@example.com",
+  password: "password",
+  image_url: "https://avatars.githubusercontent.com/u/136320274?v=4"
+)
+
+user15 = User.create(
+  first_name: "Chet",
+  last_name: "Baker",
+  email: "chet@example.com",
+  password: "password",
+  image_url: "https://avatars.githubusercontent.com/u/139125894?v=4"
+)
+
+user16 = User.create(
+  first_name: "Jim",
+  last_name: "Morrison",
+  email: "jim@example.com",
+  password: "password",
+  image_url: "https://res.cloudinary.com/wagon/image/upload/c_fill,g_face,h_200,w_200/v1688993845/fvpb8lfyosqeivzds7ez.jpg"
+)
+
+user17 = User.create(
+  first_name: "Jimi",
+  last_name: "Hendrix",
+  email: "jimi@example.com",
+  password: "password",
+  image_url: "https://avatars.githubusercontent.com/u/44208500?v=4"
+)
+
+user18 = User.create(
+  first_name: "Jim",
+  last_name: "Morrison",
+  email: "jim@example.com",
+  password: "password",
+  image_url: "https://res.cloudinary.com/wagon/image/upload/c_fill,g_face,h_200,w_200/v1688993845/fvpb8lfyosqeivzds7ez.jpg"
+)
+
+user19 = User.create(
+  first_name: "Roger",
+  last_name: "Waters",
+  email: "roger@example.com",
+  password: "password",
+  image_url: "https://avatars.githubusercontent.com/u/139124191?v=4"
+)
+
+user20 = User.create(
+  first_name: "Miles",
+  last_name: "Davis",
+  email: "miles@example.com",
+  password: "password",
+  image_url: "https://avatars.githubusercontent.com/u/118887314?v=4"
+)
+
+user21 = User.create(
+  first_name: "Mick",
+  last_name: "Jagger",
+  email: "mick@example.com",
+  password: "password",
+  image_url: "https://avatars.githubusercontent.com/u/120410801?v=4"
+)
+
+user22 = User.create(
+  first_name: "Mick",
+  last_name: "Jagger",
+  email: "mick@example.com",
+  password: "password",
+  image_url: "https://avatars.githubusercontent.com/u/120410801?v=4"
+)
+
+user23 = User.create(
+  first_name: "David",
+  last_name: "Bowie",
+  email: "david@example.com",
+  password: "password",
+  image_url: "https://avatars.githubusercontent.com/u/136184385?v=4"
+)
+
+user24 = User.create(
+  first_name: "Iggy",
+  last_name: "Pop",
+  email: "iggy@example.com",
+  password: "password",
+  image_url: "https://avatars.githubusercontent.com/u/135331205?v=4"
+)
+
+user25 = User.create(
+  first_name: "Eddie",
+  last_name: "Vedder",
+  email: "eddie@example.com",
+  password: "password",
+  image_url: "https://res.cloudinary.com/wagon/image/upload/c_fill,g_face,h_200,w_200/v1688995034/okfhhgjkc71sqo7mpqpk.jpg"
+)
+
+user26 = User.create(
+  first_name: "Bruce",
+  last_name: "Dickinson",
+  email: "bruce@example.com",
+  password: "password",
+  image_url: "https://avatars.githubusercontent.com/u/139124434?v=4"
+)
+
+trip1 = Trip.create(
+  title: "Super cute romantic trip in Italy",
+  city: "Rome, Florence, Venice",
+  image_url: "https://media.tacdn.com/media/attractions-splice-spp-674x446/06/70/0e/c8.jpg",
+  comment: "Embarking on an Italian escapade for a romantic journey. Our path unveils hidden treasures at every stop. In Rome, the Eternal City, each monument narrates a timeless love story. Florence, with its sublime art, leaves an artistic imprint on our hearts. And finally, the winding canals of Venice mirror our love in their tranquil waters. This unforgettable voyage through the charm of Italy will forever be etched in our story.",
+  planner_id: user1.id,
+  tripper_id: user1.id,
+  style: "romantic"
+)
 
 # destination_italy1 = Destination.create(
 #   address: "Rome, Italy",
