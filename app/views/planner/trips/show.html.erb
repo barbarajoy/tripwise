@@ -24,5 +24,11 @@
     <div class="button-container">
       <%= link_to 'Edit my trip', edit_planner_trip_path(trip_id:@trip.id), class: "link-btn-container button-dark-green-show" %>
     </div>
+    <% if  @trip.custom_validate %>
+      <%= link_to "Telecharger", my_trip_download_pdf_path(@trip), :format => 'pdf', class: "button" %>
+    <% else %>
+      <%= link_to "Valider", my_trip_custom_validate_path(@trip), data: {turbo_method: :patch}, class: "button" %>
+      <%# <a href="https://www.example.com" class="btn">It's ready</a> %>
+    <% end %>
 </div>
-<%= render "layouts/footer", position: "relative" %>
+<%= render "layouts/footer", position: "absolute" %>
