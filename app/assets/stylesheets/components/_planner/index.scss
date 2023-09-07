@@ -4,8 +4,9 @@
   margin-bottom: 20px;
 
   h1 {
-    font-size: 28px;
-    color: #333;
+    text-align: center;
+    color: $very-dark-green;
+    font-family: $headers-font;
   }
 }
 
@@ -30,7 +31,7 @@
 
   img {
     max-width: 100%;
-    height: auto;
+    height: 250px;
   }
 
   .card-index-infos-custom {
