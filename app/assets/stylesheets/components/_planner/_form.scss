@@ -25,10 +25,10 @@ h1 {
   font-family: $headers-font;
 }
 
-.photo {
-  display: flex;
-  justify-content: center;
-}
+// .photo {
+//   display: flex;
+//   justify-content: center;
+// }
 
 .upload-photo {
   padding: 16px 24px;
@@ -48,7 +48,7 @@ h1 {
   }
 }
 
-.update-button {
+.update-button, .create-button {
   display: flex;
   justify-content: center;
 }
@@ -80,6 +80,11 @@ h1 {
 
 
 .edit-trip .form-check-input:checked + .form-check-label::after {
+  left: 17px;
+  top: 8px;
+}
+
+.new-trip .form-check-input:checked + .form-check-label::after {
   left: 17px;
   top: 8px;
 }
