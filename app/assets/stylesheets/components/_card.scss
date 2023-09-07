@@ -28,7 +28,9 @@
 }
 
 .card-trip h2 {
-  height: 50px;
+  display: flex;
+  height: 45px;
+  align-items: center;
   overflow: hidden;
   min-width: 70px;
   font-size: 19px;
