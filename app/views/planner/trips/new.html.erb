@@ -1,17 +1,20 @@
-<div class="container">
+<div class="container new-trip">
   <h1>Tell us about your trip</h1>
   <%= simple_form_for [:planner, @trip],  data: { controller: 'nested-form', nested_form_wrapper_selector_value: '.nested-form-wrapper' } do |f| %>
     <%= f.input :title, placeholder: 'Title of your Trip', wrapper_html: { class: "custom-wrapper" }, input_html: { class: "custom-input"}, label_html: { class: "custom-label"} %>
-    <%= f.input :comment, placeholder: 'An amazing trip', wrapper_html: { class: "custom-wrapper" }, label_html: { class: "custom-label"}  %>
-    <%= f.input :budget, input_html: { min: '0', step: 'any' }, placeholder: 'For the trip', label_html: { class: "custom-label"} %>
-    <%= f.input :city, placeholder: 'Bordeaux', label_html: { class: "custom-label"}  %>
+    <%= f.input :comment, placeholder: 'An amazing trip', wrapper_html: { class: "custom-wrapper" }, label_html: { class: "custom-label"}, input_html: { class: "custom-input"} %>
+    <%= f.input :budget, input_html: { min: '0', step: 'any' }, placeholder: 'For the trip', label_html: { class: "custom-label"}, input_html: { class: "custom-input"} %>
+    <%= f.input :city, placeholder: 'Bordeaux', label_html: { class: "custom-label"}, input_html: { class: "custom-input"}  %>
+    <div class="photo">
+      <%= f.input :photo, class: "upload-photo form-control", input_html: { class: 'd-none' }, label_html: { class: 'upload-photo'}, label: '📷  Upload a photo' %>
+    </div>
+    <div class="checkbox-title">Select trip style</div>
     <%= f.input :style,
       collection: Trip::STYLES,
       as: :check_boxes,
-      label: 'Select trip style',
+      legend_tag: false,
       input_html: { class: "tag-selector" },
       item_wrapper_class: 'tag-item' %>
-    <%= f.input :photo, class: "upload-photo form-control", input_html: { class: 'd-none' }, label_html: { class: 'upload-photo'}, label: '📷 Upload a photo' %>
 
     <template data-nested-form-target="template">
       <%= f.fields_for :destinations, Destination.new, child_index: 'NEW_RECORD' do |destination_fields| %>
@@ -24,8 +27,10 @@
     <% end %>
 
     <div data-nested-form-target="target"></div>
-     <button class="button-green" type="button" data-action="nested-form#add">Add destination</button>
+     <button class="button-green" type="button" data-action="nested-form#add"><i class="fa-sharp fa-solid fa-plus me-2" style="color: #ffd600;"></i>Add destination</button>
 
-    <%= f.submit "Create Trip", class: 'button-dark-green', style: 'margin-top:10px;' %>
+    <div class="create-button">
+      <%= f.submit "Create Trip", class: 'button-dark-green', style: 'margin-top:10px;' %>
+    </div>
   <% end %>
 </div>

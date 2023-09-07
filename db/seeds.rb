@@ -312,9 +312,9 @@ while cpt_trip < 15
   city = CITYS[cpt_trip_tentative]
   cpt_trip_tentative += 1
 
-  if cpt_trip < 4
+  if cpt_trip < 3
     style = "romantic"
-  elsif cpt_trip == 4
+  elsif cpt_trip == 3
     style = "luxury"
   else
     style = DESTINATIONS_CRITERES.keys.sample.to_s
@@ -348,9 +348,9 @@ while cpt_trip < 15
   elsif cpt_trip == 1
     titre = "Discover Venise, in Italy, with your other half"
   elsif cpt_trip == 2
-    titre = "Enchanting Florence: a romantic Italian getaway"
+    titre = "Enchanting Florence: A Romantic Escape in the Heart of Italy"
   elsif cpt_trip == 3
-    titre = "Milan: the capital of luxury!"
+    titre = "Milan: Epitome of Luxury in Italy!"
   else
     titre = "#{Faker::Adjective.positive.capitalize} trip at #{city}"
   end

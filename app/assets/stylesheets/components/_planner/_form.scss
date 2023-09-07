@@ -7,34 +7,94 @@
   transform: scale(0);
 }
 
-.tag-selector + label {
-  cursor: pointer;
-  display: inline-block;
-  font-size: 0.9rem;
-  border-radius: 50rem;
-  padding: 0.1rem 0.5rem;
-  background-color: $green;
-  color: white !important;
-  border: 1px solid $dark-green;
-  margin-right: 0.6rem;
-  margin-bottom: 0.4rem;
+h1 {
+  text-align: center;
+  color: $very-dark-green;
 }
 
-.tag-selector:checked + label {
-  background-color: $very-dark-green;
-  color: white;
-}
-
-.upload-photo {
-  border: 1px solid #d3d3d3;
-  padding: 16px 24px;
-  cursor: pointer;
-  font-weight: 500;
-  background: $very-dark-green;
-  border-radius: 2px;
+.custom-input {
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  padding: 10px;
 }
 
 .custom-label{
+  font-size: 24px;
+  color: $dark-green;
+  text-align: left;
+  font-family: $headers-font;
+}
+
+// .photo {
+//   display: flex;
+//   justify-content: center;
+// }
+
+.upload-photo {
+  padding: 16px 24px;
+  cursor: pointer;
+  background: $very-dark-green;
+  border-radius: 15px;
+  color: white;
+  font-weight: bold;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  margin-top: 15px;
+  border: none;
+
+  &:hover {
+    background-color: $light-green;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    color: $very-dark-green;
+  }
+}
+
+.update-button, .create-button {
+  display: flex;
+  justify-content: center;
+}
+
+.button-dark-green {
+  padding: 16px 24px;
+}
+
+.tag-selector + label {
+  cursor: pointer;
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 15px;
+  padding: 7px;
+  // padding: 0.1rem 0.5rem;
+  // background-color: $green;
+  // color: white !important;
+  // border: 1px solid $dark-green;
+  // margin-right: 0.6rem;
+  margin-bottom: 0.4rem;
+}
+
+
+.tag-selector:checked + label {
+  background-color: $green;
+  color: white;
+}
+
+
+.edit-trip .form-check-input:checked + .form-check-label::after {
+  left: 17px;
+  top: 8px;
+}
+
+.new-trip .form-check-input:checked + .form-check-label::after {
+  left: 17px;
+  top: 8px;
+}
+
+.button-green {
+  top: 0px;
+  right: 0px;
+}
+
+.checkbox-title {
   font-size: 24px;
   color: $dark-green;
   text-align: left;

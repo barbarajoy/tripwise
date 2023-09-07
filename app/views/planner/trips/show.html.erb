@@ -3,8 +3,11 @@
 <div class="container">
   <div class="delete and title">
     <h2>Trip downloaded by <strong>50</strong> users</h2>
-    <%= link_to "Delete this trip", planner_trip_path(@trip), data: {turbo_method: :delete, turbo_confirm: "Are you sure you want to delete this trip?"}, class: "button-dark-green"%>
+    <%= link_to planner_trip_path(@trip), data: {turbo_method: :delete, turbo_confirm: "Are you sure you want to delete this trip?"}, class: "button-dark-green" do %>
+      <i class="fa-solid fa-trash fa-lg" style="color: #ffd600;"></i>
+    <% end %>
   </div>
+
     <h3><strong><%= @trip.title %></strong></h3>
     <p><%= @trip.comment %></p>
     <% if @trip.photo.attached? %>
@@ -12,17 +15,42 @@
     <% else %>
       <%= image_tag @trip.image_url %>
     <% end %>
-    <div class="destinations">
-      <% @trip.trip_destinations.each do |trip_destination| %>
-        <div class="destination">
-          <h4><strong><%= trip_destination.destination.title %></strong></h4>
-          <p><strong><%= trip_destination.destination.address %></strong></p>
-          <p><%= trip_destination.destination.description %></p>
-        </div>
-      <% end %>
-    </div>
+
     <div class="button-container">
       <%= link_to 'Edit my trip', edit_planner_trip_path(trip_id:@trip.id), class: "link-btn-container button-dark-green-show" %>
     </div>
+
+    <div class="destinations">
+      <% @trip.trip_destinations.each_with_index do |trip_destination, i| %>
+
+        <div class="destination">
+          <div class="trip_destination">
+            <div class="trip_destination_infos">
+              <div class="trip_destination_header">
+                <h1><strong>#<%= i+1 %></strong></h1>
+                <h4><strong><%= trip_destination.destination.title %></strong></h4>
+              </div>
+              <div class="trip_destination_address"><%= trip_destination.destination.address %></div>
+              <p><%= trip_destination.destination.description %></p>
+            </div>
+            <div class="trip_map"
+              data-controller="map"
+              data-map-markers-value="<%= [{ lat: trip_destination.destination.latitude, lng: trip_destination.destination.longitude }].to_json %>"
+              data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
+            </div>
+
+          </div>
+
+        </div>
+      <% end %>
+    </div>
+    <% if  @trip.custom_validate %>
+      <%= link_to "Telecharger", my_trip_download_pdf_path(@trip), :format => 'pdf', class: "button" %>
+    <% else %>
+      <%= link_to "Valider", my_trip_custom_validate_path(@trip), data: {turbo_method: :patch}, class: "button" %>
+      <%# <a href="https://www.example.com" class="btn">It's ready</a> %>
+    <% end %>
+
 </div>
-<%= render "layouts/footer", position: "relative" %>
+
+<%= render "layouts/footer" %>

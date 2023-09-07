@@ -23,15 +23,19 @@
   display: none;
 }
 
+.form-check-label {
+  position: relative;
+}
+
 .form-check-input + .form-check-label::before {
   content: '';
   display: inline-block;
-  width: 16px;
-  height: 16px;
-  border: 1px solid grey;
+  width: 20px;
+  height: 20px;
+  border: 2px solid $yellow;
   background-color: #ffffff;
   border-radius: 3px;
-  margin-right: 10px;
+  margin: 0 10px;
   vertical-align: middle;
   cursor: pointer;
 }
@@ -41,20 +45,7 @@
   border-color: grey;
 }
 
-// .form-check-input:checked + .form-check-label::after {
-//   content: '\2713';
-//   display: inline-block;
-//   position: absolute;
-//   left: 4px;
-//   top: 0;
-//   color: white;
-//   font-size: 14px;
-//   line-height: 14px;
-//   width: 16px;
-//   height: 16px;
-//   text-align: center;
-//   vertical-align: middle;
-//   background-color: $dark-green;
-//   border-radius: 3px;
-//   margin-right: 10px;
-// }
+.sidebar .form-check-input:checked + .form-check-label::after {
+  left: 10px;
+  top: 3px;
+}

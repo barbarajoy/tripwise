@@ -17,6 +17,8 @@
   box-shadow: 0 0 15px rgba(0,0,0,0.2);
   // max-width: 400px;
   border-radius: 5px;
+  display: flex;
+  flex-direction: column;
 }
 
 .card-trip > img {
@@ -87,4 +89,8 @@ p {
   border-radius: 50%;
   box-shadow: 0 1px 2px rgba(0,0,0,0.2);
   border: white 1px solid;
+}
+
+.card-planner-budget{
+  margin-top: 20px;
 }

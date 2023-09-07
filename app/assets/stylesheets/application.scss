@@ -14,7 +14,15 @@
 @import "components/footer";
 @import "components/homepage";
 
+@import "components/customcheckbox";
+
 @import "components/show";
 @import "components/searchbar";
 @import "components/_planner/index";
+@import "components/_planner/show";
 @import "components/_planner/form";
+
+
+body{
+  min-height: 100px;
+}
