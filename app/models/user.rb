@@ -7,4 +7,8 @@ class User < ApplicationRecord
   has_many :messages
   validates :first_name, presence: true, format: { with: /\A[a-zA-Z'-]+\z/ }
   validates :last_name, presence: true, format: { with: /\A[a-zA-Z'-]+\z/ }
+
+  def custom_trips
+    Trip.where(tripper_id: id).reject { |trip| trip.planner == trip.tripper }
+  end
 end
