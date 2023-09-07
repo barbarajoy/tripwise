@@ -29,13 +29,17 @@
             <%= link_to trip_path(trip) do %>
               <div class="card-trip">
                 <%= image_tag trip.image_url %>
+
                 <div class="card-trip-infos">
                   <div>
                     <h2><%= trip.title %></h2>
-                    <p><%= trip.comment %></p>
+                    <p><%= trip.style %></p>
                   </div>
-                  <h2 class="card-planner"><%= trip.planner.first_name %> <%= trip.planner.last_name %></h2>
+                  <div>
+                    <h2 class="card-planner"><%= trip.planner.first_name %> <%= trip.planner.last_name %></h2>
+                    <p class="card-trip-pricing"><%= trip.budget %></p>
                     <%= image_tag trip.planner.image_url, class: "card-trip-user avatar-bordered" %>
+                  </div>
                 </div>
               </div>
             <% end %>
@@ -44,4 +48,4 @@
       </div>
     </div>
   </div>
-<%= render "layouts/footer", position: "absolute" %>
+<%# <%= render "layouts/footer", position: "absolute" %>
