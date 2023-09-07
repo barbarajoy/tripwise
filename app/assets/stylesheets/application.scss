@@ -18,3 +18,8 @@
 @import "components/searchbar";
 @import "components/_planner/index";
 @import "components/_planner/form";
+
+
+body{
+  min-height: 100vh;
+}
