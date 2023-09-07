@@ -39,7 +39,7 @@ nav {
 }
 
 .img-navbar-height-20 {
-  width: 100px
+  width: 100px;
 }
 
 .navbar-height-20 {
@@ -50,15 +50,19 @@ nav {
   height: 100px;
 }
 
-nav {
-  background-color: $dark-green;
+.navbar-height-100 .card-trip-user {
+  width: 75px;
+  margin: 0 30px;
 }
 
-.navbar-end{
-  img{
-    width: 65px;
-    margin: 0 25px;
-  }
+.navbar-height-20 .card-trip-user {
+  width: 50px;
+  margin: 0 30px;
+}
+
+
+nav {
+  background-color: $dark-green;
 }
 
 .dropdown-item{
