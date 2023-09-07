@@ -7,10 +7,34 @@ class My::TripsController < ApplicationController
   def create
     @trip = Trip.find_by(trip_id: params[:trip_id], tripper_id: current_user)
     if @trip.nil?
+
+
+
+      copied_trip = trip.dup
+      copied_trip.trip_id = trip.id
+
+      trip.destinations.each_with_index do |destination, n|
+        TripDestination.create!(
+          trip: copied_trip,
+          destination: destination,
+          position: n + 1
+        )
+      end
+
+      copied_trip.tripper = User.where.not(id: [planner.id, user_barbara.id]).sample
+      copied_trip.save!
+
+
       @old_trip = Trip.find(params[:trip_id])
       copied_trip = @old_trip.dup
       copied_trip.trip_id = @old_trip.id
-      copied_trip.trip_destinations = @old_trip.trip_destinations
+      trip.destinations.each_with_index do |destination, n|
+        TripDestination.create!(
+          trip: copied_trip,
+          destination: destination,
+          position: n + 1
+        )
+      end
       copied_trip.tripper = current_user
       if copied_trip.save
         @trip = Trip.find(copied_trip.id)
