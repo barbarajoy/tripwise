@@ -7,12 +7,12 @@
             placeholder: 'Where do you want to go?',
             wrapper_html: { class: "searchbar-wrapper" },
             input_html: { value: @query, class: "searchbar form-control rounded-pill mr-2 py-2 w-70", style: "width: 80%;" } %>
-          <%= f.submit "Search", class: "button-dark-green rounded-pill searchbar-button" %>
+          <%= f.submit "Search", class: "button-dark-green rounded-pill searchbar-button py-0" %>
     </div>
   </div>
 
 
-  <div class="container-fluid">
+  <div class="container-fluid ps-0">
     <div class="row">
       <nav class="col-md-4 col-lg-2 d-md-block sidebar">
         <%= render "/layouts/budgetslider", f:f %>
