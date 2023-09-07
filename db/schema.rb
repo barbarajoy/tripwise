@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_06_070559) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_07_085955) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -84,6 +84,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_06_070559) do
     t.integer "budget", default: 10
     t.string "city"
     t.string "style"
+    t.boolean "custom_validate"
     t.index ["planner_id"], name: "index_trips_on_planner_id"
     t.index ["trip_id"], name: "index_trips_on_trip_id"
     t.index ["tripper_id"], name: "index_trips_on_tripper_id"

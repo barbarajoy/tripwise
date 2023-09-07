@@ -54,6 +54,20 @@ class My::TripsController < ApplicationController
 
   end
 
+  def custom_validate
+    @trip = Trip.find(params[:id])
+    @trip.update(custom_validate: true)
+    redirect_to planner_trip_path(@trip.id)
+  end
+
+  def download_pdf
+    send_file(
+      "#{Rails.root}/public/image.pdf",
+      filename: "coco.pdf",
+      type: "application/pdf"
+    )
+  end
+
   # private
 
   # def trip_params
