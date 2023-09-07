@@ -43,7 +43,6 @@ class My::TripsController < ApplicationController
         trip_destination2.save!
       end
     end
-
     trip_destination1.save!
   end
 

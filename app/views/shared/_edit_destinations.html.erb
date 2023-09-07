@@ -1,0 +1,8 @@
+
+
+<%= simple_form_for destination, url: my_destination_path, method: :patch do |f| %>
+  <%= f.input :title, disabled: disable %>
+  <%= f.input :description, as: :text, disabled: disable %>
+  <%= f.hidden_field :id %>
+  <%= f.button(:submit, class: "button") unless disable %>
+<% end %>

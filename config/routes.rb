@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     resources :trips, only: %i[new create update show] do
       resources :messages, only: %i[create]
     end
+    resources :destinations, only: %i[update]
   end
   namespace :planner do
     resources :trips, only: %i[index show new create edit update destroy]

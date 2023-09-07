@@ -1,13 +1,31 @@
 
 
-<table>
-  <tbody data-controller="sortable" data-sortable-tripid-value=<%= trip.id %>>
-    <% trip.ordered_tripdestinations.each do |trip_destination| %>
-      <tr>
-        <td style="width: 0;"><i class="fa-solid fa-grip-vertical"></i></td>
-        <td><%= trip_destination.destination.title %></td>
-        <td style="width: 0;"><i class="fa-solid fa-arrow-up-right-from-square"></i></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<div class="accordion" id="accordionExample">
+  <table>
+    <tbody data-controller="sortable" data-sortable-tripid-value="<%= trip.id %>">
+      <% trip.ordered_tripdestinations.each_with_index do |trip_destination, i| %>
+        <tr>
+          <td>
+            <div class="accordion" id="accordionDestination<%= trip_destination.id %>">
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="heading<%= trip_destination.id %>">
+                  <button class="accordion-button" type="button" data-bs-toggle="collapse" aria-expanded="false" data-bs-target="#collapse<%= trip_destination.id %>" aria-controls="collapse<%= trip_destination.id %>">
+
+                      <i class="fa-solid fa-grip-vertical" id="dnd_icon"></i>
+
+                      <p><%= trip_destination.destination.title %></p>
+                  </button>
+                </h2>
+                <div id="collapse<%= trip_destination.id %>" class="accordion-collapse collapse" aria-labelledby="heading<%= trip_destination.id %>" data-bs-parent="#accordionDestination<%= trip_destination.id %>">
+                  <div class="accordion-body">
+                    <%= render partial: "shared/edit_destinations", locals: { destination: trip_destination.destination, disable: disable } %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

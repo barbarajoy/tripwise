@@ -1,5 +1,5 @@
 <%= render "/layouts/navbar", hauteur: "20", searchbar: false  %>
-<h1>My trips</h1>
+<!--<h1 id="my_trips_h1">My trips</h1>-->
 
 <div class="my_trip_container">
   <div class="row">
@@ -26,9 +26,30 @@
     </div>
     <div class="col-md-4">
       <div class="scrollable-content" id="col2">
-       <!-- <%= "Tripper : #{@trip.tripper.first_name} (#{@trip.tripper.id})" %><br>
-        <%= "Planner : #{@trip.planner.first_name} (#{@trip.planner.id})" %><br>
-        <%= "current_user : #{current_user.first_name} (#{current_user.id})" %> -->
+        <div class="my_trips_planner_tripper">
+          <div class="my_trips_planner">
+            <a href="#" class="avatar" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <%= image_tag @trip.planner.image_url, class: "card-trip-user avatar-bordered" %>
+            </a>
+            <div class="my_trips_planner_infos">
+              <h1><%= "#{@trip.planner.first_name} #{@trip.planner.last_name}" %></h1>
+              <p> Planner </p>
+            </div>
+          </div>
+          <div class="my_trips_tripper">
+            <a href="#" class="avatar" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <%= image_tag @trip.tripper.image_url, class: "card-trip-user avatar-bordered" %>
+            </a>
+            <div class="my_trips_tripper_infos">
+              <h1><%= "#{@trip.tripper.first_name} #{@trip.tripper.last_name}" %></h1>
+              <p> Tripper </p>
+            </div>
+          </div>
+        </div>
+
+       <%#= "Tripper : #{@trip.tripper.first_name} (#{@trip.tripper.id})" %>
+        <%#= "Planner : #{@trip.planner.first_name} (#{@trip.planner.id})" %>
+        <%#= "current_user : #{current_user.first_name} (#{current_user.id})" %>
         <div class="messages">
           <% rr = @trip.messages.sort_by(&:created_at) %>
           <% rr.each do |message| %>
@@ -40,29 +61,40 @@
               <p <%= message == @trip.messages.last ? "id=mid_scroll_right" : nil %>><%= message.content %></p>
             </div>
           <% end %>
-          <%= simple_form_for [@trip, @new_message], url: my_trip_messages_path(@trip.id) do |f| %>
-            <%= f.input :content, as: :text, input_html: { id: 'new_messages', name: 'message[content]' }, label: false %>
-            <%= f.button :submit, id: 'btn_new_messages', value: ">" %>
-          <% end %>
         </div>
+      </div>
+      <div class="div_new_messages">
+        <%= simple_form_for [@trip, @new_message], url: my_trip_messages_path(@trip.id) do |f| %>
+          <%= f.input :content, as: :text, input_html: { id: 'new_messages', name: 'message[content]' }, label: false %>
+          <%= f.button :submit, id: 'btn_new_messages', value: "Send" %>
+        <% end %>
       </div>
     </div>
     <div class="col-md-5">
       <div class="scrollable-content" id="col3">
-        <!--<%= link_to("Trip initial", trip_path(@trip.trip_id)) if !@trip.trip_id.nil? %>-->
+        <div class="my_trips">
+          <% if current_user != @trip.planner %>
 
-
-        <h4><strong><%= @trip.title %></strong></h4>
-        <p><%= @trip.comment %></p>
-        <div class="my_trips_destinations">
-            <%= render partial: "shared/draganddrop", locals: {trip: @trip} %>
-          <!--<% if current_user != @trip.planner %>
-
+            <div class="my_trips_destinations">
+              <%= simple_form_for @trip, url: my_trips_path(trip_id:@trip.id), method: :patch do |f| %>
+                <%= f.input :title, disabled: true, label: false %>
+                <%= f.input :comment, as: :text, disabled: true, label: false  %>
+              <% end %>
+              <%= render partial: "shared/draganddrop", locals: { trip: @trip, disable: true } %>
+            </div>
 
           <% else %>
 
+            <div class="my_trips_destinations">
+              <%= simple_form_for @trip, url: my_trips_path(trip_id:@trip.id), method: :patch do |f| %>
+                <%= f.input :title, disabled: false, label: false %>
+                <%= f.input :comment, as: :text, disabled: false, label: false  %>
+                <%= f.button(:submit, class: "button my_trips_button") unless false %>
+              <% end %>
+              <%= render partial: "shared/draganddrop", locals: { trip: @trip, disable: false } %>
+            </div>
 
-          <% end %>-->
+          <% end %>
         </div>
       </div>
     </div>
