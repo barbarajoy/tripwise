@@ -1,6 +1,6 @@
 <%= render "/layouts/navbar", hauteur: "100"  %>
 
-<%= simple_form_for :filter, url: trips_path, method: :get, data: { controller: 'filters' } do |f| %>
+<%= simple_form_for :filter, url: trips_path, method: :get, data: { controller: 'filters' }, html: { style: "flex-grow: 1; display: flex; flex-direction: column;     flex-grow: 1;"} do |f| %>
   <div class="searchbar-container text-center">
     <div class="d-flex searchbar-wrapper">
           <%= f.input :title, label: false,
@@ -12,8 +12,8 @@
   </div>
 
 
-  <div class="container-fluid ps-0">
-    <div class="row">
+  <div class="container-fluid ps-0" style="height: 100%; flex-grow: 1;">
+    <div class="row" style="height: 100%">
       <nav class="col-md-4 col-lg-2 d-md-block sidebar">
         <%= render "/layouts/budgetslider", f:f %>
         <hr>
@@ -33,11 +33,13 @@
                 <div class="card-trip-infos">
                   <div>
                     <h2><%= trip.title %></h2>
-                    <p><%= trip.style %></p>
+                    <div class="d-flex align-items-center">
+                      <button class="btn"><%= trip.style %></button>
+                      <button class="btn">$<%= trip.budget %></button>
+                    </div>
                   </div>
                   <div>
-                    <h2 class="card-planner"><%= trip.planner.first_name %> <%= trip.planner.last_name %></h2>
-                    <p class="card-trip-pricing"><%= trip.budget %></p>
+                    <h3 class="card-planner"><%= trip.planner.first_name %> <%= trip.planner.last_name %></h3>
                     <%= image_tag trip.planner.image_url, class: "card-trip-user avatar-bordered" %>
                   </div>
                 </div>
@@ -50,4 +52,3 @@
   </div>
 
 <%= render "layouts/footer" %>
-
