@@ -1,8 +1,8 @@
-<div class="nested-form-wrapper" data-new-record="<%= f.object.new_record? %>">
-  <%= f.input :title %>
-  <%= f.input :address %>
-  <%= f.input :description %>
+<div class="nested-form-wrapper position-relative my-5" data-new-record="<%= f.object.new_record? %>">
+  <%= f.input :title, input_html: { class: "custom-input"}, label_html: { class: "custom-label"} %>
+  <%= f.input :address, input_html: { class: "custom-input"}, label_html: { class: "custom-label"} %>
+  <%= f.input :description, input_html: { class: "custom-input"}, label_html: { class: "custom-label"} %>
   <%#= f.input :position %>
-  <button class="button-green" type="button" data-action="nested-form#remove">Remove destination</button>
+  <button class="button-green position-absolute" type="button" data-action="nested-form#remove"><i class="fa-solid fa-xmark" style="color: #ffd600;"></i></button>
   <%= f.hidden_field :_destroy %>
 </div>
