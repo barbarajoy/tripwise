@@ -39,7 +39,10 @@
                     </div>
                   </div>
                   <div>
-                    <h3 class="card-planner"><%= trip.planner.first_name %> <%= trip.planner.last_name %></h3>
+                  <div class="card-planner d-flex flex-column align-items-center">
+                    <p class="mx-auto"><%= trip.planner.first_name %></p>
+                    <p class="mx-auto"><%= trip.planner.last_name %></p>
+                  </div>
                     <%= image_tag trip.planner.image_url, class: "card-trip-user avatar-bordered" %>
                   </div>
                 </div>

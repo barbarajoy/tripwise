@@ -344,13 +344,13 @@ while cpt_trip < 15
   end
 
   if cpt_trip == 0
-    titre = "Super cute romantic trip in Rome, Italy"
+    titre = "Cute romantic trip in Rome (Italy)"
   elsif cpt_trip == 1
-    titre = "Discover Venise, in Italy, with your other half"
+    titre = "Discover Venise in Italy"
   elsif cpt_trip == 2
-    titre = "Enchanting Florence: A Romantic Escape in the Heart of Italy"
+    titre = "Florence: A Romantic Escape in the Heart of Italy"
   elsif cpt_trip == 3
-    titre = "Milan: Epitome of Luxury in Italy!"
+    titre = "Milan: Luxury in Italy!"
   else
     titre = "#{Faker::Adjective.positive.capitalize} trip at #{city}"
   end
