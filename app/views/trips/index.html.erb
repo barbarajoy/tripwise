@@ -34,8 +34,8 @@
                   <div>
                     <h2><%= trip.title %></h2>
                     <div class="d-flex align-items-center">
-                      <button class="btn"><%= trip.style %></button>
-                      <button class="btn">$<%= trip.budget %></button>
+                      <button class="btn" style="height: 26px;padding: 0 8px;font-size: 14px"><%= trip.style %></button>
+                      <button class="btn" style="height: 26px;padding: 0 8px;font-size: 14px">$<%= trip.budget %></button>
                     </div>
                   </div>
                   <div>
@@ -51,4 +51,4 @@
     </div>
   </div>
 
-<%= render "layouts/footer" %>
+<%= render "layouts/footer", height: 100 %>

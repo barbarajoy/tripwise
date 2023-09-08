@@ -718,13 +718,13 @@ while cpt_trip < 5
       position: 8
     )
   elsif cpt_trip == 3
-    # Uffizi Gallery (Galleria degli Uffizi)
+    # Milan Cathedral (Duomo di Milano)
     destination = Destination.create!({
-      title: "Uffizi Gallery",
-      latitude: 43.769562,
-      longitude: 11.255814,
-      address: "Piazzale degli Uffizi, 6, 50122 Florence, Italy",
-      description: "The Uffizi Gallery is one of the most famous art museums in the world, housing an extensive collection of Italian Renaissance masterpieces, including works by Botticelli, Michelangelo, and Leonardo da Vinci."
+      title: "Milan Cathedral",
+      latitude: 45.464097,
+      longitude: 9.191926,
+      address: "Piazza del Duomo, 20122 Milan, Italy",
+      description: "The Milan Cathedral, or Duomo di Milano, is a stunning Gothic cathedral known for its intricate architecture and beautiful sculptures. You can also visit the rooftop for a unique view of Milan."
     })
     TripDestination.create!(
       trip: trip,
@@ -732,13 +732,13 @@ while cpt_trip < 5
       position: 1
     )
 
-    # Cathedral of Santa Maria del Fiore (Duomo)
+    # The Last Supper (Cenacolo Vinciano)
     destination = Destination.create!({
-      title: "Cathedral of Santa Maria del Fiore",
-      latitude: 43.773756,
-      longitude: 11.256600,
-      address: "Piazza del Duomo, 50122 Florence, Italy",
-      description: "The Florence Cathedral, also known as the Duomo, is an architectural marvel of the Renaissance. You can climb to the top of the dome for a panoramic view of the city."
+      title: "The Last Supper",
+      latitude: 45.464128,
+      longitude: 9.172439,
+      address: "Piazza di Santa Maria delle Grazie, 2, 20123 Milan, Italy",
+      description: "Leonardo da Vinci's masterpiece 'The Last Supper' can be admired in the Convent of Santa Maria delle Grazie. It's advisable to book tickets in advance to see this iconic painting."
     })
     TripDestination.create!(
       trip: trip,
@@ -746,13 +746,13 @@ while cpt_trip < 5
       position: 2
     )
 
-    # Ponte Vecchio
+    # Galleria Vittorio Emanuele II
     destination = Destination.create!({
-      title: "Ponte Vecchio",
-      latitude: 43.767704,
-      longitude: 11.253191,
-      address: "Ponte Vecchio, 50125 Florence, Italy",
-      description: "The Ponte Vecchio is one of Florence's most famous bridges. It is known for its jewelry shops and historical charm."
+      title: "Galleria Vittorio Emanuele II",
+      latitude: 45.465253,
+      longitude: 9.191322,
+      address: "Piazza del Duomo, 20123 Milan, Italy",
+      description: "This historic shopping arcade is known for its elegant architecture and high-end boutiques. It's a great place for shopping and people-watching."
     })
     TripDestination.create!(
       trip: trip,
@@ -760,13 +760,13 @@ while cpt_trip < 5
       position: 3
     )
 
-    # Pitti Palace (Palazzo Pitti)
+    # Sforza Castle (Castello Sforzesco)
     destination = Destination.create!({
-      title: "Pitti Palace",
-      latitude: 43.764234,
-      longitude: 11.248482,
-      address: "Piazza de' Pitti, 1, 50125 Florence, Italy",
-      description: "The Pitti Palace is a historic Renaissance palace housing several museums, including the Palatine Gallery and the Museum of Fashion."
+      title: "Sforza Castle",
+      latitude: 45.470960,
+      longitude: 9.178480,
+      address: "Piazza Castello, 20121 Milan, Italy",
+      description: "The Sforza Castle is a Renaissance fortress that now houses several museums and art collections. It's a fascinating historical site to explore."
     })
     TripDestination.create!(
       trip: trip,
@@ -774,13 +774,13 @@ while cpt_trip < 5
       position: 4
     )
 
-    # Boboli Gardens (Giardino di Boboli)
+    # Brera Art Gallery (Pinacoteca di Brera)
     destination = Destination.create!({
-      title: "Boboli Gardens",
-      latitude: 43.764680,
-      longitude: 11.248484,
-      address: "Piazza de' Pitti, 1, 50125 Florence, Italy",
-      description: "The Boboli Gardens are historic gardens located behind the Pitti Palace. They offer a beautiful stroll among sculptures, fountains, and panoramic terraces."
+      title: "Brera Art Gallery",
+      latitude: 45.472460,
+      longitude: 9.187780,
+      address: "Via Brera, 28, 20121 Milan, Italy",
+      description: "The Brera Art Gallery is home to an impressive collection of Italian artworks, including pieces by Caravaggio and Raphael."
     })
     TripDestination.create!(
       trip: trip,
@@ -788,13 +788,13 @@ while cpt_trip < 5
       position: 5
     )
 
-    # Basilica of Santa Croce
+    # Navigli District (Navigli)
     destination = Destination.create!({
-      title: "Basilica of Santa Croce",
-      latitude: 43.768970,
-      longitude: 11.262982,
-      address: "Piazza Santa Croce, 16, 50122 Florence, Italy",
-      description: "The Basilica of Santa Croce is one of the most important churches in Florence, housing the tombs of famous personalities such as Michelangelo, Galileo, and Machiavelli."
+      title: "Navigli District",
+      latitude: 45.459318,
+      longitude: 9.177042,
+      address: "Naviglio Grande, 20123 Milan, Italy",
+      description: "The Navigli district is famous for its picturesque canals, vibrant nightlife, and charming cafes. It's a great place to unwind and enjoy Milan's atmosphere."
     })
     TripDestination.create!(
       trip: trip,
@@ -802,13 +802,13 @@ while cpt_trip < 5
       position: 6
     )
 
-    # Academy Gallery (Galleria dell'Accademia)
+    # La Scala Opera House (Teatro alla Scala)
     destination = Destination.create!({
-      title: "Academy Gallery",
-      latitude: 43.776065,
-      longitude: 11.259395,
-      address: "Via Ricasoli, 58/60, 50122 Florence, Italy",
-      description: "The Academy Gallery is famous for housing Michelangelo's statue of David. It also features other important artworks from the Florentine Renaissance."
+      title: "La Scala Opera House",
+      latitude: 45.467328,
+      longitude: 9.189532,
+      address: "Via Filodrammatici, 2, 20121 Milan, Italy",
+      description: "La Scala is one of the world's most renowned opera houses. Catching a performance here is a must for music enthusiasts."
     })
     TripDestination.create!(
       trip: trip,
@@ -816,13 +816,13 @@ while cpt_trip < 5
       position: 7
     )
 
-    # Piazzale Michelangelo
+    # Leonardo da Vinci Museum of Science and Technology (Museo Nazionale della Scienza e della Tecnologia Leonardo da Vinci)
     destination = Destination.create!({
-      title: "Piazzale Michelangelo",
-      latitude: 43.762175,
-      longitude: 11.265396,
-      address: "Piazzale Michelangelo, 50125 Florence, Italy",
-      description: "Piazzale Michelangelo offers one of the best panoramic views of Florence. It is a popular spot to admire the sunset over the city."
+      title: "Leonardo da Vinci Museum of Science and Technology",
+      latitude: 45.461624,
+      longitude: 9.181924,
+      address: "Via San Vittore, 21, 20123 Milan, Italy",
+      description: "This museum is dedicated to the genius of Leonardo da Vinci and showcases his inventions and contributions to science and technology."
     })
     TripDestination.create!(
       trip: trip,
@@ -879,6 +879,8 @@ while cpt_trip < 5
     puts "#{trip.city.upcase} => #{cptttl} lieux"
     trip.save!
     n = rand(0..3)
+    n = rand(1..3) if trip.city == "Milan"
+
     # puts "#{n} copies"
     n.times do |k|
       copied_trip = trip.dup
@@ -900,8 +902,13 @@ end
 
 Trip.all.each do |trip|
   if trip.planner != trip.tripper
-    rand(2..10).times do
-      trip.messages.create({ content:Faker::Lorem.sentence, user: [trip.planner, trip.tripper].sample })
+    if trip.title.slice(0, 4) == "Milan"
+      trip.messages.create({ content:"wsh", user: trip.planner })
+      trip.messages.create({ content:"Yo !", user: trip.tripper })
+    else
+      rand(2..10).times do
+        trip.messages.create({ content:Faker::Lorem.sentence, user: [trip.planner, trip.tripper].sample })
+      end
     end
   end
 end

@@ -28,11 +28,17 @@
 }
 
 .card-trip h2 {
+  height: 45px;
+  overflow: hidden;
   min-width: 70px;
   font-size: 18px;
   font-weight: bold;
   margin: 0px 50px 8px 0px;
   padding: 5px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  -webkit-box-align: center;
 }
 
 .card-trip h3 {
@@ -46,7 +52,7 @@
 }
 
 .card-trip-infos {
-  height: 100px;
+  height: 105px;
   p {
     overflow: hidden;
   }
@@ -72,7 +78,7 @@
   color: $green;
   position: absolute;
   right: 2%;
-  top: 43px;
+  top: 53px;
   margin-bottom: 30px;
 }
 
