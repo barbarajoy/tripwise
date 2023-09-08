@@ -307,7 +307,7 @@ User.create(
 cpt_trip = 0
 cpt_trip_tentative = 0
 one_trip_for_laura = true
-while cpt_trip < 5
+while cpt_trip < 15
   # rand(20..30).times do |j|
   # CITYS.each_with_index do |city, j|
   city = CITYS[cpt_trip_tentative]
