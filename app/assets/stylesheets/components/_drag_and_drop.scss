@@ -68,7 +68,10 @@
       margin: 0;
       margin-right: 10px;
       height: 26px;
-      width: 60px;
+      width: 80px;
+      white-space: nowrap; /* Empêche le texte de se retourner à la ligne */
+      overflow: hidden;    /* Masque le texte dépassant de la boîte */
+      text-overflow: ellipsis;
     }
     input {
       font-weight: bold;
@@ -109,7 +112,11 @@
     }
   }
   .my_trips_planner_infos, .my_trips_tripper_infos {
-    margin-left: 6px;
+    margin-left: 8px;
+    h1 {
+      margin-bottom: 4px;
+      text-align: left;
+    }
   }
 
   .my_trips_planner {

@@ -306,6 +306,7 @@ User.create(
 
 cpt_trip = 0
 cpt_trip_tentative = 0
+one_trip_for_laura = true
 while cpt_trip < 5
   # rand(20..30).times do |j|
   # CITYS.each_with_index do |city, j|
@@ -326,7 +327,7 @@ while cpt_trip < 5
   else
     maphoto = "https://www.deutschland.de/sites/default/files/styles/image_container/public/media/image/living-in-germany-city-frankfurt-skyline.jpg?itok=ZSTPGApy"
   end
-  if cpt_trip < 3
+  if cpt_trip == 2 || cpt_trip == 3
     planner = User.first
   else
     planner = User.all.sample
@@ -891,7 +892,14 @@ while cpt_trip < 5
         )
       end
 
-      copied_trip.tripper = User.where.not(id: [planner.id, user_barbara.id]).sample
+      if one_trip_for_laura
+        copied_trip.tripper = User.first
+        one_trip_for_laura = false
+      else
+        copied_trip.tripper = User.where.not(id: [planner.id, user_barbara.id]).sample
+      end
+
+
       copied_trip.save!
     end
   end

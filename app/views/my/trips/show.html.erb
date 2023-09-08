@@ -32,7 +32,7 @@
               <%= image_tag @trip.planner.image_url, class: "card-trip-user avatar-bordered" %>
             </a>
             <div class="my_trips_planner_infos">
-              <h1><%= "#{@trip.planner.first_name} #{@trip.planner.last_name}" %></h1>
+              <h1><%= "#{@trip.planner.first_name}" %></h1>
               <p> Planner </p>
             </div>
           </div>
@@ -41,7 +41,7 @@
               <%= image_tag @trip.tripper.image_url, class: "card-trip-user avatar-bordered" %>
             </a>
             <div class="my_trips_tripper_infos">
-              <h1><%= "#{@trip.tripper.first_name} #{@trip.tripper.last_name}" %></h1>
+              <h1><%= "#{@trip.tripper.first_name}" %></h1>
               <p> Tripper </p>
             </div>
           </div>
@@ -113,7 +113,7 @@
 </div>
 
 
-<%= render "layouts/footer" %>
+<%= render "layouts/footer", hauteur: "50" %>
 
 <script>
   document.getElementById('new_messages').addEventListener('keydown', function(event) {
