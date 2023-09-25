@@ -1,6 +1,7 @@
 .searchbar {
   height: 45px;
   box-shadow: 0 0 0 2px $yellow;
+  max-width: 64%;
 }
 
 .searchbar-container{
@@ -18,13 +19,13 @@
 }
 
 .searchbar-wrapper {
-  width: 750px;
+  width: 100%;
   position: relative;
 }
 
 .searchbar-button {
   position: absolute;
-  right: 10%;
+  right: 18%;
   top: 0;
   height: 45px;
 }

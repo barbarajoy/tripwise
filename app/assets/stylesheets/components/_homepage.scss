@@ -8,11 +8,6 @@
   }
 }
 
-// .button-dark-green {
-//   posistion: relative;
-//   left: -300px;
-// }
-
 .card-container {
   display: flex;
   flex-direction: row;
@@ -45,5 +40,24 @@
     transform: translate(-50%, -50%);
     font-size: 36px;
     text-shadow: 1px 1px 2px black;
+  }
+}
+
+@media (max-width: 768px) {
+  .content {
+    margin: 0 20px; 
+  }
+
+  .travel-card {
+    width: 100%;
+    margin-bottom: 20px;
+
+    img {
+      height: auto;
+    }
+
+    .city-name {
+      font-size: 24px;
+    }
   }
 }
