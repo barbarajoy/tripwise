@@ -1,10 +1,10 @@
-.container{
+.container-trip-show {
   text-align: left;
   padding: 20px;
   background-color: $very-light-green;
   border-radius: 5px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-  width: 1000px;
+  width: 90%;
   margin: 0 auto;
   .trip_show_header {
     display: flex;
@@ -139,4 +139,3 @@
   display: flex;
   justify-content: space-between;
 }
-
