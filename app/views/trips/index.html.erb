@@ -23,7 +23,7 @@
         <% end %>
       </nav>
 
-      <div class="col-8 ms-sm-auto col-lg-10 px-md-4">
+      <div class="col-12 ms-auto col-lg-10 px-md-4">
         <div class="card-trip-grid">
           <% @trips.each do |trip| %>
             <%= link_to trip_path(trip) do %>
@@ -34,8 +34,8 @@
                   <div>
                     <h2><%= trip.title %></h2>
                     <div class="d-flex align-items-center">
-                      <button class="btn"><%= trip.style %></button>
-                      <button class="btn">$<%= trip.budget %></button>
+                      <button class="btn-tag"><%= trip.style %></button>
+                      <button class="btn-tag">$<%= trip.budget %></button>
                     </div>
                   </div>
                   <div>

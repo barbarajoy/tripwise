@@ -1,5 +1,4 @@
 class My::TripsController < ApplicationController
-  # skip_before_action :verify_csrf_token
   def new
     raise
   end
