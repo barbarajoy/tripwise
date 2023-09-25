@@ -20,6 +20,8 @@ nav {
   }
 }
 
+
+
 .navbar-middle {
   position: absolute;
   width: fit-content;
@@ -71,5 +73,15 @@ nav {
   &:hover {
     color: $very-dark-green;
     background-color: $very-light-green;
+  }
+}
+
+
+@media(max-width: 768px) {
+  .navbar-top {
+    margin-top: 10px;
+  }
+  h2 {
+    font-size: 18px;
   }
 }
